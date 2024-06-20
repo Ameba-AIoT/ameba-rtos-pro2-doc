@@ -4,5 +4,5 @@ Realtek AmebaPro2 application note
 .. toctree::
    :maxdepth: 1
 
-   building_environment
+   01_BUILD.rst
 
