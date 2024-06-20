@@ -6,4 +6,5 @@ Realtek AmebaPro2 application note
 
    01_BUILD
    02_SDK
+   03_MAKEFILE
 
