@@ -80,17 +80,18 @@ Method 2
 
    add_library (<LIBRARY_NAME> STATIC IMPORTED)
 
+
 (2) Setup location of your library by:
 
 .. code-block:: cmake
 
-set_property (TARGET <LIBRARY_NAME> PROPERTY IMPORTED_LOCATION <PATH_TO_YOUR_LIBRARY>)
+  set_property (TARGET <LIBRARY_NAME> PROPERTY IMPORTED_LOCATION <PATH_TO_YOUR_LIBRARY>)
 
-   or
+or
 
 .. code-block:: cmake
 
-set_target_properties (<LIBRARY_NAME> PROPERTY IMPORTED_LOCATION <PATH_TO_YOUR_LIBRARY>)
+  set_target_properties (<LIBRARY_NAME> PROPERTY IMPORTED_LOCATION <PATH_TO_YOUR_LIBRARY>)
 
 (3) Link to your library
 
