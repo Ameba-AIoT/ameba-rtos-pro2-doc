@@ -9,4 +9,5 @@ Realtek AmebaPro2 application note
    03_MAKEFILE
    04_IMAGE
    05_JTAG
+   06_MMF
 
