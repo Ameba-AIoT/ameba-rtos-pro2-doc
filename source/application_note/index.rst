@@ -12,4 +12,5 @@ Realtek AmebaPro2 application note
    06_MMF
    07_MEMORYLAYOUT
    08_FLASHLAYOUT
+   09_OTA
 
