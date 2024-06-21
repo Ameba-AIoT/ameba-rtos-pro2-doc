@@ -11,4 +11,5 @@ Realtek AmebaPro2 application note
    05_JTAG
    06_MMF
    07_MEMORYLAYOUT
+   08_FLASHLAYOUT
 
