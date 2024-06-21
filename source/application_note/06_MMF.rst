@@ -1,6 +1,10 @@
 Multimedia Framework Architecture
 =================================
 
+.. contents::
+  :local:
+  :depth: 2
+
 The Multimedia Framework Architecture version 2(MMFv2) is responsible
 for handling the connection and management of different media resources
 on AmebaPro2.

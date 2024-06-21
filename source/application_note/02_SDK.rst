@@ -1,6 +1,10 @@
 SDK Architecture
 ================
 
+.. contents::
+  :local:
+  :depth: 2
+
 In AmebaPro2 sdk, it mainly contains four folders. The folder
 “component” store the main component source and the folder “project”
 contains the project makefile, compile flag and some examples. The

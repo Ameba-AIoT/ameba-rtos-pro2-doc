@@ -1,6 +1,10 @@
 OTA
 ===
 
+.. contents::
+  :local:
+  :depth: 2
+
 Over-the-air programming (OTA) provides a methodology to update device
 firmware remotely via TCP/IP network connection. OTA only supports
 firmware1 and firmware2, OTA does not support updating Key Certificate,

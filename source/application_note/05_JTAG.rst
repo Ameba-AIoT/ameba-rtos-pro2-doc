@@ -1,6 +1,10 @@
 Using JTAG/SWD to debug
 =======================
 
+.. contents::
+  :local:
+  :depth: 2
+
 JTAG/SWD is a universal standard for chip internal test. The external
 JTAG interface has four mandatory pins, TCK, TMS, TDI and TDO, and an
 optional reset, nTRST, JTAG-DP and SW-DP also require a separate

@@ -1,6 +1,10 @@
 Flash Layout
 ============
 
+.. contents::
+  :local:
+  :depth: 2
+
 NOR Flash Layout overview
 -------------------------
 

@@ -3,7 +3,7 @@ Building Environment
 
 .. contents::
   :local:
-  :depth: 1
+  :depth: 2
 
 Setting up GCC Building Environment
 -----------------------------------

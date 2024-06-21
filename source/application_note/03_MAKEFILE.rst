@@ -1,6 +1,10 @@
 GCC Makefile
 ============
 
+.. contents::
+  :local:
+  :depth: 2
+
 Adding files in CMake project
 -----------------------------
 

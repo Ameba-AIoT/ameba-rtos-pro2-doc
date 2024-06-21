@@ -1,6 +1,10 @@
 Memory Layout
 =============
 
+.. contents::
+  :local:
+  :depth: 2
+
 Programming Space
 -----------------
 
