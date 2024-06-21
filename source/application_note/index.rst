@@ -13,4 +13,5 @@ Realtek AmebaPro2 application note
    07_MEMORYLAYOUT
    08_FLASHLAYOUT
    09_OTA
+   10_POWERSAVE
 
