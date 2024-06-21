@@ -8,4 +8,5 @@ Realtek AmebaPro2 application note
    02_SDK
    03_MAKEFILE
    04_IMAGE
+   05_JTAG
 
