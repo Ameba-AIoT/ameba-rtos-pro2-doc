@@ -15,4 +15,5 @@ Realtek AmebaPro2 application note
    09_OTA
    11_SYSTEMAPI
    12_FILESYSTEM
+   17_USAGE
 
