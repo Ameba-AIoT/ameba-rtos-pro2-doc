@@ -18,4 +18,5 @@ Realtek AmebaPro2 application note
    17_USAGE
    19_USB
    22_Peripheral
+   23_Log_System
 
