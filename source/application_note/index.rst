@@ -16,4 +16,5 @@ Realtek AmebaPro2 application note
    11_SYSTEMAPI
    12_FILESYSTEM
    17_USAGE
+   19_USB
 
