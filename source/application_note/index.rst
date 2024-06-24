@@ -17,4 +17,5 @@ Realtek AmebaPro2 application note
    12_FILESYSTEM
    17_USAGE
    19_USB
+   22_Peripheral
 
