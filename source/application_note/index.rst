@@ -16,6 +16,7 @@ Realtek AmebaPro2 application note
    10_POWERSAVE
    11_SYSTEMAPI
    12_FILESYSTEM
+   14_NN
    17_USAGE
    19_USB
    22_Peripheral
