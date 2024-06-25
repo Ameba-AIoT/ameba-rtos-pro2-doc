@@ -58,13 +58,13 @@ Installing mingw with ASDK and setting up the CMake
 
 .. note :: For the first time adding the CMake PATH, after adding the PATH, you need to re-open the msys2_shell and check by:
 
-	.. code-block:: bash
+.. code-block:: bash
 
-	   $ cmake --version
+   $ cmake --version
+   cmake version 3.20.0-rc1
+   CMake suite maintained and supported by Kitware (kitware.com/cmake).
 
-	   cmake version 3.20.0-rc1
-
-	   CMake suite maintained and supported by Kitware (kitware.com/cmake).
+|
 
 Adding toolchain to msys2
 ^^^^^^^^^^^^^^^^^^^^^^^^^

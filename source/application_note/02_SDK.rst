@@ -297,12 +297,9 @@ coding.
 
 .. note :: Difference of libvideo_get_versonion() and video_get_version()
 
-libvideo_get_versonion() is the version information in video driver
-running on main core v8m.
+libvideo_get_versonion() is the version information in video driver running on main core v8m.
 
-video_get_version() retrieve all the other version information from
-video offload engine, including VOE(bin file for Video offload engine),
-Sensor Driver, FCS, IQ Timestamp and IQ version.
+video_get_version() retrieve all the other version information from video offload engine, including VOE(bin file for Video offload engine), Sensor Driver, FCS, IQ Timestamp and IQ version.
 
 Bootloader version
 ~~~~~~~~~~~~~~~~~~
