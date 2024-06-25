@@ -22,6 +22,7 @@ Realtek AmebaPro2 application note
    17_USAGE
    18_FCS_MULTI
    19_USB
+   20_WIFI
    22_Peripheral
    23_Log_System
 
