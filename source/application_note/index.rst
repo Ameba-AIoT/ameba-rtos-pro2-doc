@@ -18,6 +18,7 @@ Realtek AmebaPro2 application note
    12_FILESYSTEM
    13_AUDIO
    14_NN
+   16_Bluetooth
    17_USAGE
    18_FCS_MULTI
    19_USB
