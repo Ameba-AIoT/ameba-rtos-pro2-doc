@@ -1,0 +1,45 @@
+name: build rtk-docs
+
+on:
+    pull_request:
+
+jobs:
+    task:
+        runs-on: ubuntu-latest
+        timeout-minutes: 5
+        steps:
+            - name: checkout to main branch
+              uses: actions/checkout@v3
+              with:
+                  ref: ${{ github.event.pull_request.head.sha }}
+                  path: rtk-docs-amebapro2
+
+            - name: Set up python
+              uses: https://github.com/actions/setup-python@v4
+
+            - name: Install python package
+              run: |
+                    apt update && apt install sudo
+                    sudo apt-get install -y python3 python3-pip
+                    pip3 install Sphinx
+                    pip3 install sphinx_rtd_theme recommonmark sphinx_markdown_tables
+
+            - name: Declare some variables
+              id: vars
+              shell: bash
+              run: |
+                cd rtk-docs-amebapro2
+                echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+                echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+            - name: Run CGI script
+              run: |
+                cd rtk-docs-amebapro2
+                make html
+                curl http://172.21.35.202/cgi-bin/bashcgiscript_pro2.cgi?commit=${{ steps.vars.outputs.sha_short }}
+
+            - name: Preview URL
+              run: |
+                echo "Branch: ${{ steps.vars.outputs.branch }}"
+                echo "Sha: ${{ steps.vars.outputs.sha_short }}"
+                echo "http://172.21.35.202/amebapro2/verify/${{ steps.vars.outputs.sha_short }}/index.html"

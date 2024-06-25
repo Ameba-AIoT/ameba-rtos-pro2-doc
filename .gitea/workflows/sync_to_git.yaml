@@ -1,0 +1,14 @@
+name: build rtk-docs
+
+on:
+    pull_request:
+      types:
+        - closed
+
+jobs:
+    if_merged:
+      if: github.event.pull_request.merged == true
+      runs-on: ubuntu-latest
+      steps:
+      - run: |
+           curl http://172.21.35.202/cgi-bin/update_pro2_web.cgi
