@@ -1,6 +1,10 @@
 FCS and multi sensor
 ====================
 
+.. contents::
+  :local:
+  :depth: 2
+
 The fast camera start (FCS) can speed up the sensor bring up time. The
 sensor starts from rom code and initial the Video engine from
 bootloader. It can speed up the time to get the first frame. The multi

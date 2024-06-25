@@ -1,6 +1,10 @@
 Bluetooth
 =========
 
+.. contents::
+  :local:
+  :depth: 2
+
 BT Example
 ----------
 

@@ -1,6 +1,10 @@
 Wi-Fi
 =====
 
+.. contents::
+  :local:
+  :depth: 2
+
 Wi-Fi Data Structures
 ---------------------
 
