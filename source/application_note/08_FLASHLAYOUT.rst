@@ -179,7 +179,7 @@ Please refer to snand_api.h & snand_api.c
     * @param obj: address of the flash object
     * @retval none
     */
-   void snand_init(snand_t \*obj);
+   void snand_init(snand_t *obj);
 
    /**
     * @brief Erase flash block, usually 1 block = 64K bytes
@@ -188,7 +188,7 @@ Please refer to snand_api.h & snand_api.c
     * @param address: Specifies the starting address to be erased.
     * @retval SUCCESS, FAIL
     */
-   int snand_erase_block(snand_t \*obj, uint32_t address);
+   int snand_erase_block(snand_t *obj, uint32_t address);
 
    /**
     * @brief Read a stream of data from specified address vai user mode
@@ -198,8 +198,7 @@ Please refer to snand_api.h & snand_api.c
     * @param data: Specified the address to save the readback data.
     * @retval SUCCESS, FAIL
     */
-   int snand_page_read(snand_t \*obj, uint32_t address, uint32_t Length,
-   uint8_t \*data);
+   int snand_page_read(snand_t *obj, uint32_t address, uint32_t Length, uint8_t *data);
 
    /**
     * @brief Write a stream of data to specified address
@@ -210,7 +209,7 @@ Please refer to snand_api.h & snand_api.c
              If the address is in the flash, full address is required, i.e. SPI_SNAND_BASE + Offset
     * @retval SUCCESS, FAIL
     */
-   int snand_page_write(snand_t \*obj, uint32_t address, uint32_t Length, uint8_t \*data);
+   int snand_page_write(snand_t *obj, uint32_t address, uint32_t Length, uint8_t *data);
 
 
 
@@ -223,7 +222,7 @@ read/write a NAND flash.
 
 The example is located in:
 
-“\project\realtek_amebapro2_v0_example\example_sources\nand_flash\”
+“\\project\\realtek_amebapro2_v0_example\\example_sources\\nand_flash\\”
 
 Copy main.c to src folder, compile project, and the download the binary.
 
