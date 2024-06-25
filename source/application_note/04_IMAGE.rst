@@ -25,7 +25,7 @@ need to first set up the UART with PC by connecting J21 with jumpers and
 CON8 with PC. Then, connect J27 with a jumper and press reset button to
 enter download mode.
 
-.. image:: ../_static/04_IMAGE/pro2_EVB.png
+.. image:: ../_static/04_IMAGE/pro2_evb.png
 
 Software Setup
 ~~~~~~~~~~~~~~
