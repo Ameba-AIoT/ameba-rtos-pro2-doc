@@ -253,19 +253,15 @@ mm_siso_t entity.
 
 Pointer to the function that sends the control command to siso module.
 
-MMIC_CMD_ADD_INPUT link the input module to the input of the siso
-module.
+- MMIC_CMD_ADD_INPUT link the input module to the input of the sisomodule.
 
-MMIC_CMD_ADD_OUTPUT link the output module to the output of the siso
-module.
+- MMIC_CMD_ADD_OUTPUT link the output module to the output of the sisomodule.
 
-MMIC_CMD_SET_TASKPRIORITY set the task priority for the linker task. If
-setting as 0, it will be configured to tskIDLE_PRIORITY + 1
-automatically.
+- MMIC_CMD_SET_TASKPRIORITY set the task priority for the linker task. If setting as 0, it will be configured to tskIDLE_PRIORITY + 1 automatically.
 
-MMIC_CMD_SET_TASKNANE set the task names for the linker task.
+- MMIC_CMD_SET_TASKNANE set the task names for the linker task.
 
-MMIC_CMD_SET_STACKSIZE add size to the stack_size of siso.
+- MMIC_CMD_SET_STACKSIZE add size to the stack_size of siso.
 
 .. note ::  For consistency, the setting task size will be divided by 4. Make sure setting an enough and valid stack_size for the task.
 
@@ -400,20 +396,27 @@ output.
 
 .. code-block:: c
 
-   typedef struct mm_miso_s {
-       int input_cnt;
-       mm_context_t *input[4]; // max 4 input
-       int input_port_idx[4];
+    typedef struct mm_mimo_s {
+            int                 input_cnt;
 
-       mm_context_t *output;
+        // depend on intput count
+            mm_context_t*       input[4];
+            mm_mimo_queue_t     queue[4];
 
-       uint32_t pause_mask;
-       uint32_t status;
-       uint32_t stack_size;
-       uint32_t task_priority;
-       char taskname[16];
-       xTaskHandle task;
-   } mm_miso_t;
+            int             output_cnt;
+
+        // depend on output count
+            uint32_t            pause_mask[4];
+            mm_context_t*   output[4];     // output module context
+            uint32_t            output_dep[4]; // output depend on which input, bit mask
+            uint32_t            input_mask[4]; // convert from output_dep, input referenced by which output, bit mask
+            uint32_t            status[4];
+            uint32_t            stack_size;
+            uint32_t            task_priority;
+            char                taskname[4][16];
+            xTaskHandle         task[4];
+    } mm_mimo_t;
+
 
 There are some functions in the MISO module responsible for the module
 inter-connection. By these functions, it will be simple to update the
@@ -699,22 +702,23 @@ Use **CMD_VIDEO_SET_PARAMS** to set up the VIDEO parameters.
 
 .. note ::  In VOE, OSD is applied after the cropped and resized image, so OSD size and offset are not affected by video cropping and resizing.
 
-   **Video resolution alignment**
+Video resolution alignment
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   Encoder input width require 16 alignment and input height require 4
-   alignment, so video module will do width and height alignment
-   automatically. For example, if user set (width, height) to (1080,
-   1080), ISP will give 1088x1080 video frame to encoder. Then, encoder
-   will encode the data and crop to 1080x1080 as video module output.
+Encoder input width require 16 alignment and input height require 4
+alignment, so video module will do width and height alignment
+automatically. For example, if user set (width, height) to (1080,
+1080), ISP will give 1088x1080 video frame to encoder. Then, encoder
+will encode the data and crop to 1080x1080 as video module output.
 
-   ROI region parameters xmin, ymin, xmax, ymax should be 2 aligned and
-   within the maximum resolution of the sensor. In addition, the
-   roi_w(a.k.a. xmax-xmin) should no less than 16-aligned video_w
-   (a.k.a. 16-aligned width) and roi_h (a.k.a. ymax-ymin) should no less
-   than video_h(a.k.a. height), because the ROI only support scale down.
-   In other words, if user want a 1080x1080 output of video module and
-   require the usage of ROI, the ROI region width should >=1088 and ROI
-   region height should >=1080.
+ROI region parameters xmin, ymin, xmax, ymax should be 2 aligned and
+within the maximum resolution of the sensor. In addition, the
+roi_w(a.k.a. xmax-xmin) should no less than 16-aligned video_w
+(a.k.a. 16-aligned width) and roi_h (a.k.a. ymax-ymin) should no less
+than video_h(a.k.a. height), because the ROI only support scale down.
+In other words, if user want a 1080x1080 output of video module and
+require the usage of ROI, the ROI region width should >=1088 and ROI
+region height should >=1080.
 
 .. note ::  Sensor model and ISP will restrict the video resolution and fps. For the sensor’s max resolution and fps, please check the sensor list in ISP chapter. The ISP supported max resolutions for each channel are as followed:
 
@@ -739,13 +743,13 @@ Amebapro2 ISP support scaling down function with non-aspect ratio window
 ( it should be less than sensor output size). User can set 「use_roi」to
 enable this function. Take example for 1080P sensor below:
 
-.. code-block:: bash
+.. code-block:: c
 
    typedef struct video_param_s {
-       …
+       // …
        uint32_t width; // 640
        uint32_t height; // 480
-       …
+       // …
        uint32_t use_roi;
        struct video_roi_s {
            uint32_t xmin; // 240
@@ -2155,8 +2159,8 @@ the PC and booted to get the Log message output of AmebaPro2.
    ATW1=<Password>          => Set the WiFi AP password, if needed
    ATWC                     => Initiate the connection
 
-When the “RTSP stream enabled” message shown on console, it indicates that the RSTP server is already running. You can use VLC player to check the rtsp stream. For rtsp usage can refer to 1.3.3.
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+When the “RTSP stream enabled” message shown on console, it indicates that the RSTP server is already running. You can use VLC player to check the rtsp stream. For rtsp usage can refer to `VLC media player settings`_.
+
 
 MMF AT command
 ~~~~~~~~~~~~~~
@@ -2183,11 +2187,16 @@ Stream audio/video from AmebaPro2 to VLC player
 .. image:: ../_static/06_MMF/image8.png
    :align: center
 
+
+|
+
 -  Enter “rtsp://xxx.xxx.xxx.xxx:yyy/”, where xxx.xxx.xxx.xxx is the Ameba IP address and yyy is the RTSP server port (default is 554), and click “Play”.
 
 .. image:: ../_static/06_MMF/image9.png
    :align: center
 
+
+|
 
 Stream audio from VLC player to AmebaPro2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -2196,6 +2205,9 @@ Stream audio from VLC player to AmebaPro2
 
 .. image:: ../_static/06_MMF/image10.png
    :align: center
+
+
+|
 
 -  Select “File”, choose the file by “Add” and finally click the
    “Stream”. (If the startup example is RTP -> AAD -> AUDIO please
@@ -2209,20 +2221,32 @@ Stream audio from VLC player to AmebaPro2
 .. image:: ../_static/06_MMF/image11.png
    :align: center
 
+
+|
+
 -  You will see your select file after push “Stream”. Check it and click “Next”.
 
 .. image:: ../_static/06_MMF/image12.png
    :align: center
+
+
+|
 
 -  Select “RTP Audio/Video Profile”, and click “Add”.
 
 .. image:: ../_static/06_MMF/image13.png
    :align: center
 
+
+|
+
 -  Enter AmebaPro's IP Address in “Address” field, with “Base port” set to 16384, and click “Next”.
 
 .. image:: ../_static/06_MMF/image14.png
    :align: center
+
+
+|
 
 -  Confirm “Activate Transcoding” is unchecked, and click “Next” -> “Stream”. Then the sound can be heard on AmebaPro2 3.5mm audio jack.
 
@@ -2231,6 +2255,9 @@ Stream audio from VLC player to AmebaPro2
 
 .. image:: ../_static/06_MMF/image15-2.png
    :align: center
+
+
+|
 
 Adjust latency (buffer) related settings
 ''''''''''''''''''''''''''''''''''''''''
@@ -2243,12 +2270,18 @@ Adjust latency (buffer) related settings
 .. image:: ../_static/06_MMF/image17.png
    :align: center
 
+
+|
+
 -  Click “Tools” -> “Preferences” -> “Show settings: Simple” (lower left
    corner) -> “Input/ Codecs”. Enable “Hardware-accelerated decoding” if
    available, and set “Skip H.264 in-loop deblocking filter” to “All”.
 
 .. image:: ../_static/06_MMF/image18.png
    :align: center
+
+
+|
 
 -  VLC have a pts_delay buffer by "network buffer" and "clock jitter".
    The maximum value of this buffer is equal to "network buffer" plus
