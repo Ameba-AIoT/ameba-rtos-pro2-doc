@@ -90,8 +90,7 @@ user_boot_fw_selection(), it is necessary to re-build bootloader.
 
     #include "fw_img_export.h"
 
-    uint8_t user_boot_fw_selection(
-    fw_img_user_export_info_type_t *pfw_img_user_export_info)
+    uint8_t user_boot_fw_selection(fw_img_user_export_info_type_t *pfw_img_user_export_info)
     {
         uint8_t fw_ld_idx = USER_LOAD_FW_FOLLOW_DEFAULT;
         return fw_ld_idx;
@@ -369,11 +368,11 @@ ota_verify_signature() are provided in ota_8735b.c to verify the public
 key and signature in manifest of signed bootloader or firmware after
 OTA.
 
-.. code-block:: bash
+.. code-block:: c
 
     //ota_8735b.c
-    int ota_verify_flash_signature(char \*partition_name);
-    int ota_verify_signature(char \*partition_name, uint8_t \*manifest);
+    int ota_verify_flash_signature(char *partition_name);
+    int ota_verify_signature(char *partition_name, uint8_t *manifest);
 
 ota_verify_signature() can be used to verify the public key and
 signature in a manifest buffer. The manifest for partitions of "BL_PRI",

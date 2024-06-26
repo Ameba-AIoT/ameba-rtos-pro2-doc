@@ -454,47 +454,47 @@ from standby by case.
 -  Error code -3: Firmware will sync with AP by sending Null frame to
    confirm that enter LPS mode successfully or not.
 
--  If the status does not be checked successfully until timeout, the
-   maximum waiting time is 10 seconds.
+   +  If the status does not be checked successfully until timeout, the
+      maximum waiting time is 10 seconds.
 
--  Because system has already back up the retention data, user can enter
-   standby mode and wakeup quickly for wifi resume.
+   +  Because system has already back up the retention data, user can enter
+      standby mode and wakeup quickly for wifi resume.
 
 -  Error code -4: Check device has connected to AP or not.
 
--  Because of wifi disconnection, user cannot back up retention
-   information. User need to do system reset.
+   +  Because of wifi disconnection, user cannot back up retention
+      information. User need to do system reset.
 
 -  Error code -6: Driver will read the RF power status to check enter HW
    LPS mode successfully or not.
 
--  If the status does not be checked successfully until timeout, the
-   maximum waiting time is 10 seconds.
+   +  If the status does not be checked successfully until timeout, the
+      maximum waiting time is 10 seconds.
 
--  The RF power status should be off when PRO2 enter HW LPS mode
-   successfully. IF the power status is on, Pro2 need to close wifi by
-   calling wifi_off() and reset the hardware by waking up from standby
-   mode.
+   +  The RF power status should be off when PRO2 enter HW LPS mode
+      successfully. IF the power status is on, Pro2 need to close wifi by
+      calling wifi_off() and reset the hardware by waking up from standby
+      mode.
 
--  Because system has already back up the retention data, user can enter
-   standby mode and wakeup quickly for wifi resume.
+   +  Because system has already back up the retention data, user can enter
+      standby mode and wakeup quickly for wifi resume.
 
 -  Error code -7: Wowlan firmware get the wake-up event during suspend
    process.
 
--  System has already back up the retention data before enter suspend.
+   +  System has already back up the retention data before enter suspend.
 
--  If Pro2 receive wake-up pattern (wake-up reason 0x77 and 0x23) in
-   suspend process, user can enter standby mode and wakeup quickly for
-   wifi resume.
+   +  If Pro2 receive wake-up pattern (wake-up reason 0x77 and 0x23) in
+      suspend process, user can enter standby mode and wakeup quickly for
+      wifi resume.
 
--  If Pro2 receive other wake-up event in suspend process, user need to
-   enter standby mode and wakeup quickly for wifi reconnection. Because
-   PRO2 be disconnected by AP, system cannot do wifi resume.
+   +  If Pro2 receive other wake-up event in suspend process, user need to
+      enter standby mode and wakeup quickly for wifi reconnection. Because
+      PRO2 be disconnected by AP, system cannot do wifi resume.
 
--  After Pro2 waking up, user can get wake-up reason by the API,
-   rtw_hal_wowlan_get_suspend_wakeup_reason(), and do the corresponding
-   wifi flow.
+   +  After Pro2 waking up, user can get wake-up reason by the API,
+      rtw_hal_wowlan_get_suspend_wakeup_reason(), and do the corresponding
+      wifi flow.
 
 Set AON GPIO pull control before power save mode
 ------------------------------------------------

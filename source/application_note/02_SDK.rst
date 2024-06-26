@@ -20,15 +20,21 @@ Component
 | component  | at-cmd      | AT-command                                                        |
 |            +-------------+-------------------------------------------------------------------+
 |            | audio       | ASP algorithm api                                                 |
+|            |             |                                                                   |
 |            |             | audio codec                                                       |
 |            +-------------+-------------------------------------------------------------------+
 |            | bluetooth   | bluetooth driver                                                  |
 |            +-------------+-------------------------------------------------------------------+
 |            | example     | amazon releated examples                                          |
+|            |             |                                                                   |
 |            |             | audio releated examples                                           |
+|            |             |                                                                   |
 |            |             | fatfs releated examples                                           |
+|            |             |                                                                   |
 |            |             | mmf releated examples                                             |
+|            |             |                                                                   |
 |            |             | socket releated examples                                          |
+|            |             |                                                                   |
 |            |             | ...                                                               |
 |            +-------------+-------------------------------------------------------------------+
 |            | file system | Fatfs and Littlefs                                                |
@@ -36,29 +42,47 @@ Component
 |            | lwip        | lwip API source code                                              |
 |            +-------------+-------------------------------------------------------------------+
 |            | mbed        | multi-media framework modules                                     |
+|            |             |                                                                   |
 |            |             | muxer and demuer                                                  |
+|            |             |                                                                   |
 |            |             | rtp codec for media                                               |
 |            +-------------+-------------------------------------------------------------------+
 |            | network     | cJSON                                                             |
+|            |             |                                                                   |
 |            |             | coap                                                              |
+|            |             |                                                                   |
 |            |             | dhcp                                                              |
+|            |             |                                                                   |
 |            |             | httpc and httpd                                                   |
+|            |             |                                                                   |
 |            |             | iperf                                                             |
+|            |             |                                                                   |
 |            |             | mDNS                                                              |
+|            |             |                                                                   |
 |            |             | mqtt                                                              |
+|            |             |                                                                   |
 |            |             | ping                                                              |
+|            |             |                                                                   |
 |            |             | rtsp                                                              |
+|            |             |                                                                   |
 |            |             | sntp                                                              |
+|            |             |                                                                   |
 |            |             | tftp                                                              |
+|            |             |                                                                   |
 |            |             | websockect                                                        |
 |            +-------------+-------------------------------------------------------------------+
 |            | os          | freertos: freertos source code                                    |
+|            |             |                                                                   |
 |            |             | os_dep: Realtek encapsulating interface for FreeRTOS, ram usage…  |
 |            +-------------+-------------------------------------------------------------------+
 |            | soc         | app: monitor and shell                                            |
+|            |             |                                                                   |
 |            |             | cmsis: cmsis style header file and startup file                   |
+|            |             |                                                                   |
 |            |             | fwlib: hal drivers and nn api                                     |
+|            |             |                                                                   |
 |            |             | mbed-drivers: mbed API source code                                |
+|            |             |                                                                   |
 |            |             | misc: driver and utilities                                        |
 |            +-------------+-------------------------------------------------------------------+
 |            | ssl         | ssl stub function and ram map source code                         |
@@ -107,6 +131,7 @@ Doc and tools
 | Folder     | Sub-folder                | Description                                                                      |
 +============+===========================+==================================================================================+
 | tools      |                           | PGTool: for downloading image files to AmebaPro2                                 |
+|            |                           |                                                                                  |
 |            |                           | msys64: for building the environment of AmebaPro2 project                        |
 +------------+---------------------------+----------------------------------------------------------------------------------+
 | doc        |                           | document for AmebaPro2                                                           |
@@ -188,7 +213,7 @@ code piece.
 .. code-block:: bash
 
   extern char * libwlan_get_version(void);  
-  printf(“%s\n\r”, libwlan_get_version());
+  printf("%s\n\r", libwlan_get_version());
 
 
 Device should output string like
@@ -203,7 +228,7 @@ For the version of “video” lib,
 .. code-block:: bash
 
   extern char* libvideo_get_version(void);
-  printf(“%s\n\r”, libvideo_get_version());
+  printf("%s\n\r", libvideo_get_version());
 
 
 Device should output string like
@@ -267,18 +292,15 @@ calling video_get_version(), you can see the content as follows:
 
 Below is more description for above information,
 
-   **voe_ver** is an abbreviation for VOE version, where VOE is another
-   core for ISP.
+   **voe_ver** is an abbreviation for VOE version, where VOE is another core for ISP.
 
-   **sensor_voe_ver** means sensor VOE version, which is the sensor
-   version on VOE.
+   **sensor_voe_ver** means sensor VOE version, which is the sensor version on VOE.
 
    **sensor_timestamp** is the release information of sensor driver.
 
    **fcs_version** is the version of FCS driver.
 
-   **iq_timestamp** and **iq_cus_ver** are the release information of iq
-   table.
+   **iq_timestamp** and **iq_cus_ver** are the release information of iq table.
 
 -  iq_timestamp record the date/time information of the IQ release day.
 

@@ -172,7 +172,7 @@ used in the bootloader.
 
 Please refer to snand_api.h & snand_api.c
 
-.. code-block:: bash
+.. code-block:: c
 
    /**
     * @brief Init Flash

@@ -37,6 +37,9 @@ module communication, included siso, simo, miso and mimo.
 .. image:: ../_static/06_MMF/image2.png
    :align: center
 
+
+|
+
 In order to use the MMFv2, here are some aspects must to be followed.
 
 -  Define valid source
@@ -72,20 +75,22 @@ Function’s constant of each module is defined by module itself.
 .. code-block:: c
 
    typedef struct mm_module_s {
-       void* (*create)(void *);
-       void* (*destroy)(void *);
-       int (*control)(void *, int, int);
-       int (*handle)(void *, void *, void *);
-       void* (*new_item)(void *);
-       void* (*del_item)(void *, void *);
-       void* (*rsz_item)(void *, void *, int);
-       void* (*vrelease_item)(void *, void *, int);
+       void*       (*create)(void *);
+       void*       (*destroy)(void *);
+       int         (*control)(void *, int, int);
+       int         (*handle)(void *, void *, void *);
+       void*       (*new_item)(void *);
+       void*       (*del_item)(void *, void *);
+       void*       (*rsz_item)(void *, void *, int);
+       void*       (*vrelease_item)(void *, void *, int);
 
-       uint32_t output_type;
-       uint32_t module_type;
-
-       char * name;
+       uint32_t    output_type;
+       uint32_t    module_type;
+       char *      name;
    } mm_module_t;
+
+
+|
 
 Function description
 ^^^^^^^^^^^^^^^^^^^^
@@ -396,26 +401,20 @@ output.
 
 .. code-block:: c
 
-    typedef struct mm_mimo_s {
-            int                 input_cnt;
+    typedef struct mm_miso_s {
+            int          input_cnt;
+            mm_context_t *input[4];  // max 4 input
+            int          input_port_idx[4];
 
-        // depend on intput count
-            mm_context_t*       input[4];
-            mm_mimo_queue_t     queue[4];
+            mm_context_t *output;
 
-            int             output_cnt;
-
-        // depend on output count
-            uint32_t            pause_mask[4];
-            mm_context_t*   output[4];     // output module context
-            uint32_t            output_dep[4]; // output depend on which input, bit mask
-            uint32_t            input_mask[4]; // convert from output_dep, input referenced by which output, bit mask
-            uint32_t            status[4];
-            uint32_t            stack_size;
-            uint32_t            task_priority;
-            char                taskname[4][16];
-            xTaskHandle         task[4];
-    } mm_mimo_t;
+            uint32_t    pause_mask;
+            uint32_t    status;
+            uint32_t    stack_size;
+            uint32_t    task_priority;
+            char        taskname[16];
+            xTaskHandle task;
+    } mm_miso_t;
 
 
 There are some functions in the MISO module responsible for the module
@@ -497,26 +496,27 @@ output streaming for each task.
 
 .. code-block:: c
 
-   typedef struct mm_mimo_s {
-       int input_cnt;
+    typedef struct mm_mimo_s {
+            int                 input_cnt;
 
-   // depend on intput count
-       mm_context_t* input[4];
-       mm_mimo_queue_t queue[4];
+        // depend on intput count
+            mm_context_t*       input[4];
+            mm_mimo_queue_t     queue[4];
 
-       int output_cnt;
+            int                 output_cnt;
 
-   // depend on output count
-       uint32_t pause_mask[4];
-       mm_context_t* output[4]; // output module context
-       uint32_t output_dep[4]; // output depend on which input, bit mask
-       uint32_t input_mask[4]; // convert from output_dep, input referenced by which output, bit mask
-       uint32_t status[4];
-       uint32_t stack_size;
-       uint32_t task_priority;
-       char taskname[4][16];
-       xTaskHandle task[4];
-   } mm_mimo_t;
+        // depend on output count
+            uint32_t            pause_mask[4];
+            mm_context_t*       output[4];     // output module context
+            uint32_t            output_dep[4]; // output depend on which input, bit mask
+            uint32_t            input_mask[4]; // convert from output_dep, input referenced by which output, bit mask
+            uint32_t            status[4];
+            uint32_t            stack_size;
+            uint32_t            task_priority;
+            char                taskname[4][16];
+            xTaskHandle         task[4];
+    } mm_mimo_t;
+
 
 There are some functions in the MIMO module responsible for the module
 inter-connection. By these functions, it will be simple to update the
@@ -1077,34 +1077,36 @@ AAC Encoder (AAC)
 
 .. code-block:: c
 
-   //AAC header type
-   typedef enum {
-       AAC_TYPE_RAW = TT_MP4_RAW, // For AAC raw pqacket
-       AAC_TYPE_ADTS = TT_MP4_ADTS, // For AAC with ADTS header
-   } AAC_TRANSPORT_TYPE;
+    //AAC header type
+    typedef enum {
+            AAC_TYPE_RAW    = TT_MP4_RAW,       // For AAC raw pqacket
+            AAC_TYPE_ADTS   = TT_MP4_ADTS,      // For AAC with ADTS header
+    } AAC_TRANSPORT_TYPE;
 
-   //AAC audio object type
-   typedef enum {
-       AAC_AOT_LC = AOT_AAC_LC, // MP4 Low Complexity
-       AAC_AOT_SBR = AOT_SBR, // MP4 LC + Spectral Band Replication (HE-AAC v1)
-       AAC_AOT_PS = AOT_PS, // MP4 LC + SBR + Parametric Stereo (HE-AAC v2)
-       AAC_AOT_ER_LD = AOT_ER_AAC_LD, // Error Resilient(ER) AAC LowDelay
-       AAC_AOT_ER_ELD = AOT_ER_AAC_ELD, // Enhanced Low Delay
-   } AAC_AOT_TYPE;
+    //AAC audio object type
+    typedef enum {
+            AAC_AOT_LC      = AOT_AAC_LC,       // MP4 Low Complexity
+            AAC_AOT_SBR     = AOT_SBR,          // MP4 LC + Spectral Band Replication (HE-AAC v1)
+            AAC_AOT_PS      = AOT_PS,           // MP4 LC + SBR + Parametric Stereo (HE-AAC v2)
 
-   typedef struct aac_param_s {
-       AAC_TRANSPORT_TYPE trans_type; // Transport Type
-       AAC_AOT_TYPE object_type; // Audio Object Type
-       uint32_t sample_rate; // 8000
-       uint32_t channel; // 1
-       uint32_t bitrate;
+            AAC_AOT_ER_LD   = AOT_ER_AAC_LD,    // Error Resilient(ER) AAC LowDelay
+            AAC_AOT_ER_ELD  = AOT_ER_AAC_ELD,   // Enhanced Low Delay
+    } AAC_AOT_TYPE;
 
-       uint32_t mem_total_size;
-       uint32_t mem_block_size;
-       uint32_t mem_frame_size;
+    typedef struct aac_param_s {
+            AAC_TRANSPORT_TYPE trans_type;      // Transport Type
+            AAC_AOT_TYPE object_type;           // Audio Object Type
+            uint32_t     sample_rate;           // 8000
+            uint32_t     channel;               // 1
+            uint32_t     bitrate;
 
-   //...
-   } aac_params_t;
+            uint32_t     mem_total_size;
+            uint32_t     mem_block_size;
+            uint32_t     mem_frame_size;
+
+        //...
+    } aac_params_t;
+
 
 Use **CMD_AAC_SET_PARAMS** to set up the AAC parameters.
 
@@ -1137,28 +1139,30 @@ AAC Decoder (AAD)
 
 .. code-block:: c
 
-   //AAD header type
-   typedef enum {
-       AAD_TYPE_RAW = 0, // For AAC without AU-header (not from AAC rtp packet header)
-       AAD_TYPE_ADTS = 2, // For AAC with ADTS header
-       AAD_TYPE_RTP_RAW = 3, // For AAC with AU-header (from AAC rtp packet header)
-   } AAD_TRANSPORT_TYPE;
+    //AAD header type
+    typedef enum {
+            AAD_TYPE_RAW        = 0,     // For AAC without AU-header (not from AAC rtp packet header)
+            AAD_TYPE_ADTS       = 2,     // For AAC with ADTS header
+            AAD_TYPE_RTP_RAW    = 3,     // For AAC with AU-header (from AAC rtp packet header)
+    } AAD_TRANSPORT_TYPE;
 
-   //AAD audio object type
-   typedef enum {
-       AAD_AOT_LC = AOT_AAC_LC, // MP4 Low Complexity
-       AAD_AOT_SBR = AOT_SBR, // MP4 LC + Spectral Band Replication (HE-AAC v1)
-       AAD_AOT_PS = AOT_PS, // MP4 LC + SBR + Parametric Stereo (HE-AAC v2)
-       AAD_AOT_ER_LD = AOT_ER_AAC_LD, // Error Resilient(ER) AAC LowDelay
-       AAD_AOT_ER_ELD = AOT_ER_AAC_ELD, // Enhanced Low Delay
-   } AAD_AOT_TYPE;
+    //AAD audio object type
+    typedef enum {
+            AAD_AOT_LC      = AOT_AAC_LC,       // MP4 Low Complexity
+            AAD_AOT_SBR     = AOT_SBR,          // MP4 LC + Spectral Band Replication (HE-AAC v1)
+            AAD_AOT_PS      = AOT_PS,           // MP4 LC + SBR + Parametric Stereo (HE-AAC v2)
 
-   typedef struct aad_param_s {
-       AAD_TRANSPORT_TYPE trans_type; // Transport Type
-       AAD_AOT_TYPE object_type; // Audio Object Type
-       uint32_t sample_rate; // 8000
-       uint32_t channel; // 1
-   } aad_params_t;
+            AAD_AOT_ER_LD   = AOT_ER_AAC_LD,    // Error Resilient(ER) AAC LowDelay
+            AAD_AOT_ER_ELD  = AOT_ER_AAC_ELD,   // Enhanced Low Delay
+    } AAD_AOT_TYPE;
+
+    typedef struct aad_param_s {
+            AAD_TRANSPORT_TYPE trans_type;  // Transport Type
+            AAD_AOT_TYPE object_type;       // Audio Object Type
+            uint32_t sample_rate;           // 8000
+            uint32_t channel;               // 1
+    } aad_params_t;
+
 
 Use **CMD_AAD_SET_PARAMS** to set up the AAD parameters.
 
@@ -1532,21 +1536,21 @@ file on it.
 
 .. code-block:: c
 
-   typedef struct httpfs_param_s {
-       char fileext[4];
-       char filedir[32];
-       char request_string[128];
-       uint32_t fatfs_buf_size;
-   } httpfs_params_t;
+    typedef struct httpfs_param_s {
+            char         fileext[4];
+            char         filedir[32];
+            char         request_string[128];
+            uint32_t     fatfs_buf_size;
+    } httpfs_params_t;
+
 
 Use **CMD_HTTPFS_SET_PARAMS** to set up the HTTPFS parameters.
 
--  fileext: Set the file extension, for example “mp4”.
+-  fileext: Set the file extension, for example "mp4".
 
--  filedir: Directory where the file is located, for example “VIDEO”.
+-  filedir: Directory where the file is located, for example "VIDEO".
 
--  request_string: The string of http page, for example
-   "/video_get.mp4".
+-  request_string: The string of http page, for example "/video_get.mp4".
 
 -  fatfs_buf_size: Buffer size of read file.
 
@@ -1675,9 +1679,9 @@ Requisites and Setup
 
 The sample program is located at:
 
-Audio only: \\component\example\media_framework\\example_media_framework.c
+Audio only: \\component\\example\\media_framework\\example_media_framework.c
 
-Video joined: \\project\realtek_amebapro2_v0_example\src\mmfv2_video_example\\video_example_media_framework.c
+Video joined: \\project\\realtek_amebapro2_v0_example\\src\\mmfv2_video_example\\video_example_media_framework.c
 
 For example: open mmf2_video_example_joint_test_rtsp_mp4_init
 

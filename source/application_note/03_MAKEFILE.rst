@@ -133,8 +133,8 @@ Create a cmake file for the library
    )
 
 (3) Assign the library type, STATIC means that the library will be built
-    as static-link library (*.a), while SHARED means that the library
-    will be built as dynamic-link library (*.so).
+    as static-link library (``*``.a) , while SHARED means that the library
+    will be built as dynamic-link library (``*``.so).
 
 .. code-block:: cmake
 
