@@ -128,7 +128,7 @@ For detailed parameter settings, please refer to the following file.
 
 .. code-block:: bash
 
-    component\\video\\driver\\RTL8735B\\video_user_boot.c
+    component\video\driver\RTL8735B\video_user_boot.c
 
 Please be careful not to add or remove structure parameters, this may
 cause internal data errors.

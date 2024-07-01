@@ -187,6 +187,7 @@ Burn DFU firmware to AmebaPro2
    :align: center
 
 
+|
 
 USB PoE and Wi-Fi Network Connection Detection
 ----------------------------------------------
@@ -199,3 +200,6 @@ switch network between Wi-Fi and USB PoE/Ethernet. The event callbacks
 set LWIP netif link status and handle IP address for USB Poe/Ethernet
 interfaces. Finally, the LWIP default gateway is also set to specify the
 interface used to transmit the packets to external network.
+
+.. image:: ../_static/19_USB/image6.png
+   :align: center

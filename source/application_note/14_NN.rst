@@ -92,6 +92,7 @@ Basic vipnn module parameters setting
 Here are some vipnn module parameters provided to set.
 
 .. code-block:: c
+   :emphasize-lines: 10,14
 
     typedef struct vipnn_param_s {
         int model_type;
@@ -141,9 +142,10 @@ Use CMD_VIPNN_SET_IN_PARAMS to set up the NN input parameters.
 Set NN model to vipnn module
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Use CMD_VIPNN_SET_MODEL to set up the NN model:
+Use **CMD_VIPNN_SET_MODEL** to set up the NN model:
 
 .. code-block:: c
+   :emphasize-lines: 4
 
     vipnn_ctx = mm_module_open(&vipnn_module);
     if (vipnn_ctx) {
@@ -158,10 +160,11 @@ Set NN result display callback function
 
 User can register a call back function to so display the NN result or do
 their own customized additional post-processing. Use
-CMD_VIPNN_SET_DISPPOST to set up callback function for display the NN
+**CMD_VIPNN_SET_DISPPOST** to set up callback function for display the NN
 result:
 
 .. code-block:: c
+   :emphasize-lines: 13
 
     static void nn_result_display (void *p, void *img_param)
     {
@@ -190,18 +193,23 @@ Confidence is the score of the bounding box. Use
 CMD_VIPNN_SET_SCORE_THRES to set up confidence score threshold:
 
 .. code-block:: c
+   :emphasize-lines: 2
 
     static float nn_confidence_thresh = 0.5;
-    mm_module_ctrl(vipnn_ctx, **CMD_VIPNN_SET_CONFIDENCE_THRES**, (int)&nn_confidence_thresh);
+    mm_module_ctrl(vipnn_ctx, CMD_VIPNN_SET_CONFIDENCE_THRES, (int)&nn_confidence_thresh);
 
 For the same class, if the IOU (Intersection over union) of two bounding
 box larger then NMS threshold, these two objects will be considered the
-same object. Use CMD_VIPNN_SET_NMS_THRES to set up NMS threshold:
+same object. Use **CMD_VIPNN_SET_NMS_THRES** to set up NMS threshold:
 
 .. code-block:: c
+   :emphasize-lines: 2
 
     static float nn_nms_thresh = 0.3;
-    mm_module_ctrl(vipnn_ctx, **CMD_VIPNN_SET_NMS_THRES**, (int)&nn_nms_thresh);
+    mm_module_ctrl(vipnn_ctx, CMD_VIPNN_SET_NMS_THRES, (int)&nn_nms_thresh);
+
+
+|
 
 Model Zoo
 ---------
@@ -442,6 +450,7 @@ Check and modify in
 “project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\application\\rtl8735b_ram.ld
 
 .. code-block:: c
+   :emphasize-lines: 5
 
     /* DDR memory */
                               
@@ -468,6 +477,7 @@ Figure model network binary
 The nn region length in “project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\mp\\amebapro2_partitiontable.json” should not less than 4MB
 
 .. code-block:: c
+   :emphasize-lines: 3
 
     "nn":{
                 "start_addr" : "0x770000",
@@ -476,6 +486,8 @@ The nn region length in “project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\m
                 "valid": true
           },
 
+
+|
 
 Using the NN MMF example with VIPNN module
 ------------------------------------------
@@ -548,6 +560,7 @@ should set NN_WIDTH and NN_HEIGHT to 416 in video_v4_params.
 
 
 .. code-block:: c
+   :emphasize-lines: 5,6,17,18
 
     #define YOLO_MODEL              1
     #define USE_NN_MODEL            YOLO_MODEL
@@ -604,6 +617,7 @@ image or cropped image.
 **Output resized RGB (1920 x 1080 NN_WIDTH x NN_HEIGHT):**
 
 .. code-block:: c
+   :emphasize-lines: 12,13,14,15,16,17
 
     static video_params_t video_v4_params = {
         .stream_id      = NN_CHANNEL,
@@ -626,6 +640,8 @@ image or cropped image.
     };
 
 
+|
+
 Choose NN model
 ~~~~~~~~~~~~~~~
 
@@ -638,6 +654,7 @@ Choose NN model
   and YAMNet_s - "MODEL2" be used:
 
 .. code-block:: c
+   :emphasize-lines: 7,8
 
     {
         "msg_level":3,
@@ -677,6 +694,9 @@ Choose NN model
 
 
 .. note :: After choosing the model, user have to check the ddr memory and flash size usage of models. Please refer 1.5.1 and 1.5.2 to do evaluation.
+
+
+|
 
 Build NN example
 ~~~~~~~~~~~~~~~~

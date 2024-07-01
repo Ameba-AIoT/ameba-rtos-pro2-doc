@@ -1228,6 +1228,9 @@ The flow chart of fast connection is as follows:
 .. image:: ../_static/20_WIFI/image2.png
    :align: center
 
+
+|
+
 Implementation
 ~~~~~~~~~~~~~~
 
@@ -1617,6 +1620,9 @@ Indicate EAPOL frame received in wps/eap process
 <flags>       Int      Unused
 ============= ======== ===================
 
+
+|
+
 Auto Reconnection
 -----------------
 
@@ -1659,6 +1665,9 @@ Return:
 -  RTW_SUCCESS: Success.
 
 -  RTW_ERROR: Failed.
+
+
+|
 
 Multiple AP with specified ssid or mesh selection
 -------------------------------------------------
@@ -1733,6 +1742,9 @@ strongest RSSI in the current environment every time you reconnect.
    ODM regularly wake up 24 hours a day on the upper layer and perform a
    full scan to determine whether to change to connect to another AP.
 
+
+|
+
 Wifi Channel plan setting
 -------------------------
 
@@ -1753,6 +1765,9 @@ Channel plan setup:
 .. image:: ../_static/20_WIFI/image3.png
    :align: center
 
+
+|
+
 Channel plan configured by the efuse map:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1769,6 +1784,9 @@ Channel plan table:
 
 .. image:: ../_static/20_WIFI/image4.png
    :align: center
+
+
+|
 
 Write/Read efuse map:
 '''''''''''''''''''''
@@ -1805,6 +1823,9 @@ c. W56: 100/104/108/112/116/120/124/128/132/136/140ch
 .. image:: ../_static/20_WIFI/image5.png
    :align: center
 
+
+|
+
 Channel plan configured by setting channel plan value for wifi_user_config.channel_plan in wifi_conf.c:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1821,6 +1842,9 @@ Channel plan table:
 
 .. image:: ../_static/20_WIFI/image4.png
    :align: center
+
+
+|
 
 Set channel plan by software method:
 ''''''''''''''''''''''''''''''''''''
@@ -1880,6 +1904,9 @@ i. ATWZ=get_drv_ability
 
 -  The setup priority of Channel plan: SW Modification
    (wifi_user_config.channel_plan) is higher than the efuse map (0xC8h)
+
+
+|
 
 Power by Rate and Power Limit Introduction
 ------------------------------------------
@@ -1950,10 +1977,8 @@ KCC                                                                  PW_LMT_REGU
 ACMA                                                                 PW_LMT_REGU_ACMA
 CHILE                                                                PW_LMT_REGU_CHILE
 MEX                                                                  PW_LMT_REGU_MEXICO
-NCC                                                                  PW_LMT_REGU_NCC
-WW                                                                   PW_LMT_REGU_ETSI
-                                                                    
-(The min of ETSI and MKK)                                            PW_LMT_REGU_MKK
+NCC                                                                  PW_LMT_REGU_NCC                      
+WW(The min of ETSI and MKK)                                          PW_LMT_REGU_ETSI / PW_LMT_REGU_MKK
 ==================================================================== ==========================
 
 -  For the Enum definition of odm_pw_lmt_regulation_type in
@@ -1989,6 +2014,9 @@ Add new Power Limit Table excluding the FCC/ETSI/MKK table:
 .. image:: ../_static/20_WIFI/image11.png
    :align: center
 
+
+|
+
 SRRC Regulation Introduction and setting:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2008,6 +2036,9 @@ SRRC Regulation Introduction and setting:
    regulation is PW_LMT_REGU_CN. Customers can also modify or add the
    power limit size of PW_LMT_REGU_CN in rtw_opt_rf_para_rtl8735b.c.
    Therefore, the requirements of SRRC regulations can be met.
+
+
+|
 
 Wifi Adaptivity
 ---------------

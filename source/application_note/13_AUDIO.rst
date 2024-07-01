@@ -459,10 +459,10 @@ NS_process                        NS              -  frame_size: setting the fra
 NS_destory                        NS                                                                                                                    -  For output (speaker) side ASP
                                                                                                                                                        
                                                                                                                                                         -  For destroy the modules creates in NS_init
-VQE_SND_init                      NS, AEC, AGC,BF                                                                                                       -  
-                                                                                                                                                       
-(not support yet)                                                                                                                                      
+VQE_SND_init (not support yet)    NS, AEC, AGC,BF                                                                                                       -  
+                                                                                                                                                                                                    
 VQE_SND_process (not support yet) NS, AEC, AGC,BF                                                                                                       -  
+
 VQE_SND_destory (not support yet) NS, AEC, AGC,BF                                                                                                       -  
 ================================= =============== ===================================================================================================== ============
 
@@ -538,14 +538,14 @@ AmebaPro2 provide an example for audio testing.
 
 User can use the following steps to build up the audio test tool image
 
--  Step1: cd project\realtek_amebapro2_v0_example\GCC-RELEASE
+-  Step1: cd project\\realtek_amebapro2_v0_example\\GCC-RELEASE
 
 -  Step2: mkdir build
 
 -  Step3: cd build
 
 -  Step4: cmake .. -G"Unix Makefiles"
-   -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake –DAUDIO_TEST_TOOL=on
+   -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake ``–DAUDIO_TEST_TOOL=on``
 
 -  Step5: cmake --build . --target flash
 

@@ -48,7 +48,7 @@ Sensor configuration
 ~~~~~~~~~~~~~~~~~~~~
 
 User can check supported sensor list and sensor settings is in
-“project\realtek_amebapro2_v0_example\inc\sensor.h”
+“project\\realtek_amebapro2_v0_example\\inc\\sensor.h”
 
 Setup
 ^^^^^
@@ -157,7 +157,8 @@ FCS.
 
 **MANUAL_SENSOR_IQ:** The order in “manual_iq”.
 
-..
+
+|
 
 How to apply “sensor.h” file to fit to customized usage
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -133,7 +133,7 @@ project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\application\\rtl8735b_ram.ld
 
 .. code-block:: bash
 
-   RAM_RETENTION (rwx) : ORIGIN = 0x20120000, LENGTH = 0x20140000 - 0x20120000 /* 128KB retention data \/
+   RAM_RETENTION (rwx) : ORIGIN = 0x20120000, LENGTH = 0x20140000 - 0x20120000 /* 128KB retention data */
 
 For this case, the SRAM retention total size is 128KB. So user still have free SRAM retention space about 128KB - 3KB = 125KB.
 
