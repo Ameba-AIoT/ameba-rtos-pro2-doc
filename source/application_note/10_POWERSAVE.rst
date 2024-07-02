@@ -65,9 +65,9 @@ The mode transition diagram is given in.
 
 .. image:: ../_static/10_POWERSAVE/image2.png
 
-In Figure, the power mode can be divided into 6 states except for “off”
+In Figure, the power mode can be divided into 6 states except for "off"
 state and the each power In Figure, the power mode can be divided into 6
-states except for “off” state and the each power consumption was shown
+states except for "off" state and the each power consumption was shown
 in Figure. The introduction of each power mode, clock-gated and
 power-gated state will be in the following sections. Clock/power gated
 state could be regarded as a status of any hardware.

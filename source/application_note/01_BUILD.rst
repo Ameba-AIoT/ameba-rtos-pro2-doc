@@ -24,9 +24,9 @@ Installing mingw with ASDK and setting up the CMake
 
 .. note :: If %HOME% is not exist, the command will simply print %HOME%
 
-(3) If your windows already have Environment Variable named HOME, open the file “msys64/etc/post-install/05-home-dir.post”
+(3) If your windows already have Environment Variable named HOME, open the file "msys64/etc/post-install/05-home-dir.post"
 
-   Add “HOME=<PATH_TO_YOUR_MSYS64>/home/<USER_FOLDER>”.
+   Add "HOME=<PATH_TO_YOUR_MSYS64>/home/<USER_FOLDER>".
    
 .. code-block:: bash
 
@@ -38,7 +38,7 @@ Installing mingw with ASDK and setting up the CMake
 
 .. note :: By default <USER_FOLDER> is ${USER}. To prevent some errors, do not include space characters in <USER_FOLDER>
 
-(4) Double click “msys2_shell.cmd” from mysys64 folder
+(4) Double click "msys2_shell.cmd" from mysys64 folder
 
 (5) After setting up mingw, you need to install cmake. Download cmake in
     https://github.com/Kitware/CMake/releases/download/v3.20.0-rc1/cmake-3.20.0-rc1-windows-x86_64.msi
@@ -47,14 +47,14 @@ Installing mingw with ASDK and setting up the CMake
 (6) Add location of cmake.exe to PATH of msys2_shell by using vim
     ~/.bashrc and appending path of cmake.exe to environment variable
     PATH or using editor to directly append the path to file
-    “msys64/home/<USER_FOLDER>/.bashrc”
+    "msys64/home/<USER_FOLDER>/.bashrc"
 
 .. code-block:: bash
 
-   export PATH=/c/Program\\ Files/CMake/bin:$PATH
+   export PATH=/c/Program\ Files/CMake/bin:$PATH
 
 
-.. Caution :: If your PATH contains space characters, remember to use “\” to escape
+.. Caution :: If your PATH contains space characters, remember to use "\\" to escape
 
 .. note :: For the first time adding the CMake PATH, after adding the PATH, you need to re-open the msys2_shell and check by:
 
@@ -62,6 +62,7 @@ Installing mingw with ASDK and setting up the CMake
 
    $ cmake --version
    cmake version 3.20.0-rc1
+   
    CMake suite maintained and supported by Kitware (kitware.com/cmake).
 
 |
@@ -70,37 +71,38 @@ Adding toolchain to msys2
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 (1) Like adding PATH for cmake, user can add or change the toolchain in
-    “msys64/home/<USER_FOLDER>/.bashrc”.
+    "msys64/home/<USER_FOLDER>/.bashrc".
 
-(2) Add toolchain PATH by “export PATH=<path to toolchain>:$PATH”.
+(2) Add toolchain PATH by "export PATH=<path to toolchain>:$PATH".
 
 .. code-block:: bash
 
    if [ -d "../../asdk-10.3.0" ]; then
-
-   echo "asdk-10.3.0 exist"
-
-   export PATH=/asdk-10.3.0/mingw32/newlib/bin:$PATH
+       echo "asdk-10.3.0 exist"
+       export PATH=/asdk-10.3.0/mingw32/newlib/bin:$PATH
 
 .. note :: The recommended toolchain version is 10.3.0
 
 Building the project
 ^^^^^^^^^^^^^^^^^^^^
 
-(1) Open mingw by double clicking “msys2_shell.cmd”.
+(1) Open mingw by double clicking "msys2_shell.cmd".
 
 (2) Enter the project location:
     project/realtek_amebapro2_v0_example/GCC-RELEASE.
 
-(3) Create folder “build” and enter “build” folder.
+(3) Create folder "build" and enter "build" folder.
 
-(4) Run “cmake .. -G"Unix Makefiles"
-    -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake” to create the makefile.
+(4) Run "cmake .. -G"Unix Makefiles"
+    -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake" to create the makefile.
 
-(5) Run “cmake --build . --target flash” to build and generate flash
+(5) Run "cmake --build . --target flash" to build and generate flash
     binary.
 
 .. note :: If building successfully, you can see flash_ntz.bin in the build folder
+
+
+|
 
 Building the project in GCC Building Environment (LINUX)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -126,9 +128,9 @@ Add toolchain to the linux PATH
 Installing cmake for linux
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-(1) Install cmake using terminal (like “sudo apt-get -y install cmake”),
-    if the installation is successful, you can get the version by “cmake
-    --version”.
+(1) Install cmake using terminal (like "sudo apt-get -y install cmake"),
+    if the installation is successful, you can get the version by "cmake
+    --version".
 
 Building the project
 ^^^^^^^^^^^^^^^^^^^^
@@ -136,20 +138,21 @@ Building the project
 (1) Open linux terminal and enter the project location:
     project/realtek_amebapro2_v0_example/GCC-RELEASE/.
 
-(2) Create folder “build” and enter “build” folder.
+(2) Create folder "build" and enter "build" folder.
 
-(3) Run “cmake .. -G"Unix Makefiles"
-    -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake” to create the makefile.
+(3) Run "cmake .. -G"Unix Makefiles"
+    -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake" to create the makefile.
 
-(4) Run “cmake --build . --target flash” to build and generate flash
+(4) Run "cmake --build . --target flash" to build and generate flash
     binary.
 
 .. note :: 
-	If building successfully, you can see flash_ntz.bin in the build folder
-	
-	If the ‘build’ folder has been used by others, you can remove ‘build’ folder first to have clean build
-	
-	If there’s some permission issues, you can do “chmod -R 777 <PATH_TO_YOUR_SDK>”
+	- If building successfully, you can see flash_ntz.bin in the build folder
+	- If the ‘build’ folder has been used by others, you can remove ‘build’ folder first to have clean build
+	- If there’s some permission issues, you can do "chmod -R 777 <PATH_TO_YOUR_SDK>"
+
+
+|
 
 Log UART Settings
 -----------------

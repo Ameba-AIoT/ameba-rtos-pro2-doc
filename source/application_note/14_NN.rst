@@ -408,7 +408,7 @@ There are several existing NN model binary files provided in SDK:
 -  mobilefacenet_int8.nb (112x112), mobilefacenet_int16.nb (112x112)
 
 They are located in
-“project/realtek_amebapro2_v0_example/src/test_model”.
+"project/realtek_amebapro2_v0_example/src/test_model".
 
 .. note :: In face recognition application, it would be better to remain the image aspect ratio to get a better accuracy. If user want to run object detection and face detection/recognition at the same time, we can choose scrfd_500m_bnkps_576x320_u8.nb and yolov4_tiny_576x320.nb.
 
@@ -447,7 +447,7 @@ memory. Therefore, we have to make sure the NN ddr region in link script
 is enough for this model.
 
 Check and modify in
-“project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\application\\rtl8735b_ram.ld
+"project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\application\\rtl8735b_ram.ld
 
 .. code-block:: c
    :emphasize-lines: 5
@@ -474,7 +474,7 @@ Figure model network binary
 .. image:: ../_static/14_NN/image3.png
 
 
-The nn region length in “project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\mp\\amebapro2_partitiontable.json” should not less than 4MB
+The nn region length in "project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\mp\\amebapro2_partitiontable.json" should not less than 4MB
 
 .. code-block:: c
    :emphasize-lines: 3
@@ -649,8 +649,8 @@ Choose NN model
   amebapro2_fwfs_nn_models.json, so that the model will be packed into
   the final firmware image. For example, if we want to use yolov4_tiny
   and YAMNet_s, go to
-  “project/realtek_amebapro2_v0_example/GCC-RELEASE/mp/
-| amebapro2_fwfs_nn_models.json” and set model yolov4_tiny - "MODEL0"
+  "project/realtek_amebapro2_v0_example/GCC-RELEASE/mp/
+| amebapro2_fwfs_nn_models.json" and set model yolov4_tiny - "MODEL0"
   and YAMNet_s - "MODEL2" be used:
 
 .. code-block:: c
@@ -719,7 +719,7 @@ inside:
 
 After running the command above, you will get the flash_ntz.nn.bin
 (including the model) in
-“project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\build”
+"project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\build"
 
 Figure image with NN model
 

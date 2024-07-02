@@ -6,9 +6,9 @@ SDK Architecture
   :depth: 2
 
 In AmebaPro2 sdk, it mainly contains four folders. The folder
-“component” store the main component source and the folder “project”
+"component" store the main component source and the folder "project"
 contains the project makefile, compile flag and some examples. The
-folder “doc” and “tool” provide the document and tools for assisting you
+folder "doc" and "tool" provide the document and tools for assisting you
 to set up the project.
 
 Component
@@ -185,7 +185,7 @@ SDK and lib version
 -------------------
 
 For more easily management prebuilt libraries version in SDK, each
-library has its own “get version” API and the output version string
+library has its own "get version" API and the output version string
 follows a specific format.
 
 API in each library
@@ -207,7 +207,7 @@ prebuilt lib.
 For example
 
 If user want to obtain the version information for a specific library,
-such as the “wlan” lib, user could implement the code like following
+such as the "wlan" lib, user could implement the code like following
 code piece.
 
 .. code-block:: bash
@@ -223,7 +223,7 @@ Device should output string like
   libwlan:2023.05.01.12.20.00_b9.5_0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f
 
 
-For the version of “video” lib,
+For the version of "video" lib,
 
 .. code-block:: bash
 
@@ -328,7 +328,7 @@ Bootloader version
 
 At offset 0x2B0 of bootloader image, the version is a 32bytes value in
 little endian order. The definition of version is explained in the
-“Version and Timestamp” section of OTA chapter. The version can be
+"Version and Timestamp" section of OTA chapter. The version can be
 configured in ‘amebapro2_bootloader.json’ under
 ‘project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\mp’.
 

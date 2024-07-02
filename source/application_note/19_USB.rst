@@ -157,13 +157,13 @@ see:
 
 In this case, please follow these steps to install the driver:
 
-(1) Open “Zadig.exe”
+(1) Open "Zadig.exe"
 
-(2) Select “USB DFU CLASS”
+(2) Select "USB DFU CLASS"
 
-(3) Select “libusb-win32”
+(3) Select "libusb-win32"
 
-(4) Click “Install Driver”
+(4) Click "Install Driver"
 
 .. image:: ../_static/19_USB/image4.png
    :align: center
@@ -173,7 +173,7 @@ In this case, please follow these steps to install the driver:
 Burn DFU firmware to AmebaPro2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-(1) Copy “ota.bin” from image build folder
+(1) Copy "ota.bin" from image build folder
 
 (2) Run dfu-util tool:
 

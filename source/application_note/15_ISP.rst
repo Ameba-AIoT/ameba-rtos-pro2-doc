@@ -48,7 +48,7 @@ Sensor configuration
 ~~~~~~~~~~~~~~~~~~~~
 
 User can check supported sensor list and sensor settings is in
-“project\\realtek_amebapro2_v0_example\\inc\\sensor.h”
+"project\\realtek_amebapro2_v0_example\\inc\\sensor.h"
 
 Setup
 ^^^^^
@@ -58,7 +58,7 @@ Setup
 First, check whether your sensor is in the list or not. If not, add your
 sensor by below steps.
 
-Take “\ **SENSOR_SC301**\ ” as example, add sensor parameters to the
+Take "\ **SENSOR_SC301**\ " as example, add sensor parameters to the
 list. (refers to the words in red)
 
 .. code-block:: c
@@ -155,19 +155,19 @@ FCS.
 
 [Description]
 
-**MANUAL_SENSOR_IQ:** The order in “manual_iq”.
+**MANUAL_SENSOR_IQ:** The order in "manual_iq".
 
 
 |
 
-How to apply “sensor.h” file to fit to customized usage
+How to apply "sensor.h" file to fit to customized usage
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 One sensor vs. one IQ (auto mode)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 -  Files in
-   “component\\soc\\8735b\\fwlib\\rtl8735b\\lib\\source\\ram\\video\\voe_bin”
+   "component\\soc\\8735b\\fwlib\\rtl8735b\\lib\\source\\ram\\video\\voe_bin"
 
 .. code-block:: bash
 
@@ -229,7 +229,7 @@ One sensor vs. multiple IQ (manual mode)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 -  Confirm files in
-   “component\\soc\\8735b\\fwlib\\rtl8735b\\lib\\source\\ram\\video\\voe_bin”
+   "component\\soc\\8735b\\fwlib\\rtl8735b\\lib\\source\\ram\\video\\voe_bin"
 
 .. code-block:: bash
 
@@ -504,7 +504,7 @@ OSD example
 
 OSD example is included in RTSP (**-DVIDEO_EXAMPLE=ON**) and UVCD
 (**-DEXAMPLE=media_uvcd**) examples, and it is located at the path
-“component\video\osd2\isp_osd_example.c”
+"component\video\osd2\isp_osd_example.c"
 
 Take UVCD for example, before building the firmware, run below command
 to create the makefile.
@@ -527,10 +527,10 @@ to create the makefile.
 -  Connect the USB cable to the AmebaPro2 CON port and the other end to
    the PC.
 
--  Open potplayer, enter atcmd “ATIO=task,0,0,28,56” will show results.
+-  Open potplayer, enter atcmd "ATIO=task,0,0,28,56" will show results.
 
    -  Command
-      parameters:“ATIO=task,0,0(channel),28(char_width),56(char_height)”
+      parameters:"ATIO=task,0,0(channel),28(char_width),56(char_height)"
 
 OSD Enumerations and Data Structures
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -742,14 +742,14 @@ rts_osd_set_info
 It sets OSD data of indicated stream and block. Each video stream has a
 separate OSD module. Each OSD module supports up to 6 blocks, a block is
 an area in the image for displaying characters or images, which
-represented by the structure “osd_text_info_st” or “osd_pict_st”.
+represented by the structure "osd_text_info_st" or "osd_pict_st".
 English and digital width of a word are inconsistent with Chinese in
 display. English and array use a single, the width and font files are
 saved in the single font lib. The Chinese display takes up double width,
 and the font file is saved in the double wide font lib. For the detail
-of “osd_text_info_st” and “osd_pict_st”, refer to previous instructions
+of "osd_text_info_st" and "osd_pict_st", refer to previous instructions
 
-.. note :: When using rts_osd_set_info, the parameters “osd_text_info_st” or “osd_pict_st” must be declared as global variables.
+.. note :: When using rts_osd_set_info, the parameters "osd_text_info_st" or "osd_pict_st" must be declared as global variables.
 
 Table 1‑17 OSD API: rts_osd_set_info
 
@@ -765,11 +765,11 @@ Parameter  Type    Introduction
                    -  rts_osd2_type_pict,
                   
                    -  rts_osd2_type_text.
-<osd_info> void *  Block detail description, which includes “osd_text_info_st*” and “osd_pict_st*”.
+<osd_info> void *  Block detail description, which includes "osd_text_info_st*" and "osd_pict_st*".
                   
-                   -  “osd_text_info_st*” includes rts_osd2_type_date, rts_osd2_type_time, rts_osd2_type_text
+                   -  "osd_text_info_st*" includes rts_osd2_type_date, rts_osd2_type_time, rts_osd2_type_text
                   
-                   -  “osd_pict_st*” includes rts_osd2_type_pict
+                   -  "osd_pict_st*" includes rts_osd2_type_pict
 ========== ======= ==========================================================================================
 
 rts_osd_get_timezone
@@ -886,7 +886,7 @@ Parameter      Type                Introduction
 <fontlib_idx>  Int                 Font-lib index/Stream ID
 ============== =================== ==========================================
 
-.. note :: When using osd_update_custom, the parameters “osd_text_info_st” or “osd_pict_st” must be declared as global variables.
+.. note :: When using osd_update_custom, the parameters "osd_text_info_st" or "osd_pict_st" must be declared as global variables.
 
 OSD Render Task
 ~~~~~~~~~~~~~~~
@@ -1105,7 +1105,7 @@ Introduce the numbers in above image
 (1) 3 options to select the input method: input by strings, English text
     files, Chinese text files
 
-    -  Please note the option “Input Bmp file” is not used for
+    -  Please note the option "Input Bmp file" is not used for
        generating font lib.
 
 (2) Select font: Please avoid the situation when incomplete characters
@@ -1186,15 +1186,15 @@ iii. Replace the variables in below static functions (emphasized in bold):
 
 (6) **(Isolated Function for FontTool)** Please note it is an isolated
     function to transform font-lib to .txt file, and save font-lib
-    characters to .bmp files if “Font to .bmp” is checked. Please follow
+    characters to .bmp files if "Font to .bmp" is checked. Please follow
     below steps.
 
-    -  Press “…” to open fon-lib (generated by FontTool).
+    -  Press "…" to open fon-lib (generated by FontTool).
 
-    -  Check “Font to .bmp” if you also want to save those characters in
+    -  Check "Font to .bmp" if you also want to save those characters in
        the font-lib to .bmp.
 
-    -  Press “Font to .txt” to generate .txt and .bmp files from the
+    -  Press "Font to .txt" to generate .txt and .bmp files from the
        font-lib.
 
 ISP Control API
@@ -2038,7 +2038,7 @@ Enable Privacy Mask Examples
 Normal mode
 ^^^^^^^^^^^
 
-In “example mmf2_video_example_v1_mask_init.c”, it implements grid-mode
+In "example mmf2_video_example_v1_mask_init.c", it implements grid-mode
 and rect-mode privacy mask function.
 
 Below steps are required to enable privacy mask.
@@ -2308,7 +2308,7 @@ Then, use the following command to generate an image:
     cmake --build . --target flash
 
 After running the command above, you will get the flash_ntz.bin in
-“project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\build”. Then, use the
+"project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\build". Then, use the
 image tool to download it to AmebaPro2.
 
 Build MD & NN Example
@@ -2331,7 +2331,7 @@ command to generate an image with NN model inside:
     cmake --build . --target flash_nn
 
 After running the command above, you will get the flash_ntz.nn.bin in
-“project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\build”. Then, use the
+"project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\build". Then, use the
 image tool to download it to AmebaPro2.
 
 Validate MD example
@@ -2901,7 +2901,7 @@ configurations.
 -  adapt_level: adapt level. The target adaptative threshold will be set
    to "adapt_level" times the current difference.
 
--  adapt_step: adapt step frames. Need “adapt_step” frames to reach the
+-  adapt_step: adapt step frames. Need "adapt_step" frames to reach the
    target adaptive threshold.
 
 -  adapt_thr_max: maximum adaptive threshold.

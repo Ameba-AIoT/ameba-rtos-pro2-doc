@@ -407,13 +407,13 @@ VQE_RCV_STATE_t -  RinLvldB: ASP mic input level in dBFS
                 -  NSRun: NS run status
 =============== ====================================================================================================================================================
 
-In “ASP.h” it defined some function for the ASP setting. The following
+In "ASP.h" it defined some function for the ASP setting. The following
 table shows the functions for setting the ASP algorithm:
 
 ================================= =============== ===================================================================================================== ============
 Function                          Related module  Parameters                                                                                            Note
 ================================= =============== ===================================================================================================== ============
-AEC_init                          NS, AEC, AGC    -  frame_size: setting the frame size for the AEC module, the unit is “sample”                        -  For mono mic side ASP
+AEC_init                          NS, AEC, AGC    -  frame_size: setting the frame size for the AEC module, the unit is "sample"                        -  For mono mic side ASP
                                                                                                                                                        
                                                   -  sample_freq: audio sample rate (support 8k and 16k)                                                -  This process also initialed other modules include NS, AEC and AGC.
                                                                                                                                                        
@@ -444,7 +444,7 @@ AEC_destory                       NS, AEC, AGC                                  
 AGC_init                          AGC             -  sample_freq: audio sample rate (support 8k and 16k)                                                -  For output (speaker) side ASP
                                                                                                                                                        
                                                   -  TX_AGC: the pointer for the webrtc AGC setting in speaker path                                    
-AGC_process                       AGC             -  frame_size: setting the frame size for the AGC module, the unit is “sample” (words)                -  For output (speaker) side ASP
+AGC_process                       AGC             -  frame_size: setting the frame size for the AGC module, the unit is "sample" (words)                -  For output (speaker) side ASP
                                                                                                                                                        
                                                   -  out: the data will be used to do AGC process, the data will directly be modified                  
 AGC_destory                       AGC                                                                                                                   -  For output (speaker) side ASP
@@ -453,7 +453,7 @@ AGC_destory                       AGC                                           
 NS_init                           NS              -  sample_freq: audio sample rate (support 8k and 16k)                                                -  For output (speaker) side ASP
                                                                                                                                                        
                                                   -  TX_NS: the pointer for the webrtc NS setting in speaker path                                      
-NS_process                        NS              -  frame_size: setting the frame size for the AGC module, the unit is “sample”                        -  For output (speaker) side ASP
+NS_process                        NS              -  frame_size: setting the frame size for the AGC module, the unit is "sample"                        -  For output (speaker) side ASP
                                                                                                                                                        
                                                   -  out: the data will be used to do AGC process, the data will directly be modified                  
 NS_destory                        NS                                                                                                                    -  For output (speaker) side ASP

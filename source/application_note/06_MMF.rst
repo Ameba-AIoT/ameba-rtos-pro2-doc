@@ -113,7 +113,7 @@ Audio driver is initialized and the corresponding context is released.
 Pointer to function that sends the control command to the MMF module
 layer (see **mm_module_ctrl**) or a specific module. For example, for
 Audio source, it points to function that controls Audio parameters
-(“sample rate”, “word length”, “mic gain”, etc.) and MMFv2 service task
+("sample rate", "word length", "mic gain", etc.) and MMFv2 service task
 on or off.
 
 -  handle
@@ -783,7 +783,7 @@ log.
 
    video_ctrl(0, VIDEO_DEBUG, enable);
 
-For normal booting, the VOE log is default enable in “video_api.c”. To
+For normal booting, the VOE log is default enable in "video_api.c". To
 disable VOE log, please set "--dbg 0" according to specific video codec
 type
 
@@ -816,7 +816,7 @@ measurement quality. To enable log in FCS, there are two places that
 need to be modified.
 
 -  To enable VOE log in bootloader, please set voe_dbg = 1 in
-   “video_boot.c”.
+   "video_boot.c".
 
 .. code-block:: bash
 
@@ -1667,12 +1667,12 @@ Requisites and Setup
 -  In project\realtek_amebapro2_v0_example\inc\platform_opts.h select
    the usage sensor.
 
--  For audio only example, use “cmake .. -G"Unix Makefiles"
-   -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake -DEXAMPLE=media_framework”
+-  For audio only example, use "cmake .. -G"Unix Makefiles"
+   -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake -DEXAMPLE=media_framework"
    to build up the project.
 
--  For video joined example, use “cmake .. -G"Unix Makefiles"
-   -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake -DVIDEO_EXAMPLE=on” to
+-  For video joined example, use "cmake .. -G"Unix Makefiles"
+   -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake -DVIDEO_EXAMPLE=on" to
    build up the project.
 
 -  Uncomment the example you want to execute.
@@ -2163,7 +2163,7 @@ the PC and booted to get the Log message output of AmebaPro2.
    ATW1=<Password>          => Set the WiFi AP password, if needed
    ATWC                     => Initiate the connection
 
-When the “RTSP stream enabled” message shown on console, it indicates that the RSTP server is already running. You can use VLC player to check the rtsp stream. For rtsp usage can refer to `VLC media player settings`_.
+When the "RTSP stream enabled" message shown on console, it indicates that the RSTP server is already running. You can use VLC player to check the rtsp stream. For rtsp usage can refer to `VLC media player settings`_.
 
 
 MMF AT command
@@ -2186,7 +2186,7 @@ https://www.videolan.org/.
 Stream audio/video from AmebaPro2 to VLC player
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
--  Click “Media” -> “Open Network Stream”.
+-  Click "Media" -> "Open Network Stream".
 
 .. image:: ../_static/06_MMF/image8.png
    :align: center
@@ -2194,7 +2194,7 @@ Stream audio/video from AmebaPro2 to VLC player
 
 |
 
--  Enter “rtsp://xxx.xxx.xxx.xxx:yyy/”, where xxx.xxx.xxx.xxx is the Ameba IP address and yyy is the RTSP server port (default is 554), and click “Play”.
+-  Enter "rtsp://xxx.xxx.xxx.xxx:yyy/", where xxx.xxx.xxx.xxx is the Ameba IP address and yyy is the RTSP server port (default is 554), and click "Play".
 
 .. image:: ../_static/06_MMF/image9.png
    :align: center
@@ -2205,7 +2205,7 @@ Stream audio/video from AmebaPro2 to VLC player
 Stream audio from VLC player to AmebaPro2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
--  Click “Media” -> “Stream”.
+-  Click "Media" -> "Stream".
 
 .. image:: ../_static/06_MMF/image10.png
    :align: center
@@ -2213,8 +2213,8 @@ Stream audio from VLC player to AmebaPro2
 
 |
 
--  Select “File”, choose the file by “Add” and finally click the
-   “Stream”. (If the startup example is RTP -> AAD -> AUDIO please
+-  Select "File", choose the file by "Add" and finally click the
+   "Stream". (If the startup example is RTP -> AAD -> AUDIO please
    select the audio file with the file name .aac (The file format must
    be the same as the AAC decoder setting, the default is mono, sampling
    rate = 8k Hz). If the startup example is RTP -> G711D -> AUDIO,
@@ -2228,7 +2228,7 @@ Stream audio from VLC player to AmebaPro2
 
 |
 
--  You will see your select file after push “Stream”. Check it and click “Next”.
+-  You will see your select file after push "Stream". Check it and click "Next".
 
 .. image:: ../_static/06_MMF/image12.png
    :align: center
@@ -2236,7 +2236,7 @@ Stream audio from VLC player to AmebaPro2
 
 |
 
--  Select “RTP Audio/Video Profile”, and click “Add”.
+-  Select "RTP Audio/Video Profile", and click "Add".
 
 .. image:: ../_static/06_MMF/image13.png
    :align: center
@@ -2244,7 +2244,7 @@ Stream audio from VLC player to AmebaPro2
 
 |
 
--  Enter AmebaPro's IP Address in “Address” field, with “Base port” set to 16384, and click “Next”.
+-  Enter AmebaPro's IP Address in "Address" field, with "Base port" set to 16384, and click "Next".
 
 .. image:: ../_static/06_MMF/image14.png
    :align: center
@@ -2252,7 +2252,7 @@ Stream audio from VLC player to AmebaPro2
 
 |
 
--  Confirm “Activate Transcoding” is unchecked, and click “Next” -> “Stream”. Then the sound can be heard on AmebaPro2 3.5mm audio jack.
+-  Confirm "Activate Transcoding" is unchecked, and click "Next" -> "Stream". Then the sound can be heard on AmebaPro2 3.5mm audio jack.
 
 .. image:: ../_static/06_MMF/image15-1.png
    :align: center
@@ -2266,10 +2266,10 @@ Stream audio from VLC player to AmebaPro2
 Adjust latency (buffer) related settings
 ''''''''''''''''''''''''''''''''''''''''
 
--  Click “Tools” -> “Preferences” -> “Show settings: All” (lower left
-   corner) -> “Input/ Codecs”, (1) set “Network caching” to 300ms
-   (recommended), (2)set “Clock synchronisation” to Default, (3) set
-   “Clock jitter” to 400ms (recommended).
+-  Click "Tools" -> "Preferences" -> "Show settings: All" (lower left
+   corner) -> "Input/ Codecs", (1) set "Network caching" to 300ms
+   (recommended), (2)set "Clock synchronisation" to Default, (3) set
+   "Clock jitter" to 400ms (recommended).
 
 .. image:: ../_static/06_MMF/image17.png
    :align: center
@@ -2277,9 +2277,9 @@ Adjust latency (buffer) related settings
 
 |
 
--  Click “Tools” -> “Preferences” -> “Show settings: Simple” (lower left
-   corner) -> “Input/ Codecs”. Enable “Hardware-accelerated decoding” if
-   available, and set “Skip H.264 in-loop deblocking filter” to “All”.
+-  Click "Tools" -> "Preferences" -> "Show settings: Simple" (lower left
+   corner) -> "Input/ Codecs". Enable "Hardware-accelerated decoding" if
+   available, and set "Skip H.264 in-loop deblocking filter" to "All".
 
 .. image:: ../_static/06_MMF/image18.png
    :align: center

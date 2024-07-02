@@ -18,7 +18,7 @@ files.
 (1) Adding Source files
 
    Open the application.cmake at
-   “project/realtek_amebapro2_v0_example/GCC-RELEASE/application/”.
+   "project/realtek_amebapro2_v0_example/GCC-RELEASE/application/".
 
    Add the source code by append to app_sources:
 
@@ -34,7 +34,7 @@ files.
 (2) Adding header files
 
    Open the includepath.cmake at
-   “project/realtek_amebapro2_v0_example/GCC-RELEASE/”.
+   "project/realtek_amebapro2_v0_example/GCC-RELEASE/".
 
    Add the header files by append to inc_path_re:
 
@@ -61,7 +61,7 @@ Method 1
 ^^^^^^^^
 
 You can place the library under
-“project/realtek_amebapro2_v0_example/GCC-RELEASE/application/output”.
+"project/realtek_amebapro2_v0_example/GCC-RELEASE/application/output".
 
 Assume your library file is libABC.a, you can modify application.cmake
 like:
@@ -199,7 +199,7 @@ and <EXAMPLE_FOLDER.cmake>. The app_example.c is the entry of the
 example and the cmake file is for project build. Here are the steps for
 building up a new application example.
 
-(1) Create a folder under “sdk/component/example”, move the source code
+(1) Create a folder under "sdk/component/example", move the source code
     to the folder and add app_example.c and <EXAMPLE_FOLDER.cmake> in
     the folder.
 
@@ -244,12 +244,12 @@ example is exist in the same project.
 Function examples
 ^^^^^^^^^^^^^^^^^
 
-The function examples can be found under folder “sdk/component/example”.
+The function examples can be found under folder "sdk/component/example".
 
 Here are steps to build up the example:
 
 (1) Create example build folder in
-    “project/realtek_amebapro2_v0_example/GCC-RELEASE” and enter it
+    "project/realtek_amebapro2_v0_example/GCC-RELEASE" and enter it
 
 .. code-block:: bash
 
@@ -263,7 +263,7 @@ Here are steps to build up the example:
 
    cmake .. -G"Unix Makefiles" -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake -DEXAMPLE=<EXAMPLE_FOLDER_NAME>
 
-.. note :: If the example folder not exist, the “<EXAMPLE_FOLDER_NAME> Not Found” message will show, please check the example folder name
+.. note :: If the example folder not exist, the "<EXAMPLE_FOLDER_NAME> Not Found" message will show, please check the example folder name
 
 (3) If example configured successfully, run build command to generate
     flash image
@@ -276,15 +276,15 @@ Here are steps to build up the example:
 
 Integrated examples
 ^^^^^^^^^^^^^^^^^^^
-The function examples can be found under folder “sdk/project/realtek_amebapro2_v0_example/src”.
+The function examples can be found under folder "sdk/project/realtek_amebapro2_v0_example/src".
 
 -  Video examples
 
-   These examples could be found under “sdk/project/realtek_amebapro2_v0_example/src/mmfv2_video_example” and opened by using compiling flag –DVIDEO_EXAMPLE=on. The detail of these examples can refer to Multimedia Framework Architecture.
+   These examples could be found under "sdk/project/realtek_amebapro2_v0_example/src/mmfv2_video_example" and opened by using compiling flag –DVIDEO_EXAMPLE=on. The detail of these examples can refer to Multimedia Framework Architecture.
 
 -  Doorbell and chime example
 
-   The example could be found under “sdk/project/realtek_amebapro2_v0_example/src/doorbell-chime”, which provide users to construct a simple doorbell system which could push video and audio and get audio streaming though the Skynet. This example can be opened through -DDOORBELL_CHIME=on.
+   The example could be found under "sdk/project/realtek_amebapro2_v0_example/src/doorbell-chime", which provide users to construct a simple doorbell system which could push video and audio and get audio streaming though the Skynet. This example can be opened through -DDOORBELL_CHIME=on.
 
 .. note :: In AmebaPro2 project, the flag of integrated could not be used in the same time.
 
@@ -302,4 +302,4 @@ adjust the important parameters is described in the readme file. After the setti
 WiFi example source
 ~~~~~~~~~~~~~~~~~~~
 
-For user to test and development, we provide AT command in AmebaPro2. Users can key in AT command to connect WLAN by the console in PC. AT command can refer to “AN0025 Realtek at command.pdf”.
+For user to test and development, we provide AT command in AmebaPro2. Users can key in AT command to connect WLAN by the console in PC. AT command can refer to "AN0025 Realtek at command.pdf".

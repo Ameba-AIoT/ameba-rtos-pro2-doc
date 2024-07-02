@@ -1778,8 +1778,8 @@ Channel plan configured by the efuse map:
 Channel plan table:
 '''''''''''''''''''
 
--  Please refer to the document ”
-   WS-200923-Willis-Efuse_Channel_Plan_new_define-R54.xlsx” to configure
+-  Please refer to the document "
+   WS-200923-Willis-Efuse_Channel_Plan_new_define-R54.xlsx" to configure
    customer’s channel plan.
 
 .. image:: ../_static/20_WIFI/image4.png
@@ -1836,8 +1836,8 @@ Channel plan configured by setting channel plan value for wifi_user_config.chann
 Channel plan table:
 '''''''''''''''''''
 
--  Please refer to the document ”
-   WS-200923-Willis-Efuse_Channel_Plan_new_define-R54.xlsx” to configure
+-  Please refer to the document "
+   WS-200923-Willis-Efuse_Channel_Plan_new_define-R54.xlsx" to configure
    customer’s channel plan.
 
 .. image:: ../_static/20_WIFI/image4.png
@@ -1946,7 +1946,7 @@ Power By rate Table:
 ~~~~~~~~~~~~~~~~~~~~
 
 -  Power by rate table.txt defines the Tx power by various data rate.
-   The TX output power for “Base Rate” in Power by Rate table is the
+   The TX output power for "Base Rate" in Power by Rate table is the
    reference value.
 
 -  The power by rate table(array_mp_8735b_phy_reg_pg) in The

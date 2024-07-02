@@ -79,10 +79,10 @@ Test Procedure
 (1) After download image to your AmebaPro2 board, reset it. The default
     device name is BLE_PERIPHERAL.
 
-(2) Download apps such as “LightBlue” or “nRF Connect” and use as GATT
+(2) Download apps such as "LightBlue" or "nRF Connect" and use as GATT
     Client to connect it.
 
-(3) ATBp is an AT command for BT Peripheral. Using “ATBp=1” to initialize BT Peripheral stack, which can send advertising  package out and scannable by other devices. Below is the BT peripheral example initialization success log.
+(3) ATBp is an AT command for BT Peripheral. Using "ATBp=1" to initialize BT Peripheral stack, which can send advertising  package out and scannable by other devices. Below is the BT peripheral example initialization success log.
 
 .. code-block:: bash
 
@@ -133,19 +133,19 @@ Test Procedure
 
 (1) After download image to your AmebaPro2 board, reset it.
 
-(2) Download app “nRF Connect” and use as GATT Server to be connected.
+(2) Download app "nRF Connect" and use as GATT Server to be connected.
 
 (3) Add new advertising packet and set its additional data.
 
 .. image:: ../_static/16_Bluetooth/image3.png
    :align: center
 
-(4) ATBc is an AT command for BT Central. Using “ATBc=1” to turn BT
+(4) ATBc is an AT command for BT Central. Using "ATBc=1" to turn BT
     Central stack ON.
 
-(5) Using “ATBS=1” to scan available BT devices nearby.
+(5) Using "ATBS=1" to scan available BT devices nearby.
 
-(6) Using “ATBC=P/R, BLE_BD_ADDR” to connect to the device.
+(6) Using "ATBC=P/R, BLE_BD_ADDR" to connect to the device.
 
 BT Central scan and connect log:
 
@@ -208,7 +208,7 @@ Test Procedure
 
 (1) After download image to your AmebaPro2 board, reset it.
 
-(2) Using “ATBf=1” to turn BT Scatternet stack ON.
+(2) Using "ATBf=1" to turn BT Scatternet stack ON.
 
 (3) Once see the following message, you can continue input other AT
     command of BT Scatternet mode as well as BT Central mode and BT
@@ -259,7 +259,7 @@ Image Generation
 Test Procedure
 '''''''''''''''
 
-(1) Choose beacon type by using “ATBJ=1,1” or “ATBJ=1,2” command.
+(1) Choose beacon type by using "ATBJ=1,1" or "ATBJ=1,2" command.
 
 .. code-block:: bash
 
@@ -268,9 +268,9 @@ Test Procedure
    [ATBJ] Start BT Alt_Beacon: ATBJ=1,2
    [ATBJ] Stop BT Beacon: ATBJ=0
 
-(2) You can use apps such as “LightBlue” or “nRF Connect” to observe
-    beacons. “Locate” observe beacon by it adv UUID. Below screenshot is
-    taken using Android “nRF Connect”.
+(2) You can use apps such as "LightBlue" or "nRF Connect" to observe
+    beacons. "Locate" observe beacon by it adv UUID. Below screenshot is
+    taken using Android "nRF Connect".
 
 bt_config
 ^^^^^^^^^
@@ -303,7 +303,7 @@ Image Generation
 APP Installation
 ''''''''''''''''
 
-Search “Easy WiFi Config” in the application store. You can install
+Search "Easy WiFi Config" in the application store. You can install
 Android or iOS as your phone OS.
 
 .. image:: ../_static/16_Bluetooth/image4.png
@@ -313,9 +313,9 @@ Android or iOS as your phone OS.
 Test Procedure
 ''''''''''''''
 
-(1) ATBB is an AT command for BT Config. Using “ATBB=1” to enter BT
+(1) ATBB is an AT command for BT Config. Using "ATBB=1" to enter BT
     Config mode, which allows BT Config APP to discover and connect to
-    AmebaPro2. Reset your AmebaPro2 board, and input command “ATBB=1”.
+    AmebaPro2. Reset your AmebaPro2 board, and input command "ATBB=1".
 
 (2) Once see the following message, you can open BT Config APP to
     associate AP.
@@ -383,8 +383,8 @@ Display on BT config app:
    :align: center
 
 (6) When AmebaPro2 is connected to an AP, user can confirm connection or
-    select another AP. Click “Confirm” to confirm AP connection. Click
-    “Try another AP” to go back to Wi-Fi scan list page and choose
+    select another AP. Click "Confirm" to confirm AP connection. Click
+    "Try another AP" to go back to Wi-Fi scan list page and choose
     another AP to connect to. After confirming BT config result,
     Bluetooth connection is disconnected, AmebaPro2 becomes
     undiscoverable to BT Config APP.
@@ -404,7 +404,7 @@ Display on BT config app:
 .. image:: ../_static/16_Bluetooth/image9.png
    :align: center
 
-(7) You can use “ATBB=1” to restart BT Config mode again.
+(7) You can use "ATBB=1" to restart BT Config mode again.
 
 =========== ================
 **Command** **Introduction**
@@ -626,8 +626,8 @@ side, and a TDMA scheme that is not shown in the diagram.
 When BT and WLAN request to T/RX simultaneously, PTA performs
 arbitrations on these requests readily. The configurations of PTA focus
 on the coexistence tables, which specify the traffic streaming rules.
-For example, we can set the coexistence table to “\ **BT traffic
-priority > WL traffic priority**\ ” to ensure BT can always preempt
+For example, we can set the coexistence table to "\ **BT traffic
+priority > WL traffic priority**\ " to ensure BT can always preempt
 WLAN. The values of coexistence tables come from WLAN driver through
 self-defined commands. Specifically, the coexistence algorithms reside
 in WLAN driver code, and the actions of sending commands to PTA are

@@ -33,15 +33,15 @@ Software installation
 
 To be able to use J-Link debugger, user needs install J-Link GDB server
 first. For Windows, please check http://www.segger.com and download
-“J-Link Software and Documentation Pack”
+"J-Link Software and Documentation Pack"
 (https://www.segger.com/downloads/jlink).
 
 Setup environment
 -----------------
 
 To check whether the connection works fine, user can go to the location
-of SEGGER J-Link tool and run “JLinkGDBServer.exe”. Choose target device
-Cortex-M33 (for AmebaPro2), and target interface SWD. Click “OK”
+of SEGGER J-Link tool and run "JLinkGDBServer.exe". Choose target device
+Cortex-M33 (for AmebaPro2), and target interface SWD. Click "OK"
 
 .. image:: ../_static/05_JTAG/jlink_server1.png
    :align: center

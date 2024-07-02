@@ -19,7 +19,7 @@ OTA Operation Flow for NOR Flash
    Figure OTA Process Flow for NOR Flash
 
 The first 8 bytes of firmware image would be a label. During the step of
-“Write received data to update firmware address”, the 8 bytes label need
+"Write received data to update firmware address", the 8 bytes label need
 set to 0xffffffffffffffff. That means the label is invalid. The backup
 label needs to be written back at the end of OTA process to prevent
 device booting from incomplete firmware.
@@ -32,7 +32,7 @@ OTA Operation Flow for NAND Flash
    
    Figure OTA Process Flow for NAND Flash
 
-During the step of “Write received data to empty block”, the magic
+During the step of "Write received data to empty block", the magic
 number of this new record in partition table is invalid. The magic
 number is updated at the end of OTA process to make this record valid.
 
@@ -187,9 +187,9 @@ zero in bit 0, version of
 zero in bit 4, and version of
 ‘FFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF’ is
 zero in bit 8. Then, it will be version with bit 8 zero > version with
-bit 4 zero > version with bit 0 zero. The version definition in “value”
+bit 4 zero > version with bit 0 zero. The version definition in "value"
 is customizable, user could apply its own method by implementing
-user_boot_fw_selection(). Moreover, the advantage of using “value” field
+user_boot_fw_selection(). Moreover, the advantage of using "value" field
 in MANIFEST instead of maintaining a separate record in NOR/NAND flash
 is that, user does not need to handle bad block management for NAND
 flash that stores firmware version control information.

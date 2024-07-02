@@ -12,7 +12,7 @@ project.
 Memory Section
 --------------
 
-We can find the memory configuration in “rtl8735b_ram.ld”:
+We can find the memory configuration in "rtl8735b_ram.ld":
 
 -  .ram.code_rodata : This section is read-only data in SRAM
 
@@ -29,19 +29,19 @@ We can find the memory configuration in “rtl8735b_ram.ld”:
 Memory Size
 -----------
 
-User can refer “application.ntz.map” to observe them after project
+User can refer "application.ntz.map" to observe them after project
 build. This file can be found in
-“project/realtek_amebapro2_v0_example/GCC-RELEASE/build/application”
+"project/realtek_amebapro2_v0_example/GCC-RELEASE/build/application"
 folder.
 
 Memory Size in SRAM
 ~~~~~~~~~~~~~~~~~~~
 
-There are several sections in SRAM, including “.ram.code_text”,
-“.ram.data”, “.ram.code_rodata”, “.ram.bss” and “.non_secure.bss”. We
+There are several sections in SRAM, including ".ram.code_text",
+".ram.data", ".ram.code_rodata", ".ram.bss" and ".non_secure.bss". We
 can sum up these sections:
 
-“.ram.code_text” has size 0xdef0:
+".ram.code_text" has size 0xdef0:
 
 .. code-block:: bash
 
@@ -53,7 +53,7 @@ can sum up these sections:
 
 
 
-“.ram.data” has size 0x9b4:
+".ram.data" has size 0x9b4:
 
 .. code-block:: bash
 
@@ -64,7 +64,7 @@ can sum up these sections:
 
 
 
-“.ram.code_rodata” has size 0x5d8:
+".ram.code_rodata" has size 0x5d8:
 
 .. code-block:: bash
 
@@ -75,7 +75,7 @@ can sum up these sections:
 
 
 
-“.ram.bss” has size 0x139fc:
+".ram.bss" has size 0x139fc:
 
 .. code-block:: bash
 
@@ -85,7 +85,7 @@ can sum up these sections:
 
 
 
-“.non_secure.bss” has size 0x4:
+".non_secure.bss" has size 0x4:
 
 .. code-block:: bash
 
@@ -111,9 +111,9 @@ SRAM space about 476KB - 138KB = 338KB.
 Memory Size in SRAM Retention
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For memory used in SRAM retention, we should check “.ram.retention.data”.
+For memory used in SRAM retention, we should check ".ram.retention.data".
 
-“.ram.retention.data” has size 0xd70:
+".ram.retention.data" has size 0xd70:
 
 .. code-block:: bash
 
@@ -140,9 +140,9 @@ For this case, the SRAM retention total size is 128KB. So user still have free S
 Memory Size in DDR Memory (ERAM)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-There are several sections in DDR Memory, “.ddr.bss”, “.ddr.text”, “.ddr.data” and “.ddr.rodata”. We can sum up these sections:
+There are several sections in DDR Memory, ".ddr.bss", ".ddr.text", ".ddr.data" and ".ddr.rodata". We can sum up these sections:
 
-“.ddr.bss” has size 0x1424d8:
+".ddr.bss" has size 0x1424d8:
 
 .. code-block:: bash
 
@@ -151,7 +151,7 @@ There are several sections in DDR Memory, “.ddr.bss”, “.ddr.text”, “.d
                     0x0000000070100000                __eram_bss_start__ = .
 
 
-“.ddr.text” has size 0x7d278:
+".ddr.text" has size 0x7d278:
 
 .. code-block:: bash
 
@@ -160,7 +160,7 @@ There are several sections in DDR Memory, “.ddr.bss”, “.ddr.text”, “.d
                     0x00000000702424e0                __eram_text_start__ = .
 
 
-“.ddr.data” has size 0x4e08:
+".ddr.data" has size 0x4e08:
 
 .. code-block:: bash
 
@@ -169,7 +169,7 @@ There are several sections in DDR Memory, “.ddr.bss”, “.ddr.text”, “.d
                      0x00000000702bf79c              __eram_data_start__ = .
 
 
-“.ddr.rodata” has size 0x512a:
+".ddr.rodata" has size 0x512a:
 
 .. code-block:: bash
 
@@ -184,7 +184,7 @@ after running an application on AmebaPro2.
 DDR memory total size = .ddr.bss + .ddr.text + .ddr.data + .ddr.rodata +
 heap usage + heap available
 
-We can get the heap available size by entering AT command – “ATW?” in
+We can get the heap available size by entering AT command – "ATW?" in
 uart console:
 
 .. code-block:: bash
@@ -223,7 +223,7 @@ For this case, the code size is about 4.4MB
 CPU Utilization
 ---------------
 
-CPU utilization can be evaluated by AT command - “ATSS” in uart console.
+CPU utilization can be evaluated by AT command - "ATSS" in uart console.
 
 It will show the amount of time each task has spent in the Running state
 (how much CPU time each task has consumed).

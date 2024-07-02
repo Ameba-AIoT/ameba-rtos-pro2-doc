@@ -159,11 +159,11 @@ all files and directories, and list files again to check if the drive is
 all clean and empty.
 
 Next, the example uses f_mkdir API to create a directory named
-“ameba_dir” in the root of the filesystem and use f_open to create a
-file named “ameba_dir_file” in ameba_dir. Then list files to show the
+"ameba_dir" in the root of the filesystem and use f_open to create a
+file named "ameba_dir_file" in ameba_dir. Then list files to show the
 created directory and file.
 
-Next, we create a file named “ameba_root_file” at the root of the drive,
+Next, we create a file named "ameba_root_file" at the root of the drive,
 and use f_write API to try to write some content to the file. Then use
 f_read API to read from the file to check if the content written to the
 file can be read back correctly.
@@ -192,13 +192,13 @@ Next, the example clears files currently exist in both drives, and list
 files again to check if the drives are all clean and empty.
 
 Next, the example tests operations on the SD drive. We create a new
-file(“sd_file”) and perform read/write to the file, then create a new
-directory(“sd_dir”) and open a new file in the directory(“sd_file2”).
+file("sd_file") and perform read/write to the file, then create a new
+directory("sd_dir") and open a new file in the directory("sd_file2").
 
 Next, the example tests similar operations on the flash drive. Create a
-new file(“flash_file”) and perform read/write to the file. Then we
-create a new directory(“flash_dir”) and open a new file in the
-directory(“flash_file2”).
+new file("flash_file") and perform read/write to the file. Then we
+create a new directory("flash_dir") and open a new file in the
+directory("flash_file2").
 
 Finally we list all files and directories in each drive.
 

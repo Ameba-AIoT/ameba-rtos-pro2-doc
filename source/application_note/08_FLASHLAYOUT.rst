@@ -222,7 +222,7 @@ read/write a NAND flash.
 
 The example is located in:
 
-“\\project\\realtek_amebapro2_v0_example\\example_sources\\nand_flash\\”
+"\\project\\realtek_amebapro2_v0_example\\example_sources\\nand_flash\\"
 
 Copy main.c to src folder, compile project, and the download the binary.
 
@@ -423,7 +423,7 @@ This example demonstrates how use mbed API to read/write a NOR flash.
 
 The example is located in:
 
-“\\project\\realtek_amebapro2_v0_example\\example_sources\\flash\\”
+"\\project\\realtek_amebapro2_v0_example\\example_sources\\flash\\"
 
 Copy main.c to src folder, compile project, and the download the binary.
 
