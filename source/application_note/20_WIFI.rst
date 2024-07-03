@@ -36,6 +36,9 @@ Wi-Fi Data Structures
 <wifi_user_conf>              The structure is used to describe the wifi user configuration.
 ============================= ==========================================================================================================================================================================
 
+
+|
+
 Wi-Fi APIs
 ----------
 
@@ -160,26 +163,25 @@ Return:
 
 -  Otherwise: Scanned AP number for synchronized scan.
 
-.. image:: ../_static/20_WIFI/image1.png
 
--  If this API is called, the scanned APs are stored in Wi-Fi driver
-   dynamic allocated memory, for a synchronous scan or asynchronous scan
-   which does not use RTW_SCAN_REPORT_EACH, these memories will be freed
-   when wifi_get_scan_records is called.
+.. note :: - If this API is called, the scanned APs are stored in Wi-Fi driver
+      dynamic allocated memory, for a synchronous scan or asynchronous scan
+      which does not use RTW_SCAN_REPORT_EACH, these memories will be freed
+      when wifi_get_scan_records is called.
 
--  When configuring TW_SCAN_REPORT_EACH,
-   scan_report_each_mode_user_callback will report NULL to indicate that
-   the scan is done.
+    - When configuring TW_SCAN_REPORT_EACH,
+      scan_report_each_mode_user_callback will report NULL to indicate that
+      the scan is done.
 
--  Only one callback function can be chosen to register. Both
-   scan_user_callback and scan_report_each_mode_user_callback are not
-   supported to be registered in one scan.
+    - Only one callback function can be chosen to register. Both
+      scan_user_callback and scan_report_each_mode_user_callback are not
+      supported to be registered in one scan.
 
--  The scan callback function will be executed in the context of the RTW
-   thread.
+    - The scan callback function will be executed in the context of the RTW
+      thread.
 
--  When scanning specific channels, devices with strong signal strength
-   on nearby channels may be detected.
+    - When scanning specific channels, devices with strong signal strength
+      on nearby channels may be detected.
 
 wifi_get_scan_records
 ^^^^^^^^^^^^^^^^^^^^^
@@ -252,28 +254,26 @@ Return:
 
 -  RTW_ERROR: If an error occurred.
 
-.. image:: ../_static/20_WIFI/image1.png
 
--  Make sure the Wi-Fi is enabled before invoking this function
-   (wifi_on()).
+.. note :: - Make sure the Wi-Fi is enabled before invoking this function(wifi_on()).
 
--  The parameter channel and pscan_option in connect_param can be used
-   to perform fast survey on the specified channel during Wi-Fi
-   connection. **Default setting null and scan full channel.**
+    -  The parameter channel and pscan_option in connect_param can be used
+       to perform fast survey on the specified channel during Wi-Fi
+       connection. **Default setting null and scan full channel.**
 
--  When the channel is set to a specified channel and pscan_option is
-   set to PSCAN_FAST_SURVEY, during Wi-Fi connection, an active scan
-   will be only performed on the specified channel, the active scan will
-   retry at most 8 times with each round interval 25ms.
-   **Default setting 0 and scan full channel.**
+    -  When the channel is set to a specified channel and pscan_option is
+       set to PSCAN_FAST_SURVEY, during Wi-Fi connection, an active scan
+       will be only performed on the specified channel, the active scan will
+       retry at most 8 times with each round interval 25ms.
+       **Default setting 0 and scan full channel.**
 
--  joinstatus_user_callback in connect_param can be registered to get
-   the real-time join status changes since this callback will be
-   executed every time join status is changed.
+    -  joinstatus_user_callback in connect_param can be registered to get
+       the real-time join status changes since this callback will be
+       executed every time join status is changed.
 
--  *Wifi_connection api will scan the supported channels to search for
-   all candidate ssids, and finally compares the AP RSSI and selects the
-   AP with the strongest signal as the target ssid for connection.*
+    -  Wifi_connection api will scan the supported channels to search for
+       all candidate ssids, and finally compares the AP RSSI and selects the
+       AP with the strongest signal as the target ssid for connection.
 
 wifi_disconnect
 ^^^^^^^^^^^^^^^
@@ -1213,6 +1213,9 @@ Return:
 
 -  RTW_ERROR: Failed.
 
+
+|
+
 Fast Connection
 ---------------
 
@@ -1309,6 +1312,9 @@ Return:
 
 -  -1: Failed.
 
+
+|
+
 WPS APIs
 --------
 
@@ -1345,14 +1351,10 @@ Return:
 
 -  Otherwise: Failed.
 
-.. image:: ../_static/20_WIFI/image1.png
 
--  Before invoking this function, the Wi-Fi should be enabled by calling
-   wifi_on().
+.. note :: - Before invoking this function, the Wi-Fi should be enabled by calling wifi_on().
 
--  Make sure CONFIG_ENABLE_WPS is enabled in platform_opts.h. After
-   calling wps_start(), the longest time of WPS is 120s. You can call
-   wps_stop() to quit WPS.
+    - Make sure CONFIG_ENABLE_WPS is enabled in platform_opts.h. After calling wps_start(), the longest time of WPS is 120s. You can call wps_stop() to quit WPS.
 
 wps_stop
 ~~~~~~~~
@@ -1364,6 +1366,9 @@ Parameter: None.
 Return: None.
 
 .. note :: Make sure CONFIG_ENABLE_WPS is enabled in platform_opts.h.
+
+
+|
 
 Wi-Fi event callback function
 -----------------------------

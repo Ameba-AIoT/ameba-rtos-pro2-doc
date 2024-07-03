@@ -654,10 +654,16 @@ transmitted during both WLAN slot and BT slot. BLE SCAN traffic which is
 assigned low priority is forbidden to transmit during WLAN slot, but
 only permitted during BT slot.
 
-Fig BLE coexistence architecture
+
+|
+
+Fig 1-1 BLE coexistence architecture
 
 .. image:: ../_static/16_Bluetooth/image11.png
    :align: center
+
+
+|
 
 PTA Mode
 ~~~~~~~~
@@ -681,7 +687,10 @@ Fig 1-2 PTA module port diagram
 .. image:: ../_static/16_Bluetooth/image12.png
    :align: center
 
-Table PTA module pin definition
+
+|
+
+Table 1-1 PTA module pin definition
 
 ==================== =================================================================================================================================================================
 **Pin**              **Description**
@@ -730,12 +739,12 @@ before next beacon early time is partitioned into slots, some for WLAN
 and others for BT. Thirdly, the slot length is configurable by
 coexistence algorithms.
 
-In most cases, we use 2-slot TDMA to share the RF usage. As Fig 1‑3
+In most cases, we use 2-slot TDMA to share the RF usage. As Fig 1-3
 demonstrates TDMA with 2-slot mode. Regardless of the working modes of
 AmebaPro2, whether in station(STA) mode or access point(AP) mode, 2-slot
 mode TDMA can be applied.
 
-Fig TDMA with 2-slot
+Fig 1-3 TDMA with 2-slot
 
 .. image:: ../_static/16_Bluetooth/image13.png
    :align: center
@@ -783,6 +792,8 @@ Fig 1-4 Normal usage of WLAN and internal BLE
 .. image:: ../_static/16_Bluetooth/image14.png
    :align: center
 
+
+|
 
 WLAN and External BLE or WLAN and Zigbee
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

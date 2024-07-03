@@ -24,6 +24,10 @@ confirmed that the sesnor power needs to be given at the beginning,
 otherwise the fcs will fail
 
 .. image:: ../_static/18_FCS_MULTI/image1.png
+   :align: center
+
+
+|
 
 The FCS parameter
 ~~~~~~~~~~~~~~~~~
@@ -43,6 +47,10 @@ FTL stored parameters: Update parameters through FTL API
 Parameters stored in FCS Partition: Update parameters through FWFS
 
 .. image:: ../_static/18_FCS_MULTI/image2.png
+   :align: center
+
+
+|
 
 In the FCS parameter process, enter the user_boot_config_init weak
 function at the beginning, determine whether it is Partition or FTL
@@ -51,6 +59,10 @@ the data if it succeeds, and load the default global variables if it
 fails, please refer to the following flowchart
 
 .. image:: ../_static/18_FCS_MULTI/image3.png
+   :align: center
+
+
+|
 
 The following structure is the FCS parameter content.
 
@@ -404,7 +416,7 @@ through look up table.
 +---------------+-------------------+    +                                       +------------------+-----+------------------+-------+-------+
 | > 10          | > 260             |    |                                       | 30000            | 1024| 3400             | 377   | 685   |
 +---------------+-------------------+----+---------------------------------------+------------------+-----+------------------+-------+-------+
-| < 5           | < 100             | IR | Extreme low lux and switch to IR Mode | 30000            | 2048| -                |       |       |
+| < 5           | < 100             | IR | Extreme low lux and switch to IR Mode | 30000            | 2048|                  |       |       |
 +---------------+-------------------+----+---------------------------------------+------------------+-----+------------------+-------+-------+
 
 
@@ -462,8 +474,6 @@ private_mask                              See Bellowing
 meta_enable                        Yes    Enable the meta data feature (0:Disable 1: Enable)
 meta_size                          Yes    User meta size
 nit_isp_items                             See bellowing
-\                                        
-\                                        
 ========================== === === ====== =======================================================================================================================================
 
 Sub-structure: The definition of video_boot_stream_cfg.video_params
@@ -499,7 +509,6 @@ sampling_time           Yes    Sample interval time
 maximum_bitrate         Yes    Maximum bitrate
 minimum_bitrate         Yes    Minimun bitrate
 target_bitrate          Yes    Target bitrate
-\                             
 =============== === === ====== ====================
 
 Sub-structure: The definition of video_boot_stream_cfg.isp_info
@@ -519,20 +528,29 @@ md_buf_size   0                        No     Buffer size for md (no use in fcs)
 
 Sub-structure: The definition of video_boot_stream_cfg.private_mask
 
-======= === ========================================= ====== ===========================================================
-Name    Mim Max                                       Modify Description
-======= === ========================================= ====== ===========================================================
-enable  0   1                                         Yes    Enable Privacy Mask initial configuration
-color   0                                             Yes    Color for privacy mask, format: 0xRRGGBB (RR/GG/BB = 0~255)
-en      0   4                                         Yes    Enable control for rectangle (1~4) and grid (0)
-start_x 0   Image width                               Yes    Start position of x axis (should be 2 alignment)
-start_y 0   Image height                              Yes    Start position of y axis (should be 2 alignment)
-w       0   Can't be over sensor image width / height Yes    Width for ROI window (Rect) or width for each grid
-h       0                                             Yes    Width for ROI window (Rect) or height for each grid
-cols    0                                             Yes    Number of grid columns (should be 2 alignment)
-rows    0                                             Yes    Number of grid rows (should be 2 alignment)
-bitmap                                                Yes    Enable bit for each grid (start from left top grid)
-======= === ========================================= ====== ===========================================================
++-------+---+-----------------------------------------+------+------------------------------------------------------------+
+|Name   |Mim|Max                                      |Modify|Description                                                 |
++=======+===+=========================================+======+============================================================+
+|enable | 0 | 1                                       |Yes   | Enable Privacy Mask initial configuration                  |
++-------+---+-----------------------------------------+------+------------------------------------------------------------+
+|color  | 0 | 1                                       |Yes   | Color for privacy mask, format: 0xRRGGBB (RR/GG/BB = 0~255)|
++-------+---+-----------------------------------------+------+------------------------------------------------------------+
+|en     | 0 | 4                                       |Yes   | Enable control for rectangle (1~4) and grid (0)            |
++-------+---+-----------------------------------------+------+------------------------------------------------------------+
+|start_x| 0 | Image width                             |Yes   | Start position of x axis (should be 2 alignment)           |
++-------+---+-----------------------------------------+------+------------------------------------------------------------+
+|start_y| 0 | Image height                            |Yes   | Start position of y axis (should be 2 alignment)           |
++-------+---+-----------------------------------------+------+------------------------------------------------------------+
+|w      | 0 |Can't be over sensor image width / height|Yes   | Width for ROI window (Rect) or width for each grid         |
++-------+---+                                         +------+------------------------------------------------------------+
+|h      | 0 |                                         |Yes   | Width for ROI window (Rect) or height for each grid        |
++-------+---+                                         +------+------------------------------------------------------------+
+|cols   | 0 |                                         |Yes   | Number of grid columns (should be 2 alignment)             |
++-------+---+                                         +------+------------------------------------------------------------+
+|rows   | 0 |                                         |Yes   | Number of grid rows (should be 2 alignment)                |
++-------+---+-----------------------------------------+------+------------------------------------------------------------+
+|bitmap |   |                                         |Yes   | Enable bit for each grid (start from left top grid)        |
++-------+---+-----------------------------------------+------+------------------------------------------------------------+
 
 Sub-structure: The definition of video_boot_stream_cfg. init_isp_items
 
@@ -568,6 +586,7 @@ Multi sensor
 ------------
 
 .. image:: ../_static/18_FCS_MULTI/image8.png
+   :align: center
 
 Configure multi sensor
 ~~~~~~~~~~~~~~~~~~~~~~

@@ -68,6 +68,8 @@ User needs to call watchdog_aon_clear() to clear AON WDT boot reason.
     void watchdog_aon_clear(void);
 
 
+|
+
 One-time Programmable (OTP)
 ---------------------------
 
@@ -95,6 +97,7 @@ Figure OTP layout
    :align: center
 
 
+|
 
 OTP Programming APIs
 ~~~~~~~~~~~~~~~~~~~~

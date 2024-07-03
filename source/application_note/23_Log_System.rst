@@ -43,36 +43,39 @@ TELNET. For detailed methods, please refer to each example. If you need
 to support the output of two log services at the same time, you need to
 register the remote and console separately at the same time.
 
+
+|
+
 Fault message redirection
 -------------------------
 
-**The initial configuration of the fault log was set to output
+The initial configuration of the fault log was set to output
 exclusively through the UART port, which presented a limitation as it
 didn't allow the logs to be saved to alternative storage mediums. To
 enhance functionality, the provided example enables users to save the
 fault log directly to flash memory, which can be particularly useful for
-post-event debugging.**
+post-event debugging.
 
-**The example code can be found in the file main_faultlog.c, located
+The example code can be found in the file main_faultlog.c, located
 within the directory project/realtek_amebapro2_v0_exmaple/src. The
 function fault_message_log_init is designed to initialize the logging
 process, and it utilizes two callback functions, fault_log and bt_log,
-to manage the saving of log information.**
+to manage the saving of log information.
 
-**fault_log callback: This function is tasked with handling the fault
+fault_log callback: This function is tasked with handling the fault
 event log messages, which includes the register and stack memory
-dumps.**
+dumps.
 
-**bt_log callback: This function is responsible for recording the stack
-backtrace log messages.**
+bt_log callback: This function is responsible for recording the stack
+backtrace log messages.
 
-**Once the system has been rebooted, the function read_last_fault_log
+Once the system has been rebooted, the function read_last_fault_log
 can be called to retrieve the most recent fault log from the flash
-memory.**
+memory.
 
-**For detailed implementation guidance, users should refer to the
+For detailed implementation guidance, users should refer to the
 main_faultlog.c file, which serves as a practical example of how to
-integrate these logging features into their projects.**
+integrate these logging features into their projects.
 
 
 .. note :: If a bus fault occurs, peripheral access and log saving through the bus may fail.

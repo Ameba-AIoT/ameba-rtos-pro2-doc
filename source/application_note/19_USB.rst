@@ -149,11 +149,14 @@ below:
 .. image:: ../_static/19_USB/image2.png
    :align: center
 
-If your DFU device is unable to work (driver is not installed), you will
-see:
+|
+
+If your DFU device is unable to work (driver is not installed), you will see:
 
 .. image:: ../_static/19_USB/image3.png
    :align: center
+
+|
 
 In this case, please follow these steps to install the driver:
 
@@ -169,6 +172,7 @@ In this case, please follow these steps to install the driver:
    :align: center
 
 
+|
 
 Burn DFU firmware to AmebaPro2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

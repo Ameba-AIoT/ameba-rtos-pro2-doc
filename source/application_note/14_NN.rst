@@ -355,7 +355,7 @@ Description of parameter in objdetect_res_t:
 Figure object detection format
 
 .. image:: ../_static/14_NN/image2.png
-
+   :align: center
 
 **Face detection**
 
@@ -472,7 +472,7 @@ Take yolov4-tiny for example, the model size is about 4MB
 Figure model network binary
 
 .. image:: ../_static/14_NN/image3.png
-
+   :align: center
 
 The nn region length in "project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\mp\\amebapro2_partitiontable.json" should not less than 4MB
 
@@ -724,7 +724,7 @@ After running the command above, you will get the flash_ntz.nn.bin
 Figure image with NN model
 
 .. image:: ../_static/14_NN/image4.png
-
+   :align: center
 
 
 Then, use the image tool to download it to AmebaPro2.
@@ -818,6 +818,7 @@ VLC player.
 Figure VLC validation
 
 .. image:: ../_static/14_NN/image5.png
+   :align: center
 
 Face detection example
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -916,6 +917,7 @@ VLC player.
 Figure face detection VLC validation (COCO 2017)
 
 .. image:: ../_static/14_NN/image6.jpg
+   :align: center
 
 Face recognition example
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1044,6 +1046,7 @@ Then, your ID will be registered and please open VLC to check the result
 Figure face recognition VLC validation (AI generated faces)
 
 .. image:: ../_static/14_NN/image7.jpg
+   :align: center
 
 You can also register other person with their ID
 

@@ -2526,6 +2526,9 @@ Figure 1-6 MD & NN Example
 .. image:: ../_static/15_ISP/image10.png
    :align: center
 
+
+|
+
 Motion Detection Evaluation 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -3061,6 +3064,8 @@ Figure 1-7 MD Mask
 .. image:: ../_static/15_ISP/image11.png
    :align: center
 
+
+|
 
 User can set MD mask value by using CMD_MD_SET_MD_MASK.
 
