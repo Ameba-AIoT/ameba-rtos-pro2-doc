@@ -5,7 +5,7 @@ NN
   :local:
   :depth: 2
 
-AmebaPro2 has an NN H/W engine to accelerate the neural network
+AmebaPro2 has an NN HW engine(NPU) to accelerate the neural network
 inference process. NN models obtained from different AI framework, such
 as Keras, Tensorflow, Tensorflow Lite, PyTorch, Caffe, ONNX, Darknet and
 etc, can be converted to network binary graph file and be deployed on
@@ -222,12 +222,9 @@ Table Pro2 model list
 ==================== ============= =========================================================================
 Category             Model         Description
 ==================== ============= =========================================================================
-Object detection     Yolov3-tiny   https://github.com/AlexeyAB/darknet
-                                  
-                     Yolov4-tiny
-					 
-                     Yolov7-tiny
-					 
+Object detection     | Yolov3-tiny https://github.com/AlexeyAB/darknet
+                     | Yolov4-tiny
+                     | Yolov7-tiny
 Object detection     NanoDet-Plus  https://github.com/RangiLyu/nanodet	 
 Face detection       SCRFD         https://github.com/deepinsight/insightface/tree/master/detection/scrfd
 Face Recognition     MobileFaceNet https://github.com/deepinsight/insightface/tree/master/recognition
@@ -357,6 +354,9 @@ Figure object detection format
 .. image:: ../_static/14_NN/image2.png
    :align: center
 
+
+|
+
 **Face detection**
 
 For the face detection result, the post-processing will parse the face
@@ -421,22 +421,22 @@ in SDK:
 
 Table Model memory and size
 
-==================== ============== ========== ========= ========================= =========================
-Category             Model          Input size Quantized DDR memory                File size
-==================== ============== ========== ========= ========================= =========================
-Object detection     Yolov3-tiny    416x416    uint8     6.9 MB (6,946,128 bytes)  5.6 MB (5,568,384 bytes)
-\                    Yolov4-tiny    416x416    uint8     7.7 MB (7,712,412 bytes)  4.1 MB (4,131,712 bytes)
-\                    Yolov4-tiny    576x320    uint8     7.48 MB (7,840,836 bytes) 3.85 MB (4,043,136 bytes)
-\                    Yolov7-tiny    416x416    uint8     8.2 MB (8,597,072 bytes)  4.44 MB (4,664,512 bytes)
-\                    NanoDet-Plus-m 416x416    uint8     4.33 MB (4,542,016 bytes) 1.86 MB (1,959,040 bytes)
-\                    NanoDet-Plus-m 576x320    uint8     4.53 MB (4,746,556 bytes) 1.83 MB (1,924,096 bytes)
-Face detection       SCRFD          640x640    uint8     4.1 MB (4,291,200 bytes)  0.68 MB (715,584 bytes)
-\                    SCRFD          576x320    uint8     2.6 MB (2,753,864 bytes)  0.56 MB (583,232 bytes)
-Face Recognition     MobileFaceNet  112x112    int8      1.72 MB (1,799,716 bytes) 0.86 MB (904,576 bytes)
-\                    MobileFaceNet  112x112    int16     5.1 MB (5,343,948 bytes)  3.42MB (3,590,656 bytes)
-Sound classification YAMNet         15600x1    fp16      9.2 MB (9,172,348 bytes)  8.7 MB (8,669,888 bytes)
-\                    YAMNet_s       96x64      hybrid    0.73 MB (729,608 bytes)   0.67 MB (678,336 bytes)
-==================== ============== ========== ========= ========================= =========================
+==================== ================= ========== ========= ============================ ============================
+Category             Model             Input size Quantized DDR memory                   File size
+==================== ================= ========== ========= ============================ ============================
+Object detection     | Yolov3-tiny     | 416x416  | uint8   | 6.9 MB (6,946,128 bytes)|  | 5.6 MB (5,568,384 bytes)
+                     | Yolov4-tiny     | 416x416  | uint8   | 7.7 MB (7,712,412 bytes)|  | 4.1 MB (4,131,712 bytes)
+                     | Yolov4-tiny     | 576x320  | uint8   | 7.48 MB (7,840,836 bytes)  | 3.85 MB (4,043,136 bytes)
+                     | Yolov7-tiny     | 416x416  | uint8   | 8.2 MB (8,597,072 bytes)   | 4.44 MB (4,664,512 bytes)
+                     | NanoDet-Plus-m  | 416x416  | uint8   | 4.33 MB (4,542,016 bytes)  | 1.86 MB (1,959,040 bytes)
+                     | NanoDet-Plus-m  | 576x320  | uint8   | 4.53 MB (4,746,556 bytes)  | 1.83 MB (1,924,096 bytes)
+Face detection       | SCRFD           | 640x640  | uint8   | 4.1 MB (4,291,200 bytes)   | 0.68 MB (715,584 bytes)
+                     | SCRFD           | 576x320  | uint8   | 2.6 MB (2,753,864 bytes)   | 0.56 MB (583,232 bytes)
+Face Recognition     | MobileFaceNet   | 112x112  | int8    | 1.72 MB (1,799,716 bytes)  | 0.86 MB (904,576 bytes)
+                     | MobileFaceNet   | 112x112  | int16   | 5.1 MB (5,343,948 bytes)   | 3.42MB (3,590,656 bytes)
+Sound classification | YAMNet          | 15600x1  | fp16    | 9.2 MB (9,172,348 bytes)   | 8.7 MB (8,669,888 bytes)
+                     | YAMNet_s        | 96x64    | hybrid  | 0.73 MB (729,608 bytes)    | 0.67 MB (678,336 bytes)
+==================== ================= ========== ========= ============================ ============================
 
 Evaluate memory usage of model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -726,7 +726,6 @@ Figure image with NN model
 .. image:: ../_static/14_NN/image4.png
    :align: center
 
-
 Then, use the image tool to download it to AmebaPro2.
 
 Update NN model on flash
@@ -819,6 +818,9 @@ Figure VLC validation
 
 .. image:: ../_static/14_NN/image5.png
    :align: center
+
+
+|
 
 Face detection example
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -918,6 +920,9 @@ Figure face detection VLC validation (COCO 2017)
 
 .. image:: ../_static/14_NN/image6.jpg
    :align: center
+
+
+|
 
 Face recognition example
 ^^^^^^^^^^^^^^^^^^^^^^^^
