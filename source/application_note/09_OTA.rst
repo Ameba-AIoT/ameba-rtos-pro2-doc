@@ -77,7 +77,7 @@ timestamp, and load it.
 
 Moreover, the default boot process flow can be overwritten by
 implementing the user_boot_fw_selection() in
-component\soc\8735b\misc\platform\user_boot.c. The
+component\\soc\\8735b\\misc\\platform\\user_boot.c. The
 user_boot_fw_selection() should return the index of firmware that will
 be loaded by bootloader. If the return value is
 USER_LOAD_FW_FOLLOW_DEFAULT(0), booloader will select FW1 or FW2 based
@@ -106,7 +106,7 @@ to each other.
 
 The Firmware 1/Firmware 2 partition addresses and length are stored in
 partition records, defined in ‘amebapro2_partitiontable.json’ under
-‘project\realtek_amebapro2_v0_example\GCC-RELEASE\mp’. Please adjust it
+‘project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\mp’. Please adjust it
 according to your firmware size.
 
 .. code-block:: bash
@@ -163,7 +163,7 @@ generated OTA firmware are expected.
 At offset 0x2B0 of firmware image, the version is a 32bytes value in
 little endian order. The version can be configured in
 ‘amebapro2_firmware_ntz.json’ under
-‘project\realtek_amebapro2_v0_example\GCC-RELEASE\mp’.
+‘project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\mp’.
 
 .. code-block:: bash
 
@@ -249,9 +249,9 @@ Download the firmware to AmebaPro2 board to execute OTA.
 Setup Local Download Server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Step 1: Build new ota.bin and place it to ‘tools\DownloadServer’ folder.
+Step 1: Build new ota.bin and place it to ‘tools\\DownloadServer’ folder.
 
-Step 2: Edit ‘tools\DownloadServer\start.bat’ file for server port and
+Step 2: Edit ‘tools\\DownloadServer\\start.bat’ file for server port and
 OTA file name
 
 .. code-block:: bash
