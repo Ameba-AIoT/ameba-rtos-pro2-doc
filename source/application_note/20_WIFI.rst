@@ -341,7 +341,9 @@ Return:
 -  RTW_JOINSTATUS_REJECT_UNSUPPORT_SECURITY: WIFI connection failure due to this security type unsupported (Ex: GCMP)
 
 -  RTW_JOINSTATUS_TIMEOUT: WIFI connection failure due to connection timeout.
+
 -  RTW_JOINSTATUS_STATUS_CODE_FAIL: WIFI connection failure due to association failure.
+
 .. note :: Wi-Fi join status will be set during Wi-Fi connection and Wi-Fi disconnection.
 
 wifi_get_disconn_reason_code
@@ -2039,22 +2041,20 @@ Power Limit Table:
    (FCC/ETSI/MKK/…) corresponding calibration content(0xC8h) channel
    plan divide into 10 group :
 
-==================================================================== ==========================
-Channel Plan WS-200923-Willis-Efuse_Channel_Plan_new_define-R54.xlsx rtw_opt_rf_para_rtl8735b.c
-                                                                    
-                                                                     odm_pw_lmt_regulation_type
-==================================================================== ==========================
-FCC                                                                  PW_LMT_REGU_FCC
-ETSI                                                                 PW_LMT_REGU_ETSI
-MKK                                                                  PW_LMT_REGU_MKK
-IC                                                                   PW_LMT_REGU_IC
-KCC                                                                  PW_LMT_REGU_KCC
-ACMA                                                                 PW_LMT_REGU_ACMA
-CHILE                                                                PW_LMT_REGU_CHILE
-MEX                                                                  PW_LMT_REGU_MEXICO
-NCC                                                                  PW_LMT_REGU_NCC                      
-WW(The min of ETSI and MKK)                                          PW_LMT_REGU_ETSI / PW_LMT_REGU_MKK
-==================================================================== ==========================
+======================================================= ======================================================
+WS-200923-Willis-Efuse_Channel_Plan_new_define-R54.xlsx rtw_opt_rf_para_rtl8735b.c(odm_pw_lmt_regulation_type)
+======================================================= ======================================================
+FCC                                                     PW_LMT_REGU_FCC
+ETSI                                                    PW_LMT_REGU_ETSI
+MKK                                                     PW_LMT_REGU_MKK
+IC                                                      PW_LMT_REGU_IC
+KCC                                                     PW_LMT_REGU_KCC
+ACMA                                                    PW_LMT_REGU_ACMA
+CHILE                                                   PW_LMT_REGU_CHILE
+MEX                                                     PW_LMT_REGU_MEXICO
+NCC                                                     PW_LMT_REGU_NCC                      
+WW(The min of ETSI and MKK)                             PW_LMT_REGU_ETSI / PW_LMT_REGU_MKK
+======================================================= ======================================================
 
 -  For the Enum definition of odm_pw_lmt_regulation_type in
    rtw_opt_rf_para_rtl8735b.c, please according to the Regulation
