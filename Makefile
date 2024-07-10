@@ -7,7 +7,7 @@ SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
-SPHINXOPTS    = -W --keep-going
+#SPHINXOPTS    = -W --keep-going
 
 # Put it first so that "make" without argument is like "make help".
 help:
