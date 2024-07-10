@@ -334,6 +334,14 @@ Return:
 
 -  RTW_JOINSTATUS_DISCONNECT: Disconnected.
 
+-  RTW_JOINSTATUS_REJECT_CONNECTION_SECURITY: if PRO2 define wifi_user_config.rtw_ignore_security == 1 in wifi_set_user_config(), station will reject the security OPEN/WEP/WPA TKIP WIFI connection.
+
+-  RTW_JOINSTATUS_SCANNING_EXTERNAL: if the station is ongoing WIFI scanning, and then the WIFI connection will return this definition to cancel the WIFI connect.
+
+-  RTW_JOINSTATUS_REJECT_UNSUPPORT_SECURITY: WIFI connection failure due to this security type unsupported (Ex: GCMP)
+
+-  RTW_JOINSTATUS_TIMEOUT: WIFI connection failure due to connection timeout.
+-  RTW_JOINSTATUS_STATUS_CODE_FAIL: WIFI connection failure due to association failure.
 .. note :: Wi-Fi join status will be set during Wi-Fi connection and Wi-Fi disconnection.
 
 wifi_get_disconn_reason_code
@@ -1440,6 +1448,12 @@ Wi-Fi event introduction
         /* csi rx done event */
         WIFI_EVENT_CSI_DONE = 160,
 
+        WIFI_EVENT_DHCP_RENEW_FAILED,
+        WIFI_EVENT_DHCP_RENEW_TIMEOUT,
+        WIFI_EVENT_DHCP_IP_BIND,
+        WIFI_EVENT_MISMATCH_CHANNEL,
+        WIFI_EVENT_DEAUTH_RECVD,
+        WIFI_EVENT_DISASSOC_RECVD,
         WIFI_EVENT_MAX,
     };
 
@@ -1457,40 +1471,96 @@ Indicate client associated in AP mode
 <flags>       int      Unused
 ============= ======== ==================================
 
-WIFI_EVENT_STA_DISASSOC
-^^^^^^^^^^^^^^^^^^^^^^^
+WIFI_EVENT_DISCONNECT
+^^^^^^^^^^^^^^^^^^^^^
 
-Indicate client disassociated in AP mode
+Indicate to receive disassociation packet and wifi disconnection
 
 ============= ======== ===========================
 **Parameter** **Type** **Introduction**
 ============= ======== ===========================
-<buf>         char *   client Mac : 6 Bytes
-                      
-                       reason code : 2 Bytes
-<buf_len>     int      Size of Assoc Request Frame
+<buf>         char *   Disconnection Reason: 6Bytes
+<buf_len>     int      6
 <flags>       int      Unused
 ============= ======== ===========================
 
-Reason code :
+WIFI_EVENT_DHCP_RENEW_FAILED
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: c
+Indicate to dhcp renew failed in dhcp renew process
 
-    #define WLAN_REASON_UNSPECIFIED                     1
-    #define WLAN_REASON_PREV_AUTH_NOT_VALID             2
-    #define WLAN_REASON_DEAUTH_LEAVING                  3
-    #define WLAN_REASON_DISASSOC_DUE_TO_INACTIVITY      4
-    #define WLAN_REASON_DISASSOC_AP_BUSY                5
-    #define WLAN_REASON_CLASS2_FRAME_FROM_NONAUTH_STA   6
-    #define WLAN_REASON_CLASS3_FRAME_FROM_NONASSOC_STA  7
-    #define WLAN_REASON_DISASSOC_STA_HAS_LEFT           8
-    #define WLAN_REASON_STA_REQ_ASSOC_WITHOUT_AUTH      9
-    #define WLAN_REASON_MIC_FAILURE                     14
-    #define WLAN_REASON_4WAY_HANDSHAKE_TIMEOUT          15
-    #define WLAN_REASON_ACTIVE_ROAM                     65533
-    #define WLAN_REASON_JOIN_WRONG_CHANNEL              65534
-    #define WLAN_REASON_EXPIRATION_CHK                  65535
+============= ======== ===========================
+**Parameter** **Type** **Introduction**
+============= ======== ===========================
+<buf>         char *   NULL
+<buf_len>     int      0
+<flags>       int      Unused
+============= ======== ===========================
 
+WIFI_EVENT_DHCP_RENEW_TIMEOUT
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Indicate to dhcp renew timeout in dhcp renew process
+
+============= ======== ===========================
+**Parameter** **Type** **Introduction**
+============= ======== ===========================
+<buf>         char *   NULL
+<buf_len>     int      0
+<flags>       int      Unused
+============= ======== ===========================
+
+WIFI_EVENT_DHCP_IP_BIND
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Indicate to dhcp bind ip in dhcp process
+
+============= ======== ===========================
+**Parameter** **Type** **Introduction**
+============= ======== ===========================
+<buf>         char *   NULL
+<buf_len>     int      0
+<flags>       int      IP address
+============= ======== ===========================
+
+WIFI_EVENT_MISMATCH_CHANNEL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Indicate to mismatch channel in driver to check beacon information and update this reason  for upper layer due to disconnection
+
+============= ======== ===========================
+**Parameter** **Type** **Introduction**
+============= ======== ===========================
+<buf>         char *   NULL
+<buf_len>     int      0
+<flags>       int      Unused
+============= ======== ===========================
+
+WIFI_EVENT_DEAUTH_RECVD
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Indicate to receive deauth packet and wifi disconnection
+
+============= ======== ===========================
+**Parameter** **Type** **Introduction**
+============= ======== ===========================
+<buf>         char *   NULL
+<buf_len>     int      0
+<flags>       int      deauth reason
+============= ======== ===========================
+
+WIFI_EVENT_DISASSOC_RECVD
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Indicate to receive disassociation packet and wifi disconnection
+
+============= ======== ===========================
+**Parameter** **Type** **Introduction**
+============= ======== ===========================
+<buf>         char *   NULL
+<buf_len>     int      0
+<flags>       int      disassociation reason
+============= ======== ===========================
 
 WIFI_EVENT_RX_MGNT
 ^^^^^^^^^^^^^^^^^^
