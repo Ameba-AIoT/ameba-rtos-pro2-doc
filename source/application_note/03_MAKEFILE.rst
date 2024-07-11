@@ -296,10 +296,10 @@ In sdk/component/example/media_framework, it provides audio-only MMF examples. T
 Peripheral example source
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The peripheral example sources are located at the folder sdk/project/realtek_amebapro2_v0_example/example_sources and basically provide main.c and readme file. The main.c file contains the usage of peripheral function and user should replace it with the original main.c (in SDK/project/realtek_amebapro2_v0_example/src). On the other hand, like application example source, the method to compile example and
+The peripheral example sources are located at the folder sdk/project/realtek_amebapro2_v0_example/example_sources and basically provide main.c and readme file. The main.c file contains the usage of peripheral function and user should replace it with the original main.c (in sdk/project/realtek_amebapro2_v0_example/src). On the other hand, like application example source, the method to compile example and
 adjust the important parameters is described in the readme file. After the setting, user can rebuild the project with peripheral example.
 
 WiFi example source
 ~~~~~~~~~~~~~~~~~~~
 
-For user to test and development, we provide AT command in AmebaPro2. Users can key in AT command to connect WLAN by the console in PC. AT command can refer to "AN0025 Realtek at command.pdf".
+For user to test and development, we provide AT command in AmebaPro2. Users can key in AT command to connect WLAN by the console in PC. AT command could be found under "sdk/component/at_cmd/atcmd_wifi.h" .
