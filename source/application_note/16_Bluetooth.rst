@@ -14,8 +14,6 @@ Config, BT Peripheral, BT Central and BT Beacon.
 BT Config example demonstrates how to transfer SSID profile from Mobile
 Phone to device.
 
-For more information, please refer to **UM0201 Ameba Common BT
-Application User Manual EN.pdf**.
 
 This section illustrates how to build and run BT examples in our SDK,
 including GCC and IAR environment.
@@ -171,8 +169,6 @@ BT Central scan and connect log:
     # cmd_con, DestAddr: 0x66:0x55:0x44:0x77:0x88:0x99
 
 
-For more AT commands used for BT Central, please refer to user manual
-**UM0201 Ameba Common BT Application User Manual EN.pdf**.
 
 ble_scatternet
 ^^^^^^^^^^^^^^
@@ -224,8 +220,6 @@ Test Procedure
     GAP adv start 
 
 
-For other AT commands used for BT Scatternet, please refer to **UM0201
-Ameba Common BT Application User Manual EN.pdf**.
 
 bt_beacon
 ^^^^^^^^^
