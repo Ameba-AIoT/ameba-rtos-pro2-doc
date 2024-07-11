@@ -116,92 +116,6 @@ system.
    More details about the usage of FATFS API, please visit http://elm-chan.org/fsw/ff/00index_e.html
 
 
-
-FATFS Example
-~~~~~~~~~~~~~
-
-The example for NOR flash and RAM file system need to be assigned the
-start address to run:
-
-In FLASH_FATFS.c
-
-.. code-block:: c
-
-   #define FLASH_APP_BASE        0x180000
-   #define FLASH_BLOCK_SIZE      512
-   #define FLASH_SECTOR_COUNT    256
-   #define SECTOR_SIZE_FLASH     4096
-
-In FATFS_RAMDISK_API.c
-
-.. code-block:: c
-
-   #define RAM_DISK_SZIE         1024*1024*10
-   #define SECTOR_SIZE_RAM       512
-   #define SECTOR_COUNT_RAM      (RAM_DISK_SZIE/512)
-
-Please execute the example_fatfs.c to run the example.
-
-
-
-FATFS Behavior Description
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-In this example, we demonstrate how to use FATFS on AmebaPro2 flash
-memory and manage files and directories in the file system.
-
-First, we use FATFS API to register flash disk driver and get a drive
-number for the flash drive. We use this drive number as its path and
-mount to a FATFS object.
-
-Next, the example list files currently exist in the flash memory, clear
-all files and directories, and list files again to check if the drive is
-all clean and empty.
-
-Next, the example uses f_mkdir API to create a directory named
-"ameba_dir" in the root of the filesystem and use f_open to create a
-file named "ameba_dir_file" in ameba_dir. Then list files to show the
-created directory and file.
-
-Next, we create a file named "ameba_root_file" at the root of the drive,
-and use f_write API to try to write some content to the file. Then use
-f_read API to read from the file to check if the content written to the
-file can be read back correctly.
-
-Finally we list all files and directories in the drive.
-
-Dual Fat File system (File system on both SD Card and Flash)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Please modify the example_fatfs.h to enable the SD and FLASH function.
-
-.. code-block:: c
-
-   #define CONFIG_FATFS_IF_SD      1
-   #define CONFIG_FATFS_IF_FLASH   1
-
-In this example, we demonstrate how to use FATFS on both AmebaPro2 flash
-memory and SD card, and manage files and directories in the two
-filesystems.
-
-First, we use FATFS API to register flash disk driver and SD disk
-driver, and each drive gets a drive number. We use the drive number as
-drive path and mount flash drive and SD drive, each with a FATFS object.
-
-Next, the example clears files currently exist in both drives, and list
-files again to check if the drives are all clean and empty.
-
-Next, the example tests operations on the SD drive. We create a new
-file("sd_file") and perform read/write to the file, then create a new
-directory("sd_dir") and open a new file in the directory("sd_file2").
-
-Next, the example tests similar operations on the flash drive. Create a
-new file("flash_file") and perform read/write to the file. Then we
-create a new directory("flash_dir") and open a new file in the
-directory("flash_file2").
-
-Finally we list all files and directories in each drive.
-
 Setup the timestamp
 ~~~~~~~~~~~~~~~~~~~
 
@@ -336,14 +250,31 @@ LITTLEFS API
 
 -  lfs_migrate - Attempts to migrate a previous version of littlefs.
 
-LITTLEFS Example
+Modify the space
 ~~~~~~~~~~~~~~~~
 
-It can support the NOR and NAND flash. It depend on different file
-operation.
+Both of Nor and Nand need to assign the start address and block size. Please
+reference the platform_opts.h to do the setup. This side of the file system must be placed behind the FW, the size according to their own use of context setting, if it is NAND FLASH is recommended that half of the space to the FW, the back half of the FILESYSTEM and USER DATA, if it is a NOR FLASH according to the current PARTITION TABLE setup placed!
 
-Please run the example_littlefs to run the example. The behavior is the
-same as fatfs example.
+.. code-block:: c
 
-Both of them need to assign the start address and block size. Please
-reference the lfs_nor_api.c and lfs_nand_api.c to do the setup.
+   #define NAND_APP_BASE           0x4000000 //NAND FLASH FILESYSTEM begin address It need to alignment block size, the default is 512 BLOCK. = 512(block index) * 64(page number per block) * 2048(page size)
+
+   #define FLASH_APP_BASE          USER_DATA_END  //Nor flash file system base address
+
+   #define FLASH_FILESYS_SIZE      (NOR_FLASH_END - FLASH_APP_BASE)  //flash file system size(Nor and Nand)
+
+For the ram disk setup, please modify the fatfs_ramdisk_api.c
+
+.. code-block:: c
+
+   #define RAM_DISK_SZIE         1024*1024*10
+   
+   #define SECTOR_SIZE_RAM       512
+   
+   #define SECTOR_COUNT_RAM      (RAM_DISK_SZIE/512)
+
+VFS 
+~~~~~~~~~~~~~~~~
+
+Through the virtual file system, it can support the operation of different operating systems LITTLEFS and FATFS, file system operations, and support for different interfcae, currently supports NAND, NOR, RAM, and SD CARD interface, you can refer to the example_std_file.c for details.
