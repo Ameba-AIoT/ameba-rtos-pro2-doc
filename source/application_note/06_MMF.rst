@@ -5,15 +5,15 @@ Multimedia Framework Architecture
   :local:
   :depth: 2
 
-The Multimedia Framework Architecture version 2(MMFv2) is responsible
+The Multimedia Framework Architecture is responsible
 for handling the connection and management of different media resources
 on AmebaPro2.
 
 Architecture
 ------------
 
-The structure of MMFv2 is as shown in the following chart and there are
-two important entities in the MMFv2, **MM_MODULE** and
+The structure of MMF is as shown in the following chart and there are
+two important entities in the MMF, **MM_MODULE** and
 **LINKER_MODULE**:
 
 **MM_MODULE** includes the media source, sink and the codec modules.
@@ -40,7 +40,7 @@ module communication, included siso, simo, miso and mimo.
 
 |
 
-In order to use the MMFv2, here are some aspects must to be followed.
+In order to use the MMF, here are some aspects must to be followed.
 
 -  Define valid source
 
@@ -60,11 +60,11 @@ The following picture shows the main usage flow to initialize different
 MM_Module Prototype 
 ~~~~~~~~~~~~~~~~~~~~
 
-MMFv2 allows users to define customized source, sink and encoder/decoder
+MMF allows users to define customized source, sink and encoder/decoder
 modules depending on the application. Although implementation details
 may be different, basic rules of the MMF structure are similar.
 
-The MMFv2 requires users to predefine both source and sink modules
+The MMF requires users to predefine both source and sink modules
 through implementing create, destroy, control, handle, new_item,
 del_item and rsz_item function callbacks. The structure mmf_module_t
 provides the interface for communication between mmf modules. In order
@@ -113,7 +113,7 @@ Audio driver is initialized and the corresponding context is released.
 Pointer to function that sends the control command to the MMF module
 layer (see **mm_module_ctrl**) or a specific module. For example, for
 Audio source, it points to function that controls Audio parameters
-("sample rate", "word length", "mic gain", etc.) and MMFv2 service task
+("sample rate", "word length", "mic gain", etc.) and MMF service task
 on or off.
 
 -  handle
@@ -172,7 +172,7 @@ mm_module_ctrl (mm_context_t \*ctx, int cmd, int arg) to use them.
 Context
 ~~~~~~~
 
-MMFv2 context supplies message transfer between different modules. It
+MMF context supplies message transfer between different modules. It
 contains mm_module_t, and queue that used to pass data. There are 6
 types of status that mm_context support (MM_STAT_INIT, MM_STAT_READY,
 MM_STAT_ERROR, MM_STAT_ERR_MALLOC, MM_STAT_ERR_QUEUE,
@@ -201,7 +201,7 @@ module state to ensure the program runs smoothly.
        int32_t curr_queue;
    } mm_context_t;
 
-The mm_context is responsible for maintaining each module entity. MMFv2
+The mm_context is responsible for maintaining each module entity. MMF
 support these modules (video, AAC_encoder, AAC_decoder, audio, g711,
 opus, mp4, rtp, rtsp) by default. Each module is independent and
 corresponding to the individual input/ output queue, state and in the
@@ -213,7 +213,7 @@ Module Inter Connection
 This section introduces mm_siso_t, mm_simo_t, mm_miso_t, mm_mimo_t and
 its corresponding create, delete, ctrl, start, stop, pause, resume
 function, which is responsible for connection and control between
-modules in mmfv2.
+modules in mmf.
 
 SISO module (Single Input Single Output)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1627,7 +1627,7 @@ Describe how to use the sample program to construct the applicational
 data stream .
 
 In this section, there will be an introduction to correctly select the
-mmfv2 sample program and adjust the parameters.
+mmf sample program and adjust the parameters.
 
 Selecting and setting up sample program
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2296,7 +2296,7 @@ Adjust latency (buffer) related settings
 Echo Cancellation
 ~~~~~~~~~~~~~~~~~
 
-Echo cancellation is default provided in the audio part of MMFv2. To
+Echo cancellation is default provided in the audio part of MMF. To
 test whether the echo cancellation function is correct, use VLC media
 player to verify it on the computer.
 
