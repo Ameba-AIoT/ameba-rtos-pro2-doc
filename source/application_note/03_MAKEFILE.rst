@@ -302,4 +302,4 @@ adjust the important parameters is described in the readme file. After the setti
 WiFi example source
 ~~~~~~~~~~~~~~~~~~~
 
-For user to test and development, we provide AT command in AmebaPro2. Users can key in AT command to connect WLAN by the console in PC. AT command could be found under "sdk/component/at_cmd/atcmd_wifi.h" .
+For user to test and development, we provide AT command in AmebaPro2. Users can key in AT command to connect WLAN by the console in PC. AT command could be found under "sdk/component/at_cmd/atcmd_wifi.h".
