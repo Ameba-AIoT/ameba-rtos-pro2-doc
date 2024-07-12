@@ -349,10 +349,11 @@ Description of parameter in objdetect_res_t:
 
    -  tx, ty, bx, by: bounding box(top_x, top_y, bottom_x, bottom_y)
 
-Figure object detection format
 
-.. image:: ../_static/14_NN/image2.png
+.. figure:: ../_static/14_NN/image2.png
    :align: center
+
+   object detection format
 
 
 |
@@ -469,10 +470,11 @@ model size, so that the model can be downloaded to flash correctly.
 
 Take yolov4-tiny for example, the model size is about 4MB
 
-Figure model network binary
-
-.. image:: ../_static/14_NN/image3.png
+.. figure:: ../_static/14_NN/image3.png
    :align: center
+
+   model network binary
+
 
 The nn region length in "project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\mp\\amebapro2_partitiontable.json" should not less than 4MB
 
@@ -721,10 +723,10 @@ After running the command above, you will get the flash_ntz.nn.bin
 (including the model) in
 "project\\realtek_amebapro2_v0_example\\GCC-RELEASE\\build"
 
-Figure image with NN model
-
-.. image:: ../_static/14_NN/image4.png
+.. figure:: ../_static/14_NN/image4.png
    :align: center
+
+   image with NN model
 
 Then, use the image tool to download it to AmebaPro2.
 
@@ -814,10 +816,10 @@ Then, open VLC and create a network stream with URL: rtsp://192.168.x.xx:554
 If everything works fine, you should see the object detection result on
 VLC player.
 
-Figure VLC validation
-
-.. image:: ../_static/14_NN/image5.png
+.. figure:: ../_static/14_NN/image5.png
    :align: center
+
+   VLC validation
 
 
 |
@@ -916,10 +918,10 @@ Then, open VLC and create a network stream with URL: rtsp://192.168.x.xx:554
 If everything works fine, you should see the face detection result on
 VLC player.
 
-Figure face detection VLC validation (COCO 2017)
-
-.. image:: ../_static/14_NN/image6.jpg
+.. figure:: ../_static/14_NN/image6.jpg
    :align: center
+
+   face detection VLC validation (COCO 2017)
 
 
 |
@@ -1047,11 +1049,11 @@ your face:
 
 Then, your ID will be registered and please open VLC to check the result
 
-
-Figure face recognition VLC validation (AI generated faces)
-
-.. image:: ../_static/14_NN/image7.jpg
+.. figure:: ../_static/14_NN/image7.jpg
    :align: center
+
+   face recognition VLC validation (AI generated faces)
+
 
 You can also register other person with their ID
 
