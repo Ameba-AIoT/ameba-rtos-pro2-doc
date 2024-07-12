@@ -16,7 +16,7 @@ OTA Operation Flow for NOR Flash
 .. figure:: ../_static/09_OTA/image1.png
    :align: center
 
-   Figure OTA Process Flow for NOR Flash
+   OTA Process Flow for NOR Flash
 
 The first 8 bytes of firmware image would be a label. During the step of
 "Write received data to update firmware address", the 8 bytes label need
@@ -30,7 +30,7 @@ OTA Operation Flow for NAND Flash
 .. figure:: ../_static/09_OTA/image2.png
    :align: center
    
-   Figure OTA Process Flow for NAND Flash
+   OTA Process Flow for NAND Flash
 
 During the step of "Write received data to empty block", the magic
 number of this new record in partition table is invalid. The magic
@@ -73,7 +73,7 @@ timestamp, and load it.
 .. figure:: ../_static/09_OTA/image3.png
    :align: center
 
-   Figure Boot Process Flow
+   Boot Process Flow
 
 Moreover, the default boot process flow can be overwritten by
 implementing the user_boot_fw_selection() in
@@ -149,7 +149,7 @@ updated firmware keeps using newer firmware version and timestamp.
 .. figure:: ../_static/09_OTA/image4.png
    :align: center
 
-   Figure OTA Firmware SWAP Procedure
+   OTA Firmware SWAP Procedure
 
 
 
@@ -265,7 +265,7 @@ Step 3: Execute ‘tools\\DownloadServer\\start.bat’.
 .. figure:: ../_static/09_OTA/image6.png
    :align: center
 
-   Figure Download Server
+   Download Server
 
 
 
@@ -279,7 +279,7 @@ command is the IP of your PC.
 .. figure:: ../_static/09_OTA/image7.png
    :align: center
 
-   Figure ATWO command
+   ATWO command
 
 After finishing OTA download, device will reboot automatically, and the
 bootloader will boot to new firmware according to firmware version and
@@ -338,7 +338,7 @@ Step 3: Execute ‘tools\\DownloadServer(HTTP)\\start.bat’.
 .. figure:: ../_static/09_OTA/image8.png
    :align: center
 
-   Figure HTTP Download Server
+   HTTP Download Server
 
 
 
@@ -355,7 +355,7 @@ timestamp.
 .. figure:: ../_static/09_OTA/image9.png
    :align: center
 
-   Figure OTA HTTP Example
+   OTA HTTP Example
 
 
 
