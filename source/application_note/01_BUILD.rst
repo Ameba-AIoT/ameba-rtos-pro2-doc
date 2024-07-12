@@ -56,7 +56,7 @@ Installing mingw with ASDK and setting up the CMake
 
 .. Caution :: If your PATH contains space characters, remember to use "\\" to escape
 
-.. note :: For the first time adding the CMake PATH, after adding the PATH, you need to re-open the msys2_shell and check by:
+.. note :: For the first time adding the CMake PATH, after adding the PATH, you need to re-open the msys2_shell and check the version by:
 
 .. code-block:: bash
 
@@ -81,7 +81,7 @@ Adding toolchain to msys2
        echo "asdk-10.3.0 exist"
        export PATH=/asdk-10.3.0/mingw32/newlib/bin:$PATH
 
-.. note :: The recommended toolchain version is 10.3.0
+.. note :: Recommand to use the latest provided toolchain or use the version after 10.3.0
 
 Building the project
 ^^^^^^^^^^^^^^^^^^^^
@@ -99,7 +99,7 @@ Building the project
 (5) Run "cmake --build . --target flash" to build and generate flash
     binary.
 
-.. note :: If building successfully, you can see flash_ntz.bin in the build folder
+.. note :: If building the project successfully, you can see flash_ntz.bin in the ‘build’ folder
 
 
 |
@@ -147,7 +147,7 @@ Building the project
     binary.
 
 .. note :: 
-	- If building successfully, you can see flash_ntz.bin in the build folder
+	- If building the project successfully, you can see flash_ntz.bin in the ‘build’ folder
 	- If the ‘build’ folder has been used by others, you can remove ‘build’ folder first to have clean build
 	- If there’s some permission issues, you can do "chmod -R 777 <PATH_TO_YOUR_SDK>"
 
