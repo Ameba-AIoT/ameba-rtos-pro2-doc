@@ -21,7 +21,7 @@ including GCC and IAR environment.
 GCC Project
 ~~~~~~~~~~~
 
-(1) Enter SDK path: project\realtek_amebapro2_v0_example\inc and modify
+(1) Enter SDK path: project\\realtek_amebapro2_v0_example\\inc and modify
     file platform_opts_bt.h to enable BT.
 
 .. code-block:: c
@@ -181,7 +181,7 @@ Scatternet on.
 Image Generation
 ''''''''''''''''
 
-(1) To run ble_central example, turn on the following flags defined in
+(1) To run ble_scatternet example, turn on the following flags defined in
     \\project\\realtek_amebapro2_v0_example\\inc\\platform_opts_bt.h
 
 .. code-block:: c
@@ -231,7 +231,7 @@ of Beacon: Apple iBeacon and Radius Networks AltBeacons.
 Image Generation
 ''''''''''''''''
 
-(1) To run ble_central example, turn on the following flags defined in
+(1) To run bt_beacon example, turn on the following flags defined in
     \\project\\realtek_amebapro2_v0_example\\inc\\platform_opts_bt.h
 
 .. code-block:: c
@@ -275,7 +275,7 @@ easily.
 Image Generation
 ''''''''''''''''
 
-(1) To run ble_central example, turn on the following flags defined in
+(1) To run bt_config example, turn on the following flags defined in
     \\project\\realtek_amebapro2_v0_example\\inc\\platform_opts_bt.h
 
 .. code-block:: c
@@ -329,7 +329,7 @@ Display on BT config app:
 .. image:: ../_static/16_Bluetooth/image5.png
    :align: center
 
-(4) Once BT Config APP connected to AmebaPro2, below log will be show.
+(4) Once BT Config APP connected to AmebaPro2, below log will be shown.
     When connection is established AmebaPro2 will start searching for
     AP.
 
