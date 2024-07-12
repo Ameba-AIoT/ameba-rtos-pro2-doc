@@ -125,9 +125,7 @@ FCS.
 
 [Description]
 
-**SENSOR_MAX**: If 4 sensors are used, please set the parameter to 5,
-because the first column needs to place the dummy data required by
-FCS.
+**USE_SENSOR**: Fill the sensor you want to bring up.
 
 -  Fill in manual IQ list (For manual mode, see example in next section)
 
@@ -147,7 +145,7 @@ FCS.
 
 **manual_iq[ ]:** Fill in the IQ file name.
 
--  Setup max sensor number (For manual mode, see example in next section)
+-  Indicate the index of IQ
 
 .. code-block:: c
 
@@ -495,7 +493,7 @@ Configuration
    -  Each font group supports up to 1 single-character glyph file and 1
       double-character glyph file
 
--  Each stream can display up to 6 sets of OSD Block
+-  Each stream can display up to 24 sets of OSD Block
 
 .. note :: The starting address of the image Array must be 16Byte align with the Hardware DMA limit
 
@@ -504,7 +502,7 @@ OSD example
 
 OSD example is included in RTSP (**-DVIDEO_EXAMPLE=ON**) and UVCD
 (**-DEXAMPLE=media_uvcd**) examples, and it is located at the path
-"component\video\osd2\isp_osd_example.c"
+"component\\video\\osd2\\isp_osd_example.c"
 
 Take UVCD for example, before building the firmware, run below command
 to create the makefile.
@@ -558,7 +556,7 @@ Table 1‑6 OSD data structure: osd_text_info_st
 Parameter Type       Introduction
 ========= ========== ===========================================
 <chn_id>  int        Channel ID: 0~2
-<blk_idx> int        Block index: 0~5
+<blk_idx> int        Block index: 0~23
 <font>    rt_font_st Please refers to table of rt_font_st
 <start_x> uint32_t   x-coordinate of start point
 <start_y> uint32_t   y-coordinate of start point
@@ -576,7 +574,7 @@ Parameter     Type             Introduction
 <bg_enable>   uint8_t          Enable background: 0~1.
 <bg_color>    uint32_t         Background color in RGB.
 <h_gap>       uint8_t :4       The meaning of the field in the osd structure is shown in below figure. The horizontal interval is h_gap, and the vertical interval is v_gap.
-<v_gap>       uint8_t :4      
+<v_gap>       uint8_t :4       The meaning of the field in the osd structure is shown in below figure. The horizontal interval is h_gap, and the vertical interval is v_gap.
 <time_fmt>    rts_osd_time_fmt Time format, please refer to introduction of rts_osd_time_fmt
 <date_fmt>    rts_osd_date_fmt Date format, please refer to introduction of rts_osd_date_fmt
 ============= ================ ===========================================================================================================================================
@@ -598,7 +596,7 @@ Table 1‑9 OSD data structure: rt_osd2_info_st
 ============ ================ ===========================================================
 Parameter    Type             Introduction
 ============ ================ ===========================================================
-<blk_idx>    int              Block index: 0~5
+<blk_idx>    int              Block index: 0~23
 <blk_fmt>    rts_osd2_blk_fmt Block format: Please refers to enumeration rts_osd2_blk_fmt
 <start_x>    uint32_t         x-coordinate of start point
 <start_y>    uint32_t         y-coordinate of start point
@@ -700,7 +698,7 @@ Definition                  Introduction
 
 If the block type is rts_osd2_type_date, rts_osd2_type_time or
 rts_osd2_type_text, block format is always RGBA1111.If the block type is
-rts_osd2_type_pict, below all block format are supported.
+rts_osd2_type_pict, above all block format are supported.
 
 OSD API
 ~~~~~~~
@@ -740,7 +738,7 @@ rts_osd_set_info
 ^^^^^^^^^^^^^^^^
 
 It sets OSD data of indicated stream and block. Each video stream has a
-separate OSD module. Each OSD module supports up to 6 blocks, a block is
+separate OSD module. Each OSD module supports up to 24 blocks, a block is
 an area in the image for displaying characters or images, which
 represented by the structure "osd_text_info_st" or "osd_pict_st".
 English and digital width of a word are inconsistent with Chinese in
@@ -810,7 +808,7 @@ Table 1‑19 OSD API: rts_osd_block_hide
 Parameter Type Introduction
 ========= ==== ================
 <chn_id>  int  Channel ID: 0~2
-<idx>     int  Block index: 0~5
+<idx>     int  Block index: 0~23
 ========= ==== ================
 
 rts_osd_block_show
@@ -824,7 +822,7 @@ Table 1‑20 OSD API: rts_osd_block_show
 Parameter Type Introduction
 ========= ==== ================
 <chn_id>  int  Channel ID: 0~2
-<idx>     int  Block index: 0~5
+<idx>     int  Block index: 0~23
 ========= ==== ================
 
 rts_set_char_size
