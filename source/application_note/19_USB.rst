@@ -37,7 +37,12 @@ Then, use the following command to generate an image:
 
    cmake --build . --target flash
 
+If you need more than one device to be plugged into the same computer, this can be done by changing the UVC name, change the product name below and set it before opening the UVC module.
 
+.. code-block:: bash
+
+   int set_uvc_string(char *product_name, char *serial_name, unsigned short bcdDevice);
+   Example: set_uvc_string("UVC_DEV_1", "012345678",0X0010);//The last two items can be left unchanged
 
 USB CDC
 -------
@@ -131,6 +136,17 @@ Then, use the following command to generate an image:
 
    cmake --build . --target flash
 
+To support multiple devices running on the same computer, this can be done by changing the dfu serial number.
+
+.. code-block:: bash
+
+   #ifdef USE_SERIAL_MAC
+	unsigned char *mac = LwIP_GetMAC(0);//Get the wifi MAC address
+	char buf_serial[24] = {0};
+	sprintf(buf_serial, "%02x%02x%02x%02x%02x%02x", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+	printf("buf_serial %s\r\n", buf_serial);
+	usbd_dfu_setup_serial_number(buf_serial);
+   #endif   
 
 
 How to download firmware over USB DFU
