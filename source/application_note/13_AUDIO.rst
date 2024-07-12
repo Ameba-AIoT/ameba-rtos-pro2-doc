@@ -20,17 +20,16 @@ Analog microphone gain setting
 The audio analog input gain can be namely divided into analog gain and
 digital gain.
 
--  Analog mic gain
+**Analog mic gain**
 
 It supports 0, 20, 30, 40 dB for the gain optimization.
 
 User can use audio_mic_analog_gain or set the parameter mic_gain for
 audio module to set it.
 
--  ADC gain can be used to set the input (analog to) digital gain – ADC
-   Volume.
+**ADC gain can be used to set the input (analog to) digital gain – ADC Volume.**
 
-   The range is -17.625dB (0x00) ~ 30dB (0x7F)
+The range is -17.625dB (0x00) ~ 30dB (0x7F)
 
 User can use the function audio_adc_digital_vol or use
 CMD_AUDIO_SET_ADC_GAIN to control audio module to use the function.
@@ -52,7 +51,7 @@ maximum range, then configure the analog gain.
 Digital microphone gain setting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
--  Left mic gain
+**Left mic gain**
 
 Left dmic gain and it supports 0, 12, 24, 36 dB for the gain
 optimization.
@@ -60,7 +59,7 @@ optimization.
 User can use audio_l_dmic_gain or set the parameter dmic_l_gain for
 audio module to set it.
 
--  Right mic gain
+**Right mic gain**
 
 Right dmic gain and it supports 0, 12, 24, 36 dB for the gain
 optimization.
@@ -71,8 +70,7 @@ audio module to set it.
 Speaker gain setting
 ^^^^^^^^^^^^^^^^^^^^
 
--  DAC gain can be used to set the output digital (to analog) gain – DAC
-   Volume.
+**DAC gain can be used to set the output digital (to analog) gain – DAC Volume.**
 
 The range is -65.625dB (0x00) ~ 0dB (0xAF)
 
@@ -113,14 +111,14 @@ peak, low shelf, and high shelf filter by register settings.
 
 Here are some tips for user to use the EQ:
 
--  Select the biquad filter
+**Select the biquad filter**
 
 User can use the following websites to configure the preferred filter
 type, sample rate, cutoff frequency, Q value and Gain first:
 
 https://www.earlevel.com/main/2021/09/02/biquad-calculator-v3/
 
--  Get the registers’ value of selecting filter
+**Get the registers’ value of selecting filter**
 
 User can use AmebaPro2_EQ_tool.exe to generate register settings. For
 example, if we choose a high pass filter with cutoff frequency 200Hz and
@@ -132,7 +130,7 @@ Figure EQ setting
 
 .. image:: ../_static/13_AUDIO/image2.png
 
--  Set the register value got from AmebaPro2_EQ_tool.exe
+**Set the register value got from AmebaPro2_EQ_tool.exe**
 
 After getting the registers’ value, user can use the following functions
 to apply the filter setting on AmebaPro2 on left digital mic (analog
@@ -163,26 +161,26 @@ Other setting
 
 Here are some commands about the module audio setting:
 
--  CMD_AUDIO_SET_RESET
+**CMD_AUDIO_SET_RESET**
 
 will be re-initialize the audio setting and also the ASP algorithms. If
 you do some changes need to reset the audio configuration, like change
 the sample rate, reset the audio to switch the configuration.
 
--  CMD_AUDIO_SET_SAMPLERATE
+**CMD_AUDIO_SET_SAMPLERATE**
 
 can set the sample rate. After using this command, a reset is needed to
 apply the sample rate configuration on audio and ASP algorithms.
 
 .. note :: If using audio codec, be sure the sample rate is fitting the sample rate used in audio codec.
 
--  CMD_AUDIO_SET_TRX
+**CMD_AUDIO_SET_TRX**
 
 Provide a way to stop and re-start the audio without re-initialize the
 audio system and ASP algorithms. Set 0 to stop the tx and rx progresses
 or 1 to start them.
 
--  CMD_AUDIO_SET_MIC_ENABLE/CMD_AUDIO_SET_SPK_ENABLE
+**CMD_AUDIO_SET_MIC_ENABLE/CMD_AUDIO_SET_SPK_ENABLE**
 
 Mute or unmute the mic input/speaker output. This command will not open
 or close the audio codec, but set the digital data to zero.
@@ -234,7 +232,7 @@ Enable ENABLE_ASP in module_audio.h and use the 3A (AGC: Automatic gain
 control; ANS: Adaptive noise suppression; AEC: Acoustic echo
 cancellation) algorithms to obtain better audio effects.
 
--  The parameters, sample_rate and mic_gain, and the initialization of
+.. note :: The parameters, sample_rate and mic_gain, and the initialization of
    NS, AEC, AGC and other algorithms will be setting at CMD_AUDIO_APPLY
    and CMD_AUDIO_SET_RESET.
 
