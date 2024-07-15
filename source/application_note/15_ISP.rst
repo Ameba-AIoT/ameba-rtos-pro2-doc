@@ -28,21 +28,31 @@ list with sensor information.
 
 Table 1‑1 Support sensor list on AmebaPro2
 
-=========== ======== ====================== ===========
-Vendor      Sensor   Max Resolution and FPS Description
-=========== ======== ====================== ===========
-Galaxycore  GC2053   1920x1080 * 30       
-Galaxycore  GC4653   2560x1440 * 15       
-PrimeSensor PS5258   1920x1080 * 30       
-PrimeSensor PS5270   1536x1536 * 30       
-SmartSens   SC2336   1920x1080 * 30       
-SmartSens   SC301IOT 2048x1536 * 20       
-SOI         JXF37P   1920x1080 * 30       
-SOI         JXF51    1536x1536 * 30       
-Sony        IMX307   1920x1080 * 30         With HDR
-Sony        IMX327   1920x1080 * 30         With HDR
-ImageDesign MIS2008  1920x1080 * 30       
-=========== ======== ====================== ===========
++-------------+----------+--------------------------+-------------+
+| Vendor      | Sensor   | Max Resolution   and FPS | Description |
++=============+==========+==========================+=============+
+| Galaxycore  | GC2053   | 1920x1080 * 30           |             |
++-------------+----------+--------------------------+-------------+
+| Galaxycore  | GC4653   | 2560x1440 * 15           |             |
++-------------+----------+--------------------------+-------------+
+| PrimeSensor | PS5258   | 1920x1080 * 30           |             |
++-------------+----------+--------------------------+-------------+
+| PrimeSensor | PS5270   | 1536x1536 * 30           |             |
++-------------+----------+--------------------------+-------------+
+| SmartSens   | SC2336   | 1920x1080 * 30           |             |
++-------------+----------+--------------------------+-------------+
+| SmartSens   | SC301IOT | 2048x1536 * 20           |             |
++-------------+----------+--------------------------+-------------+
+| SOI         | JXF37P   | 1920x1080 * 30           |             |
++-------------+----------+--------------------------+-------------+
+| SOI         | JXF51    | 1536x1536 * 30           |             |
++-------------+----------+--------------------------+-------------+
+| Sony        | IMX307   | 1920x1080 * 30           | With HDR    |
++-------------+----------+--------------------------+-------------+
+| Sony        | IMX327   | 1920x1080 * 30           | With HDR    |
++-------------+----------+--------------------------+-------------+
+| ImageDesign | MIS2008  | 1920x1080 * 30           |             |
++-------------+----------+--------------------------+-------------+
 
 Sensor configuration
 ~~~~~~~~~~~~~~~~~~~~
@@ -579,7 +589,7 @@ Parameter     Type             Introduction
 <date_fmt>    rts_osd_date_fmt Date format, please refer to introduction of rts_osd_date_fmt
 ============= ================ ===========================================================================================================================================
 
-.. image:: ../_static/15_ISP/image2.png
+.. figure:: ../_static/15_ISP/image2.png
    :align: center
 
 Table 1‑8 OSD data structure: osd_pict_st
@@ -1095,7 +1105,7 @@ OSD Tools
 Font Tool
 ^^^^^^^^^
 
-.. image:: ../_static/15_ISP/image3.png
+.. figure:: ../_static/15_ISP/image3.png
    :align: center
 
 Introduce the numbers in above image
@@ -1120,7 +1130,7 @@ Introduce the numbers in above image
 Bitmap Generate Tool
 ^^^^^^^^^^^^^^^^^^^^
 
-.. image:: ../_static/15_ISP/image4.png
+.. figure:: ../_static/15_ISP/image4.png
    :align: center
 
 Introduce the numbers in above image
@@ -2160,16 +2170,17 @@ that information for image processing.
 External Image Processing Architecture
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-External image processing (EIP) architecture is shown as below figure.
+External image processing (EIP) architecture is shown in :numref:`eip-arch-image`.
 First, it will confirm whether the value of the automatic exposure (AE)
 is stable. After stabilization, obtain the statistical brightness value
 of 32x32 to provide reference for other image processing algorithms,
 such as motion detection (MD) and auto wide dynamic range (WDR).
 
-Figure 1-1 External image processing architecture
-
-.. image:: ../_static/15_ISP/image5.png
+.. figure:: ../_static/15_ISP/image5.png
    :align: center
+   :name: eip-arch-image
+   
+   External image processing architecture
 
 
 |
@@ -2183,10 +2194,11 @@ into a 32x32 frame. As shown below figure. Calculating motion with 32x32
 luminance data has some advantages, such as (1) saving computation time,
 (2) filtering out noise
 
-Figure 1-2 Average Luminance value for each block are calculated
 
-.. image:: ../_static/15_ISP/image6.png
-   :align: center
+.. figure:: ../_static/15_ISP/image6.png
+    :align: center
+
+    Average Luminance value for each block are calculated
 
 
 |
@@ -2194,19 +2206,19 @@ Figure 1-2 Average Luminance value for each block are calculated
 Motion Detection
 ~~~~~~~~~~~~~~~~
 
-Motion detection architecture is shown in 1.6.1. First, we will obtain
+Motion detection architecture is shown in :numref:`md-arch-fig`. First, we will obtain
 first 32x32 luminance data to initialize the background model. After
 initialization, calculate the difference between the luminance values
 and the background model and the average difference of the entire image.
 Use the difference information to determine whether to trigger motion
 detection and update the background model immediately. Please refer to
-1.6.4.7 ~ 1.6.4.15 for detailed instructions for use.
+:ref:`md_en` ~ :ref:`md_set_cb` for detailed instructions for use.
 
-Figure 1-3 Motion detection architecture
+.. figure:: ../_static/15_ISP/image7.png
+    :align: center
+    :name: md-arch-fig
 
-.. image:: ../_static/15_ISP/image7.png
-   :align: center
-
+    Motion detection architecture
 
 |
 
@@ -2242,10 +2254,10 @@ where the actual motion occurred, as shown in the black areas as below
 figure.
 
 
-Figure 1-4 MD difference calculation
-
-.. image:: ../_static/15_ISP/image8.png
+.. figure:: ../_static/15_ISP/image8.png
    :align: center
+
+   MD difference calculation
 
 Motion Detection Matrix Post-Processing 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -2432,10 +2444,11 @@ Then, open VLC (or PotPlayer) and create a network stream with URL: rtsp://192.1
 
 When motion detected, it will draw the motion detected region.
 
-Figure 1-5 Motion Detection Example
 
-.. image:: ../_static/15_ISP/image9.png
-   :align: center
+.. figure:: ../_static/15_ISP/image9.png
+    :align: center
+
+    Motion Detection Example
 
 
 |
@@ -2519,10 +2532,11 @@ rtsp://192.168.x.xx:554
 When motion detected, it will trigger object detection, and draw the
 detection result
 
-Figure 1-6 MD & NN Example
 
-.. image:: ../_static/15_ISP/image10.png
+.. figure:: ../_static/15_ISP/image10.png
    :align: center
+
+   MD & NN Example
 
 
 |
@@ -2845,6 +2859,8 @@ CMD_EIP_AE_STABLE_EN. Set 1 to enable, and set 0 to disable.
     }
 
 
+.. _md_en:
+
 Enable MD
 ^^^^^^^^^
 
@@ -3057,10 +3073,11 @@ Take care lane image as an example. If we want to filter out the car
 motion when far from camera, we can disable MD in the upper part of the
 image, as shown in below figure.
 
-Figure 1-7 MD Mask
 
-.. image:: ../_static/15_ISP/image11.png
+.. figure:: ../_static/15_ISP/image11.png
    :align: center
+
+   MD Mask
 
 
 |
@@ -3132,6 +3149,7 @@ return a motion detection result structure.
         }
     }
 
+.. _md_set_cb:
 
 MD Set Display Callback Function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
