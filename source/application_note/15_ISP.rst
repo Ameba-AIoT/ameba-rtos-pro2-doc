@@ -26,33 +26,35 @@ RTK will update support sensor driver regularly. User can contact
 RTK-FAE to get newest sensor list. The following table shows support
 list with sensor information.
 
-Table 1‑1 Support sensor list on AmebaPro2
 
-+-------------+----------+--------------------------+-------------+
-| Vendor      | Sensor   | Max Resolution   and FPS | Description |
-+=============+==========+==========================+=============+
-| Galaxycore  | GC2053   | 1920x1080 * 30           |             |
-+-------------+----------+--------------------------+-------------+
-| Galaxycore  | GC4653   | 2560x1440 * 15           |             |
-+-------------+----------+--------------------------+-------------+
-| PrimeSensor | PS5258   | 1920x1080 * 30           |             |
-+-------------+----------+--------------------------+-------------+
-| PrimeSensor | PS5270   | 1536x1536 * 30           |             |
-+-------------+----------+--------------------------+-------------+
-| SmartSens   | SC2336   | 1920x1080 * 30           |             |
-+-------------+----------+--------------------------+-------------+
-| SmartSens   | SC301IOT | 2048x1536 * 20           |             |
-+-------------+----------+--------------------------+-------------+
-| SOI         | JXF37P   | 1920x1080 * 30           |             |
-+-------------+----------+--------------------------+-------------+
-| SOI         | JXF51    | 1536x1536 * 30           |             |
-+-------------+----------+--------------------------+-------------+
-| Sony        | IMX307   | 1920x1080 * 30           | With HDR    |
-+-------------+----------+--------------------------+-------------+
-| Sony        | IMX327   | 1920x1080 * 30           | With HDR    |
-+-------------+----------+--------------------------+-------------+
-| ImageDesign | MIS2008  | 1920x1080 * 30           |             |
-+-------------+----------+--------------------------+-------------+
+.. table:: Support sensor list on AmebaPro2
+    :align: center
+
+    +-------------+----------+--------------------------+-------------+
+    | Vendor      | Sensor   | Max Resolution   and FPS | Description |
+    +=============+==========+==========================+=============+
+    | Galaxycore  | GC2053   | 1920x1080 * 30           |             |
+    +-------------+----------+--------------------------+-------------+
+    | Galaxycore  | GC4653   | 2560x1440 * 15           |             |
+    +-------------+----------+--------------------------+-------------+
+    | PrimeSensor | PS5258   | 1920x1080 * 30           |             |
+    +-------------+----------+--------------------------+-------------+
+    | PrimeSensor | PS5270   | 1536x1536 * 30           |             |
+    +-------------+----------+--------------------------+-------------+
+    | SmartSens   | SC2336   | 1920x1080 * 30           |             |
+    +-------------+----------+--------------------------+-------------+
+    | SmartSens   | SC301IOT | 2048x1536 * 20           |             |
+    +-------------+----------+--------------------------+-------------+
+    | SOI         | JXF37P   | 1920x1080 * 30           |             |
+    +-------------+----------+--------------------------+-------------+
+    | SOI         | JXF51    | 1536x1536 * 30           |             |
+    +-------------+----------+--------------------------+-------------+
+    | Sony        | IMX307   | 1920x1080 * 30           | With HDR    |
+    +-------------+----------+--------------------------+-------------+
+    | Sony        | IMX327   | 1920x1080 * 30           | With HDR    |
+    +-------------+----------+--------------------------+-------------+
+    | ImageDesign | MIS2008  | 1920x1080 * 30           |             |
+    +-------------+----------+--------------------------+-------------+
 
 Sensor configuration
 ~~~~~~~~~~~~~~~~~~~~
@@ -299,20 +301,22 @@ mode for sensor (HDR / Linear), dual lens(1\ :sup:`st` source /
 2\ :sup:`nd` source) with dual mode (production / manufacture). Here is
 an example of configuring the **sensor.h** file.
 
-Table 1‑2 Combination cases for SENSOR/IQ/FCS usage.
 
-===== ========================== ================= ============================================
-Index Fcs Sensor Bin             Normal Sensor Bin IQ Bin
-===== ========================== ================= ============================================
-0     fcs_data_sensor_linear.bin sensor_linear.bin iq_sensor_project_1stlens_linear_production
-1     fcs_data_sensor_linear.bin sensor_linear.bin iq_sensor_project_1stlens_linear_manufacture
-2     fcs_data_sensor_linear.bin sensor_linear.bin iq_sensor_project_2ndlens_linear_production
-3     fcs_data_sensor_linear.bin sensor_linear.bin iq_sensor_project_2ndens_linear_manufacture
-4     fcs_data_sensor_hdr.bin    sensor_hdr.bin    iq_sensor_project_1stlens_hdr_production
-5     fcs_data_sensor_hdr.bin    sensor_hdr.bin    iq_sensor_project_1stlens_hdr_manufacture
-6     fcs_data_sensor_hdr.bin    sensor_hdr.bin    iq_sensor_project_2ndlens_hdr_production
-7     fcs_data_sensor_hdr.bin    sensor_hdr.bin    iq_sensor_project_2ndens_hdr_manufacture
-===== ========================== ================= ============================================
+.. table:: Combination cases for SENSOR/IQ/FCS usage.
+    :align: center
+
+    ===== ========================== ================= ============================================
+    Index Fcs Sensor Bin             Normal Sensor Bin IQ Bin
+    ===== ========================== ================= ============================================
+    0     fcs_data_sensor_linear.bin sensor_linear.bin iq_sensor_project_1stlens_linear_production
+    1     fcs_data_sensor_linear.bin sensor_linear.bin iq_sensor_project_1stlens_linear_manufacture
+    2     fcs_data_sensor_linear.bin sensor_linear.bin iq_sensor_project_2ndlens_linear_production
+    3     fcs_data_sensor_linear.bin sensor_linear.bin iq_sensor_project_2ndens_linear_manufacture
+    4     fcs_data_sensor_hdr.bin    sensor_hdr.bin    iq_sensor_project_1stlens_hdr_production
+    5     fcs_data_sensor_hdr.bin    sensor_hdr.bin    iq_sensor_project_1stlens_hdr_manufacture
+    6     fcs_data_sensor_hdr.bin    sensor_hdr.bin    iq_sensor_project_2ndlens_hdr_production
+    7     fcs_data_sensor_hdr.bin    sensor_hdr.bin    iq_sensor_project_2ndens_hdr_manufacture
+    ===== ========================== ================= ============================================
 
 According to the table, first make sure that the sensor/IQ/FCS files has
 been placed in the path\ **:component\\soc\\8735b\\fwlib\\rtl8735b\\lib\\source\\ram\\video\\voe_bin**
@@ -427,15 +431,17 @@ User can use ISP API to switch. ( isp_set_day_night() for iq table
 switch, isp_set_gray_mode() for color/gray mode switch) For general
 usage, suggestion configuration will be defined as follow
 
-Table 1-3 Example for iq mode switch
 
-===== =============================================================================== ==================== ====================
-Index Mode                                                                            IQ Table command     Color mode command
-===== =============================================================================== ==================== ====================
-0     RGB mode (RGB parameter with color)                                             isp_set_day_night(0) isp_set_gray_mode(0)
-1     IR mode (IR parameter w/o color)                                                isp_set_day_night(1) isp_set_gray_mode(1)
-2     Other mode( like spotlight mode with color or IR mode without IR LED w/o color) isp_set_day_night(2) User define
-===== =============================================================================== ==================== ====================
+.. table:: Example for iq mode switch
+    :align: center
+
+    ===== =============================================================================== ==================== ====================
+    Index Mode                                                                            IQ Table command     Color mode command
+    ===== =============================================================================== ==================== ====================
+    0     RGB mode (RGB parameter with color)                                             isp_set_day_night(0) isp_set_gray_mode(0)
+    1     IR mode (IR parameter w/o color)                                                isp_set_day_night(1) isp_set_gray_mode(1)
+    2     Other mode( like spotlight mode with color or IR mode without IR LED w/o color) isp_set_day_night(2) User define
+    ===== =============================================================================== ==================== ====================
 
 Image Quality Criteria
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -443,29 +449,30 @@ Image Quality Criteria
 For first draft image quality version, RTK will provide image quality
 patch following RTK criteria. User can check table for detailed.
 
-Table 1‑4 Objective image quality on AmebaPro2
+.. table:: Objective image quality on AmebaPro2
+    :align: center
 
-================== ============= ===========================
-Category           Condition     Criteria
-================== ============= ===========================
-Lens Shading       D65 & CWF & A Relative illumination > 80%
-\                  D65 & CWF & A R/G [0.9~1.1]
-\                  D65 & CWF & A B/G [0.9~1.1]
-\                  D65 & CWF & A B/G [0.9~1.1]
-Color Checker      D65 & CWF & A Saturation [100%~120%]
-\                  D65 & CWF & A Mean △C ≦10
-\                  D65 & CWF & A Max △C ≦ 30
-\                  D65 & CWF & A Mean △E ≦20
-\                  D65 & CWF & A Max △E ≦ 30
-Auto White Balance D65 & CWF & A #20~#23 Max △S ≦0.1
-Resolution (1080P) D65           Center Horizontal: ≧1000
-\                                Center Vertical: ≧1000
-\                                Corner Horizontal ≧600
-\                                Corner Vertical ≧600
-Dynamic Range      D65           Max Y ≧ 200
-\                                Step ≧ 14
-Defect Pixel       Dark & White  None
-================== ============= ===========================
+    ================== ============= ===========================
+    Category           Condition     Criteria
+    ================== ============= ===========================
+    Lens Shading       D65 & CWF & A Relative illumination > 80%
+    \                  D65 & CWF & A R/G [0.9~1.1]
+    \                  D65 & CWF & A B/G [0.9~1.1]
+    \                  D65 & CWF & A B/G [0.9~1.1]
+    Color Checker      D65 & CWF & A Saturation [100%~120%]
+    \                  D65 & CWF & A Mean △C ≦10
+    \                  D65 & CWF & A Max △C ≦ 30
+    \                  D65 & CWF & A Mean △E ≦20
+    \                  D65 & CWF & A Max △E ≦ 30
+    Auto White Balance D65 & CWF & A #20~#23 Max △S ≦0.1
+    Resolution (1080P) D65           Center Horizontal: ≧1000
+    \                                Center Vertical: ≧1000
+    \                                Corner Horizontal ≧600
+    \                                Corner Vertical ≧600
+    Dynamic Range      D65           Max Y ≧ 200
+    \                                Step ≧ 14
+    Defect Pixel       Dark & White  None
+    ================== ============= ===========================
 
 For advanced image quality such as customized objective image criteria
 or quality benchmark with target DUT, user can contact with RTK-FAE for
@@ -549,162 +556,173 @@ introduction.
 OSD Data Structures
 ^^^^^^^^^^^^^^^^^^^
 
-Table 1‑5 OSD data structure
+.. table:: OSD data structure
+    :align: center
 
-================== ============================
-Data Structures    Introduction
-================== ============================
-<osd_text_info_st> Text type OSD parameters.
-<rt_font_st>       Fonts parameters
-<osd_pict_st>      Picture type OSD parameters.
-<rt_osd2_info_st>  OSD parameters.
-================== ============================
+    ================== ============================
+    Data Structures    Introduction
+    ================== ============================
+    <osd_text_info_st> Text type OSD parameters.
+    <rt_font_st>       Fonts parameters
+    <osd_pict_st>      Picture type OSD parameters.
+    <rt_osd2_info_st>  OSD parameters.
+    ================== ============================
 
-Table 1‑6 OSD data structure: osd_text_info_st
 
-========= ========== ===========================================
-Parameter Type       Introduction
-========= ========== ===========================================
-<chn_id>  int        Channel ID: 0~2
-<blk_idx> int        Block index: 0~23
-<font>    rt_font_st Please refers to table of rt_font_st
-<start_x> uint32_t   x-coordinate of start point
-<start_y> uint32_t   y-coordinate of start point
-<rotate>  uint32_t   Please refers to enumeration of rt_rotate_t
-<str>     char \*    String content
-========= ========== ===========================================
+.. table:: OSD data structure: osd_text_info_st
+    :align: center
 
-Table 1‑7 OSD data structure: rt_font_st
+    ========= ========== ===========================================
+    Parameter Type       Introduction
+    ========= ========== ===========================================
+    <chn_id>  int        Channel ID: 0~2
+    <blk_idx> int        Block index: 0~23
+    <font>    rt_font_st Please refers to table of rt_font_st
+    <start_x> uint32_t   x-coordinate of start point
+    <start_y> uint32_t   y-coordinate of start point
+    <rotate>  uint32_t   Please refers to enumeration of rt_rotate_t
+    <str>     char \*    String content
+    ========= ========== ===========================================
 
-============= ================ ===========================================================================================================================================
-Parameter     Type             Introduction
-============= ================ ===========================================================================================================================================
-<block_alpha> uint8_t          Transparent value: 0~15.
-<ch_color>    uint32_t         Character color in RGB.
-<bg_enable>   uint8_t          Enable background: 0~1.
-<bg_color>    uint32_t         Background color in RGB.
-<h_gap>       uint8_t :4       The meaning of the field in the osd structure is shown in below figure. The horizontal interval is h_gap, and the vertical interval is v_gap.
-<v_gap>       uint8_t :4       The meaning of the field in the osd structure is shown in below figure. The horizontal interval is h_gap, and the vertical interval is v_gap.
-<time_fmt>    rts_osd_time_fmt Time format, please refer to introduction of rts_osd_time_fmt
-<date_fmt>    rts_osd_date_fmt Date format, please refer to introduction of rts_osd_date_fmt
-============= ================ ===========================================================================================================================================
+.. table:: OSD data structure: rt_font_st
+    :align: center
+
+    ============= ================ ===========================================================================================================================================
+    Parameter     Type             Introduction
+    ============= ================ ===========================================================================================================================================
+    <block_alpha> uint8_t          Transparent value: 0~15.
+    <ch_color>    uint32_t         Character color in RGB.
+    <bg_enable>   uint8_t          Enable background: 0~1.
+    <bg_color>    uint32_t         Background color in RGB.
+    <h_gap>       uint8_t :4       The meaning of the field in the osd structure is shown in below figure. The horizontal interval is h_gap, and the vertical interval is v_gap.
+    <v_gap>       uint8_t :4       The meaning of the field in the osd structure is shown in below figure. The horizontal interval is h_gap, and the vertical interval is v_gap.
+    <time_fmt>    rts_osd_time_fmt Time format, please refer to introduction of rts_osd_time_fmt
+    <date_fmt>    rts_osd_date_fmt Date format, please refer to introduction of rts_osd_date_fmt
+    ============= ================ ===========================================================================================================================================
 
 .. figure:: ../_static/15_ISP/image2.png
    :align: center
 
-Table 1‑8 OSD data structure: osd_pict_st
+.. table:: OSD data structure: osd_pict_st
+    :align: center
 
-========= =============== ===============
-Parameter Type            Introduction
-========= =============== ===============
-<chn_id>  int             Channel ID: 0~2
-<osd2>    rt_osd2_info_st OSD parameters.
-========= =============== ===============
+    ========= =============== ===============
+    Parameter Type            Introduction
+    ========= =============== ===============
+    <chn_id>  int             Channel ID: 0~2
+    <osd2>    rt_osd2_info_st OSD parameters.
+    ========= =============== ===============
 
-Table 1‑9 OSD data structure: rt_osd2_info_st
+.. table:: OSD data structure: rt_osd2_info_st
+    :align: center
 
-============ ================ ===========================================================
-Parameter    Type             Introduction
-============ ================ ===========================================================
-<blk_idx>    int              Block index: 0~23
-<blk_fmt>    rts_osd2_blk_fmt Block format: Please refers to enumeration rts_osd2_blk_fmt
-<start_x>    uint32_t         x-coordinate of start point
-<start_y>    uint32_t         y-coordinate of start point
-<end_x>      uint32_t         x-coordinate of end point
-<end_y>      uint32_t         y-coordinate of end point
-<color_1bpp> uint32_t         Set the RGB color when format is RTS_OSD2_BLK_FMT_1BPP
-<buf>        uint8_t \*       Image buffer
-<len>        uint32_t         Image buffer length
-============ ================ ===========================================================
+    ============ ================ ===========================================================
+    Parameter    Type             Introduction
+    ============ ================ ===========================================================
+    <blk_idx>    int              Block index: 0~23
+    <blk_fmt>    rts_osd2_blk_fmt Block format: Please refers to enumeration rts_osd2_blk_fmt
+    <start_x>    uint32_t         x-coordinate of start point
+    <start_y>    uint32_t         y-coordinate of start point
+    <end_x>      uint32_t         x-coordinate of end point
+    <end_y>      uint32_t         y-coordinate of end point
+    <color_1bpp> uint32_t         Set the RGB color when format is RTS_OSD2_BLK_FMT_1BPP
+    <buf>        uint8_t \*       Image buffer
+    <len>        uint32_t         Image buffer length
+    ============ ================ ===========================================================
 
 OSD Enumerations
 ^^^^^^^^^^^^^^^^
 
-Table 1‑10 OSD Enumerations
+.. table:: OSD Enumerations
+    :align: center
 
-================== =========================================
-Enumerations       Introduction
-================== =========================================
-<rt_rotate_t>      Rotation angle, include 0, 90, 180, 270..
-<rts_osd_time_fmt> Time format
-<rts_osd_date_fmt> Date format
-<rts_osd2_blk_fmt> Block format
-================== =========================================
+    ================== =========================================
+    Enumerations       Introduction
+    ================== =========================================
+    <rt_rotate_t>      Rotation angle, include 0, 90, 180, 270..
+    <rts_osd_time_fmt> Time format
+    <rts_osd_date_fmt> Date format
+    <rts_osd2_blk_fmt> Block format
+    ================== =========================================
 
-Table 1‑11 OSD data structure: rt_rotate_t
+.. table:: OSD data structure: rt_rotate_t
+    :align: center
 
-================ ==============================
-Definition       Introduction
-================ ==============================
-<RT_ROTATE_0>    None rotation
-<RT_ROTATE_90R>  Rotate 90 degree to the right
-<RT_ROTATE_180R> Rotate 180 degree to the right
-<RT_ROTATE_270R> Rotate 270 degree to the right
-<RT_ROTATE_90L>  Rotate 90 degree to the left
-<RT_ROTATE_180L> Rotate 180 degree to the left
-<RT_ROTATE_270L> Rotate 270 degree to the left
-================ ==============================
+    ================ ==============================
+    Definition       Introduction
+    ================ ==============================
+    <RT_ROTATE_0>    None rotation
+    <RT_ROTATE_90R>  Rotate 90 degree to the right
+    <RT_ROTATE_180R> Rotate 180 degree to the right
+    <RT_ROTATE_270R> Rotate 270 degree to the right
+    <RT_ROTATE_90L>  Rotate 90 degree to the left
+    <RT_ROTATE_180L> Rotate 180 degree to the left
+    <RT_ROTATE_270L> Rotate 270 degree to the left
+    ================ ==============================
 
-Table 1‑12 OSD data structure: rts_osd_time_fmt
+.. table:: OSD data structure: rts_osd_time_fmt
+    :align: center
 
-=================== ================ ================
-Definition          Type             Introduction
-=================== ================ ================
-<osd_time_fmt_no>   Not display time Not display time
-<osd_time_fmt_24>   hh:mm:ss         14:32:58
-<osd_time_fmt_12>   hh:mm:ss         02:32:58
-<osd_time_fmt_12_1> Phh:mm:ss        P02:32:58
-<osd_time_fmt_12_2> PMhh:mm:ss       PM02:32:58
-<osd_time_fmt_12_3> PM~hh:mm:ss      PM~02:32:58
-<osd_time_fmt_12_4> hh:mm:ssPM       02:32:58PM
-<osd_time_fmt_12_5> hh:mm:ss~PM      02:32:58~PM
-<osd_time_fmt_12_6> hh:mm:ss~~PM     02:32:58~~PM
-<osd_time_fmt_12_7> hh:mm:ss~~~PM    02:32:58~~~PM
-=================== ================ ================
+    =================== ================ ================
+    Definition          Type             Introduction
+    =================== ================ ================
+    <osd_time_fmt_no>   Not display time Not display time
+    <osd_time_fmt_24>   hh:mm:ss         14:32:58
+    <osd_time_fmt_12>   hh:mm:ss         02:32:58
+    <osd_time_fmt_12_1> Phh:mm:ss        P02:32:58
+    <osd_time_fmt_12_2> PMhh:mm:ss       PM02:32:58
+    <osd_time_fmt_12_3> PM~hh:mm:ss      PM~02:32:58
+    <osd_time_fmt_12_4> hh:mm:ssPM       02:32:58PM
+    <osd_time_fmt_12_5> hh:mm:ss~PM      02:32:58~PM
+    <osd_time_fmt_12_6> hh:mm:ss~~PM     02:32:58~~PM
+    <osd_time_fmt_12_7> hh:mm:ss~~~PM    02:32:58~~~PM
+    =================== ================ ================
 
-Table 1‑13 OSD data structure: rts_osd_date_fmt
+.. table:: OSD data structure: rts_osd_date_fmt
+    :align: center
 
-================= ================ ================
-Definition        Type             Example
-================= ================ ================
-<osd_date_fmt_no> Not display date Not display date
-<osd_date_fmt_0>  dd/MM/yyyy       26/05/2015
-<osd_date_fmt_1>  dd/MM/yy         26/05/15
-<osd_date_fmt_2>  d/M/yy           26/5/15
-<osd_date_fmt_3>  M/d/yyyy         5/26/2015
-<osd_date_fmt_4>  M/d/yy           5/26/15
-<osd_date_fmt_5>  MM/dd/yy         05/26/15
-<osd_date_fmt_6>  MM/dd/yyyy       05/26/2015
-<osd_date_fmt_7>  yyyy/M/d         2015/5/26
-<osd_date_fmt_8>  yyyy-M-d         2015-5-26
-<osd_date_fmt_9>  yyyy-MM-dd       2015-05-26
-<osd_date_fmt_10> yyyy/MM/dd       2015/05/26
-<osd_date_fmt_11> yy-MM-dd         15-05-26
-<osd_date_fmt_12> yy/M/d           15/5/26
-<osd_date_fmt_13> yy-M-d           15-5-26
-<osd_date_fmt_14> yy/MM/dd         15/05/26
-<osd_date_fmt_15> yyyy.mm.dd       2015.05.26
-<osd_date_fmt_16> dd.mm.yyyy       26.05.2015
-<osd_date_fmt_17> mm.dd.yyyy       05.26.2015
-<osd_date_fmt_18> mm-dd-yyyy       05-26-2015
-<osd_date_fmt_19> dd-mm-yyyy       26-05-2015
-<osd_date_fmt_20> dd-mm-yyyy www   26-05-2015 Tue
-<osd_date_fmt_21> dd/mm/yyyy www   26/05/2015 Tue
-<osd_date_fmt_22> dd.mm.yyyy www   26.05.2015 Tue
-================= ================ ================
+    ================= ================ ================
+    Definition        Type             Example
+    ================= ================ ================
+    <osd_date_fmt_no> Not display date Not display date
+    <osd_date_fmt_0>  dd/MM/yyyy       26/05/2015
+    <osd_date_fmt_1>  dd/MM/yy         26/05/15
+    <osd_date_fmt_2>  d/M/yy           26/5/15
+    <osd_date_fmt_3>  M/d/yyyy         5/26/2015
+    <osd_date_fmt_4>  M/d/yy           5/26/15
+    <osd_date_fmt_5>  MM/dd/yy         05/26/15
+    <osd_date_fmt_6>  MM/dd/yyyy       05/26/2015
+    <osd_date_fmt_7>  yyyy/M/d         2015/5/26
+    <osd_date_fmt_8>  yyyy-M-d         2015-5-26
+    <osd_date_fmt_9>  yyyy-MM-dd       2015-05-26
+    <osd_date_fmt_10> yyyy/MM/dd       2015/05/26
+    <osd_date_fmt_11> yy-MM-dd         15-05-26
+    <osd_date_fmt_12> yy/M/d           15/5/26
+    <osd_date_fmt_13> yy-M-d           15-5-26
+    <osd_date_fmt_14> yy/MM/dd         15/05/26
+    <osd_date_fmt_15> yyyy.mm.dd       2015.05.26
+    <osd_date_fmt_16> dd.mm.yyyy       26.05.2015
+    <osd_date_fmt_17> mm.dd.yyyy       05.26.2015
+    <osd_date_fmt_18> mm-dd-yyyy       05-26-2015
+    <osd_date_fmt_19> dd-mm-yyyy       26-05-2015
+    <osd_date_fmt_20> dd-mm-yyyy www   26-05-2015 Tue
+    <osd_date_fmt_21> dd/mm/yyyy www   26/05/2015 Tue
+    <osd_date_fmt_22> dd.mm.yyyy www   26.05.2015 Tue
+    ================= ================ ================
 
-Table 1‑14 OSD data structure: rts_osd2_blk_fmt
+.. table:: OSD data structure: rts_osd2_blk_fmt
+    :align: center
 
-=========================== ========================================
-Definition                  Introduction
-=========================== ========================================
-<RTS_OSD2_BLK_FMT_1BPP>     Format in 1BPP, pixel size: 1 bit.
-<RTS_OSD2_BLK_FMT_RGBA1111> Format in RGBA1111, pixel size: 4 bit.
-<RTS_OSD2_BLK_FMT_RGBA2222> Format in RGBA2222, pixel size: 1 byte.
-<RTS_OSD2_BLK_FMT_RGBA5551> Format in RGBA5551, pixel size: 2 bytes.
-<RTS_OSD2_BLK_FMT_RGBA4444> Format in RGBA4444, pixel size: 2 bytes.
-<RTS_OSD2_BLK_FMT_RGBA8888> Format in RGBA8888, pixel size: 4bytes.
-=========================== ========================================
+    =========================== ========================================
+    Definition                  Introduction
+    =========================== ========================================
+    <RTS_OSD2_BLK_FMT_1BPP>     Format in 1BPP, pixel size: 1 bit.
+    <RTS_OSD2_BLK_FMT_RGBA1111> Format in RGBA1111, pixel size: 4 bit.
+    <RTS_OSD2_BLK_FMT_RGBA2222> Format in RGBA2222, pixel size: 1 byte.
+    <RTS_OSD2_BLK_FMT_RGBA5551> Format in RGBA5551, pixel size: 2 bytes.
+    <RTS_OSD2_BLK_FMT_RGBA4444> Format in RGBA4444, pixel size: 2 bytes.
+    <RTS_OSD2_BLK_FMT_RGBA8888> Format in RGBA8888, pixel size: 4bytes.
+    =========================== ========================================
 
 If the block type is rts_osd2_type_date, rts_osd2_type_time or
 rts_osd2_type_text, block format is always RGBA1111.If the block type is
@@ -719,30 +737,32 @@ rts_osd_init
 Initial function is used to create OSD data, font lib and set the
 time-zone for the indicated stream.
 
-Table 1‑15 OSD API: rts_osd_init
+.. table:: OSD API: rts_osd_init
+    :align: center
 
-=============== ==== ===========================
-Parameter       Type Introduction
-=============== ==== ===========================
-<chn_id >       int  Stream channel ID.
-<char_resize_w> int  Character size in width.           
-<char_resize_h> int  Character size in height.
-<timezone_s>    int  Time-zone, unit in seconds.
-<chn_id >       int  Stream channel ID.
-=============== ==== ===========================
+    =============== ==== ===========================
+    Parameter       Type Introduction
+    =============== ==== ===========================
+    <chn_id >       int  Stream channel ID.
+    <char_resize_w> int  Character size in width.           
+    <char_resize_h> int  Character size in height.
+    <timezone_s>    int  Time-zone, unit in seconds.
+    <chn_id >       int  Stream channel ID.
+    =============== ==== ===========================
 
 rts_osd_deinit
 ^^^^^^^^^^^^^^
 
 De-initialize the OSD data of indicated stream.
 
-Table 1‑16 OSD API: rts_osd_deinit
+.. table:: OSD API: rts_osd_deinit
+    :align: center
 
-========= ==== ==================
-Parameter Type Introduction
-========= ==== ==================
-<chn_id>  int  Stream channel ID.
-========= ==== ==================
+    ========= ==== ==================
+    Parameter Type Introduction
+    ========= ==== ==================
+    <chn_id>  int  Stream channel ID.
+    ========= ==== ==================
 
 rts_osd_set_info
 ^^^^^^^^^^^^^^^^
@@ -759,26 +779,27 @@ of "osd_text_info_st" and "osd_pict_st", refer to previous instructions
 
 .. note :: When using rts_osd_set_info, the parameters "osd_text_info_st" or "osd_pict_st" must be declared as global variables.
 
-Table 1‑17 OSD API: rts_osd_set_info
+.. table:: OSD API: rts_osd_set_info
+    :align: center
 
-========== ======= ==========================================================================================
-Parameter  Type    Introduction
-========== ======= ==========================================================================================
-<osd_type> int     Types include
-                  
-                   -  rts_osd2_type_date,
-                  
-                   -  rts_osd2_type_time,
-                  
-                   -  rts_osd2_type_pict,
-                  
-                   -  rts_osd2_type_text.
-<osd_info> void *  Block detail description, which includes "osd_text_info_st*" and "osd_pict_st*".
-                  
-                   -  "osd_text_info_st*" includes rts_osd2_type_date, rts_osd2_type_time, rts_osd2_type_text
-                  
-                   -  "osd_pict_st*" includes rts_osd2_type_pict
-========== ======= ==========================================================================================
+    ========== ======= ==========================================================================================
+    Parameter  Type    Introduction
+    ========== ======= ==========================================================================================
+    <osd_type> int     Types include
+                    
+                    -  rts_osd2_type_date,
+                    
+                    -  rts_osd2_type_time,
+                    
+                    -  rts_osd2_type_pict,
+                    
+                    -  rts_osd2_type_text.
+    <osd_info> void *  Block detail description, which includes "osd_text_info_st*" and "osd_pict_st*".
+                    
+                    -  "osd_text_info_st*" includes rts_osd2_type_date, rts_osd2_type_time, rts_osd2_type_text
+                    
+                    -  "osd_pict_st*" includes rts_osd2_type_pict
+    ========== ======= ==========================================================================================
 
 rts_osd_get_timezone
 ^^^^^^^^^^^^^^^^^^^^
@@ -792,13 +813,14 @@ rts_osd_set_timezone
 
 Set the time-zone.
 
-Table 1‑18 OSD API: rts_osd_set_timezone
+.. table:: OSD API: rts_osd_set_timezone
+    :align: center
 
-============ ==== ==================================
-Parameter    Type Introduction
-============ ==== ==================================
-<timezone_s> int  The value of time-zone in seconds.
-============ ==== ==================================
+    ============ ==== ==================================
+    Parameter    Type Introduction
+    ============ ==== ==================================
+    <timezone_s> int  The value of time-zone in seconds.
+    ============ ==== ==================================
 
 rts_osd_isp_refresh_datetime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -812,60 +834,64 @@ rts_osd_block_hide
 
 The function used to hide the indicated block.
 
-Table 1‑19 OSD API: rts_osd_block_hide
+.. table:: OSD API: rts_osd_block_hide
+    :align: center
 
-========= ==== ================
-Parameter Type Introduction
-========= ==== ================
-<chn_id>  int  Channel ID: 0~2
-<idx>     int  Block index: 0~23
-========= ==== ================
+    ========= ==== ================
+    Parameter Type Introduction
+    ========= ==== ================
+    <chn_id>  int  Channel ID: 0~2
+    <idx>     int  Block index: 0~23
+    ========= ==== ================
 
 rts_osd_block_show
 ^^^^^^^^^^^^^^^^^^
 
 The function used to show the indicated block.
 
-Table 1‑20 OSD API: rts_osd_block_show
+.. table:: OSD API: rts_osd_block_show
+    :align: center
 
-========= ==== ================
-Parameter Type Introduction
-========= ==== ================
-<chn_id>  int  Channel ID: 0~2
-<idx>     int  Block index: 0~23
-========= ==== ================
+    ========= ==== ================
+    Parameter Type Introduction
+    ========= ==== ================
+    <chn_id>  int  Channel ID: 0~2
+    <idx>     int  Block index: 0~23
+    ========= ==== ================
 
 rts_set_char_size
 ^^^^^^^^^^^^^^^^^
 
 This function used to change character size dynamically.
 
-Table 1‑21 OSD API: rts_set_char_size
+.. table:: OSD API: rts_set_char_size
+    :align: center
 
-=============== ==== =========================
-Parameter       Type Introduction
-=============== ==== =========================
-<chn_id>        Int  Stream channel ID.
-<char_resize_w> Int  Character size in width.
-<char_resize_h> int  Character size in height.
-=============== ==== =========================
+    =============== ==== =========================
+    Parameter       Type Introduction
+    =============== ==== =========================
+    <chn_id>        Int  Stream channel ID.
+    <char_resize_w> Int  Character size in width.
+    <char_resize_h> int  Character size in height.
+    =============== ==== =========================
 
 rts_set_font_char_size
 ^^^^^^^^^^^^^^^^^^^^^^
 
 This function used to change font lib and character size dynamically.
 
-Table 1‑20 OSD API: rts_set_font_char_size
+.. table:: OSD API: rts_set_font_char_size
+    :align: center
 
-=============== ======= =========================
-Parameter       Type    Introduction
-=============== ======= =========================
-<chn_id>        Int     Stream channel ID.
-<char_resize_w> Int     Character size in width.
-<char_resize_h> int     Character size in height.
-<font_eng>      void *  English font lib.
-<font_chi>      void *  Chinese font lib.
-=============== ======= =========================
+    =============== ======= =========================
+    Parameter       Type    Introduction
+    =============== ======= =========================
+    <chn_id>        Int     Stream channel ID.
+    <char_resize_w> Int     Character size in width.
+    <char_resize_h> int     Character size in height.
+    <font_eng>      void *  English font lib.
+    <font_chi>      void *  Chinese font lib.
+    =============== ======= =========================
 
 rts_osd_task
 ^^^^^^^^^^^^
@@ -943,18 +969,19 @@ objects and font lib.
 We provided several video examples using OSD render task to show the
 detection result.
 
-Table 1‑22 Video Example with OSD Render Task
+.. table:: Video Example with OSD Render Task
+    :align: center
 
-================================== ============================== =====================================================================
-Example                            Description                    Result
-================================== ============================== =====================================================================
-mmf2_video_example_md_rtsp_init    CH1 Video -> H264/HEVC -> RTSP (1) RTSP video stream over the network.
-                                                                 
-                                   CH4 Video -> RGB -> MD         (2) MD detect motion and draw the motion region to RTSP channel.
-mmf2_video_example_vipnn_rtsp_init CH1 Video -> H264/HEVC -> RTSP (1) RTSP video stream over the network.
-                                                                 
-                                   CH4 Video -> RGB -> NN         (2) NN do object detection and draw the bounding box to RTSP channel.
-================================== ============================== =====================================================================
+    ================================== ============================== =====================================================================
+    Example                            Description                    Result
+    ================================== ============================== =====================================================================
+    mmf2_video_example_md_rtsp_init    CH1 Video -> H264/HEVC -> RTSP (1) RTSP video stream over the network.
+                                                                    
+                                       CH4 Video -> RGB -> MD         (2) MD detect motion and draw the motion region to RTSP channel.
+    mmf2_video_example_vipnn_rtsp_init CH1 Video -> H264/HEVC -> RTSP (1) RTSP video stream over the network.
+                                                                    
+                                       CH4 Video -> RGB -> NN         (2) NN do object detection and draw the bounding box to RTSP channel.
+    ================================== ============================== =====================================================================
 
 osd_render_dev_init
 ^^^^^^^^^^^^^^^^^^^
@@ -1219,158 +1246,166 @@ ISP Control API (AE)
 isp_set_exposure_mode
 ^^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑23 ISP API: isp_set_exposure_mode
+.. table:: ISP API: isp_set_exposure_mode
+    :align: center
 
-========= ==== ======================================
-Parameter Type Introduction
-========= ==== ======================================
-<val>     int  The mode of exposure, value is 0 or 1.
-              
-               (0: manual, 1: Auto).
-========= ==== ======================================
+    ========= ==== ======================================
+    Parameter Type Introduction
+    ========= ==== ======================================
+    <val>     int  The mode of exposure, value is 0 or 1.
+                
+                   (0: manual, 1: Auto).
+    ========= ==== ======================================
 
 isp_get_exposure_mode
 ^^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑24 ISP API: isp_get_exposure_mode
+.. table:: ISP API: isp_get_exposure_mode
+    :align: center
 
-========= ====== ===============================================
-Parameter Type   Introduction
-========= ====== ===============================================
-<pval>    Int *  Retrieve the mode of exposure, value is 0 or 1.
-                
-                 (0: manual, 1: auto)
-========= ====== ===============================================
+    ========= ====== ===============================================
+    Parameter Type   Introduction
+    ========= ====== ===============================================
+    <pval>    Int *  Retrieve the mode of exposure, value is 0 or 1.
+                    
+                     (0: manual, 1: auto)
+    ========= ====== ===============================================
 
 isp_set_power_line_freq
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑25 ISP API: isp_set_power_line_freq
+.. table:: ISP API: isp_set_power_line_freq
+    :align: center
 
-========= ==== =============================================================================================================================================================================================
-Parameter Type Introduction
-========= ==== =============================================================================================================================================================================================
-<val>     int  Anti-flicker mode.
-              
-               Range: 0 ~ 3
-              
-               0: Disable, 1: 50Hz, 2: 60Hz, 3: Auto
-              
-               Remark:
-              
-               1.Auto mode:
-              
-               (A)Auto mode include flicker detection method, and use 50hz as default configuration to check whether there is flicker. If no-flicker happens, it would keep default configuration. Other, it would use 60 hz. This function will always run when ae enable.
-              
-               2.50 Hz
-              
-               (A) The lowest exposure time to stop flicker is 10ms. If lower, flicker might happen.
-              
-               (B) IQ parameters can hold the flicker off, but side effect is over exposure under high brightness environment.
-              
-               (C) If IQ parameters cannot stop flicker, some FPS settings, such as 25, 20, or 10 can stop the moving. (Banding still exist.)
-              
-               3.60 Hz
-              
-               (A) The lowest exposure time to stop flicker is 8.33ms. If lower, flicker might happen.
-              
-               (B) IQ parameters can hold the flicker off, but side effect is over exposure under high brightness environment.
-              
-               (C) If IQ parameters cannot stop flicker, some FPS settings, such as 30, 24, 20, 15, or 12 can stop the moving. (Banding still exist.)
-========= ==== =============================================================================================================================================================================================
+    ========= ==== =============================================================================================================================================================================================
+    Parameter Type Introduction
+    ========= ==== =============================================================================================================================================================================================
+    <val>     int  Anti-flicker mode.
+                
+                   Range: 0 ~ 3
+                
+                   0: Disable, 1: 50Hz, 2: 60Hz, 3: Auto
+                
+                   Remark:
+                
+                   1.Auto mode:
+                
+                   (A)Auto mode include flicker detection method, and use 50hz as default configuration to check whether there is flicker. If no-flicker happens, it would keep default configuration. Other, it would use 60 hz. This function will always run when ae enable.
+                   
+                   2.50 Hz
+                   
+                   (A) The lowest exposure time to stop flicker is 10ms. If lower, flicker might happen.
+                   
+                   (B) IQ parameters can hold the flicker off, but side effect is over exposure under high brightness environment.
+                   
+                   (C) If IQ parameters cannot stop flicker, some FPS settings, such as 25, 20, or 10 can stop the moving. (Banding still exist.)
+                   
+                   3.60 Hz
+                   
+                   (A) The lowest exposure time to stop flicker is 8.33ms. If lower, flicker might happen.
+                   
+                   (B) IQ parameters can hold the flicker off, but side effect is over exposure under high brightness environment.
+                   
+                   (C) If IQ parameters cannot stop flicker, some FPS settings, such as 30, 24, 20, 15, or 12 can stop the moving. (Banding still exist.)
+    ========= ==== =============================================================================================================================================================================================
 
 isp_get_power_line_freq
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑26 ISP API: isp_get_power_line_freq
+.. table:: ISP API: isp_get_power_line_freq
+    :align: center
 
-========= ==== ======================================================================================================================================
-Parameter Type Introduction
-========= ==== ======================================================================================================================================
-<val>     int  Anti-flicker mode.
-              
-               Range: 0 ~ 3
-              
-               0: Disable, 1: 50Hz, 2: 60Hz, 3: Auto
-              
-               Remark:
-              
-               1. Auto mode:
-              
-               (A) Auto mode include the algorithm of flicker detection, the detection fail rate might result in flicker problem.
-              
-               2. 50 Hz
-              
-               (A) The lowest exposure time to stop flicker is 10ms. If lower, flicker might happen.
-              
-               (B) IQ parameters can hold the flicker off, but side effect is over exposure under high brightness environment.
-              
-               (C) If IQ parameters cannot stop flicker, some FPS settings, such as 25, 20, or 10 can stop the moving. (Banding still exist.)
-              
-               3. 60 Hz
-              
-               (A) The lowest exposure time to stop flicker is 8.33ms. If lower, flicker might happen.
-              
-               (B) IQ parameters can hold the flicker off, but side effect is over exposure under high brightness environment.
-              
-               (C) If IQ parameters cannot stop flicker, some FPS settings, such as 30, 24, 20, 15, or 12 can stop the moving. (Banding still exist.)
-========= ==== ======================================================================================================================================
+    ========= ==== ======================================================================================================================================
+    Parameter Type Introduction
+    ========= ==== ======================================================================================================================================
+    <val>     int  Anti-flicker mode.
+                
+                   Range: 0 ~ 3
+                   
+                   0: Disable, 1: 50Hz, 2: 60Hz, 3: Auto
+                   
+                   Remark:
+                   
+                   1. Auto mode:
+                   
+                   (A) Auto mode include the algorithm of flicker detection, the detection fail rate might result in flicker problem.
+                   
+                   2. 50 Hz
+                   
+                   (A) The lowest exposure time to stop flicker is 10ms. If lower, flicker might happen.
+                   
+                   (B) IQ parameters can hold the flicker off, but side effect is over exposure under high brightness environment.
+                   
+                   (C) If IQ parameters cannot stop flicker, some FPS settings, such as 25, 20, or 10 can stop the moving. (Banding still exist.)
+                   
+                   3. 60 Hz
+                   
+                   (A) The lowest exposure time to stop flicker is 8.33ms. If lower, flicker might happen.
+                   
+                   (B) IQ parameters can hold the flicker off, but side effect is over exposure under high brightness environment.
+                   
+                   (C) If IQ parameters cannot stop flicker, some FPS settings, such as 30, 24, 20, 15, or 12 can stop the moving. (Banding still exist.)
+    ========= ==== ======================================================================================================================================
 
 isp_set_exposure_time
 ^^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑27 ISP API: isp_set_exposure_time
+.. table:: ISP API: isp_set_exposure_time
+    :align: center
 
-========= ====== =============================================
-Parameter Type   Introduction
-========= ====== =============================================
-<pval>    Int *  The exposure time, unit is us.
-                
-                 Range is 1~100,000. (Depend on sensor driver)
-                
-                 Adjustable precision is +-1.
-========= ====== =============================================
+    ========= ====== =============================================
+    Parameter Type   Introduction
+    ========= ====== =============================================
+    <pval>    Int *  The exposure time, unit is us.
+                       
+                     Range is 1~100,000. (Depend on sensor driver)
+                    
+                     Adjustable precision is +-1.
+    ========= ====== =============================================
 
 isp_get_exposure_time
 ^^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑28 ISP API: isp_get_exposure_time
+.. table:: ISP API: isp_get_exposure_time
+    :align: center
 
-========= ==== =============================================
-Parameter Type Introduction
-========= ==== =============================================
-<val>     int  Retrieve the exposure time, unit is us.
-              
-               Range is 1~100,000. (Depend on sensor driver)
-========= ==== =============================================
+    ========= ==== =============================================
+    Parameter Type Introduction
+    ========= ==== =============================================
+    <val>     int  Retrieve the exposure time, unit is us.
+                
+                   Range is 1~100,000. (Depend on sensor driver)
+    ========= ==== =============================================
 
 isp_set_ae_gain
 ^^^^^^^^^^^^^^^
 
-Table 1‑29 ISP API: isp_set_ae_gain
+.. table:: ISP API: isp_set_ae_gain
+    :align: center
 
-========= ==== =========================
-Parameter Type Introduction
-========= ==== =========================
-<val>     int  Gain value.
-              
-               Range: 256~32768
-              
-               Adjustable precision: +-1
-========= ==== =========================
+    ========= ==== =========================
+    Parameter Type Introduction
+    ========= ==== =========================
+    <val>     int  Gain value.
+                
+                   Range: 256~32768
+                
+                   Adjustable precision: +-1
+    ========= ==== =========================
 
 isp_get_ae_gain
 ^^^^^^^^^^^^^^^
 
-Table 1‑30 ISP API: isp_get_ae_gain
+.. table:: ISP API: isp_get_ae_gain
+    :align: center
 
-========= ====== ===================
-Parameter Type   Introduction
-========= ====== ===================
-<pval>    Int *  Retrieve gain value
-                
-                 Range: 256~32768
-========= ====== ===================
+    ========= ====== ===================
+    Parameter Type   Introduction
+    ========= ====== ===================
+    <pval>    Int *  Retrieve gain value
+                    
+                     Range: 256~32768
+    ========= ====== ===================
 
 ISP Control API (AWB)
 ~~~~~~~~~~~~~~~~~~~~~
@@ -1378,136 +1413,146 @@ ISP Control API (AWB)
 isp_set_awb_ctrl
 ^^^^^^^^^^^^^^^^
 
-Table 1‑31 ISP API: isp_set_awb_ctrl
+.. table:: ISP API: isp_set_awb_ctrl
+    :align: center
 
-========= ==== ===============================
-Parameter Type Introduction
-========= ==== ===============================
-<val>     int  Mode of white balance.
-              
-               0: Manual temperature, 1: Auto.
-========= ==== ===============================
+    ========= ==== ===============================
+    Parameter Type Introduction
+    ========= ==== ===============================
+    <val>     int  Mode of white balance.
+                
+                   0: Manual temperature, 1: Auto.
+    ========= ==== ===============================
 
 .. note :: The API of manual temperature is not supported.
 
 isp_get_awb_ctrl
 ^^^^^^^^^^^^^^^^
 
-Table 1‑32 ISP API: isp_get_awb_ctrl
+.. table:: ISP API: isp_get_awb_ctrl
+    :align: center
 
-========= ====== ===================================
-Parameter Type   Introduction
-========= ====== ===================================
-<pval>    Int *  Retrieve the mode of white balance.
-                
-                 0: Manual, 1: Auto.
-========= ====== ===================================
+    ========= ====== ===================================
+    Parameter Type   Introduction
+    ========= ====== ===================================
+    <pval>    Int *  Retrieve the mode of white balance.
+                    
+                     0: Manual, 1: Auto.
+    ========= ====== ===================================
 
 isp_set_wb_temperature
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑33 ISP API: isp_set_wb_temperature
+.. table:: ISP API: isp_set_wb_temperature
+    :align: center
 
-========= ==== =========================
-Parameter Type Introduction
-========= ==== =========================
-<val>     int  white balance temperature
-              
-               Range: 1000~10000.
-              
-               Adjustable precision: +-1
-========= ==== =========================
+    ========= ==== =========================
+    Parameter Type Introduction
+    ========= ==== =========================
+    <val>     int  white balance temperature
+                
+                   Range: 1000~10000.
+                
+                   Adjustable precision: +-1
+    ========= ==== =========================
 
 isp_get_wb_temperature
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑34 ISP API: isp_get_wb_temperature
+.. table:: ISP API: isp_get_wb_temperature
+    :align: center
 
-========= ====== ==============================================
-Parameter Type   Introduction
-========= ====== ==============================================
-<pval>    Int *  Retrieve the current white balance temperature
-========= ====== ==============================================
+    ========= ====== ==============================================
+    Parameter Type   Introduction
+    ========= ====== ==============================================
+    <pval>    Int *  Retrieve the current white balance temperature
+    ========= ====== ==============================================
 
 isp_set_red_balance
 ^^^^^^^^^^^^^^^^^^^
 
-Table 1‑35 ISP API: isp_set_red_balance
+.. table:: ISP API: isp_set_red_balance
+    :align: center
 
-========= ==== ===============================
-Parameter Type Introduction
-========= ==== ===============================
-<val>     int  Red balance value based on 256.
-              
-               Range: 256~2047.
-              
-               Adjustable precision: +-1.
-========= ==== ===============================
+    ========= ==== ===============================
+    Parameter Type Introduction
+    ========= ==== ===============================
+    <val>     int  Red balance value based on 256.
+                
+                   Range: 256~2047.
+                
+                   Adjustable precision: +-1.
+    ========= ==== ===============================
 
 isp_get_red_balance
 ^^^^^^^^^^^^^^^^^^^
 
-Table 1‑36 ISP API: isp_get_red_balance
+.. table:: ISP API: isp_get_red_balance
+    :align: center
 
-========= ====== ===============================
-Parameter Type   Introduction
-========= ====== ===============================
-<pval>    Int *  Retrieve the red balance value.
-========= ====== ===============================
+    ========= ====== ===============================
+    Parameter Type   Introduction
+    ========= ====== ===============================
+    <pval>    Int *  Retrieve the red balance value.
+    ========= ====== ===============================
 
 isp_set_green_balance
 ^^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑37 ISP API: isp_set_green_balance
+.. table:: ISP API: isp_set_green_balance
+    :align: center
 
-========= ==== =================================
-Parameter Type Introduction
-========= ==== =================================
-<val>     int  Green balance value based on 256.
-              
-               Range: 256~2047.
-              
-               Adjustable precision: +-1
-========= ==== =================================
+    ========= ==== =================================
+    Parameter Type Introduction
+    ========= ==== =================================
+    <val>     int  Green balance value based on 256.
+                
+                   Range: 256~2047.
+                
+                   Adjustable precision: +-1
+    ========= ==== =================================
 
 .. note :: Usually this value is set 256 as default.
 
 isp_get_green_balance
 ^^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑38 ISP API: isp_get_green_balance
+.. table:: ISP API: isp_get_green_balance
+    :align: center
 
-========= ====== ================================
-Parameter Type   Introduction
-========= ====== ================================
-<pval>    Int *  Retrieve the green balance value
-========= ====== ================================
+    ========= ====== ================================
+    Parameter Type   Introduction
+    ========= ====== ================================
+    <pval>    Int *  Retrieve the green balance value
+    ========= ====== ================================
 
 isp_set_blue_balance
 ^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑39 ISP API: isp_set_blue_balance
+.. table:: ISP API: isp_set_blue_balance
+    :align: center
 
-========= ==== ================================
-Parameter Type Introduction
-========= ==== ================================
-<val>     int  Blue balance value based on 256.
-              
-               Range: 256~2047.
-              
-               Adjustable precision: +-1.
-========= ==== ================================
+    ========= ==== ================================
+    Parameter Type Introduction
+    ========= ==== ================================
+    <val>     int  Blue balance value based on 256.
+                
+                   Range: 256~2047.
+                
+                   Adjustable precision: +-1.
+    ========= ==== ================================
 
 isp_get_blue_balance
 ^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑40 ISP API: isp_get_blue_balance
+.. table:: ISP API: isp_get_blue_balance
+    :align: center
 
-========= ====== ================================
-Parameter Type   Introduction
-========= ====== ================================
-<pval>    Int *  Retrieve the blue balance value.
-========= ====== ================================
+    ========= ====== ================================
+    Parameter Type   Introduction
+    ========= ====== ================================
+    <pval>    Int *  Retrieve the blue balance value.
+    ========= ====== ================================
 
 ISP Control API (Image Tuning)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1515,166 +1560,178 @@ ISP Control API (Image Tuning)
 isp_set_brightness
 ^^^^^^^^^^^^^^^^^^
 
-Table 1‑41 ISP API: isp_set_brightness
+.. table:: ISP API: isp_set_brightness
+    :align: center
 
-========= ==== ==================================
-Parameter Type Introduction
-========= ==== ==================================
-<val>     int  The brightness value of the image.
-              
-               Range: -64 to 64.
-              
-               Adjustable precision: +-1.
-========= ==== ==================================
+    ========= ==== ==================================
+    Parameter Type Introduction
+    ========= ==== ==================================
+    <val>     int  The brightness value of the image.
+                
+                   Range: -64 to 64.
+                
+                   Adjustable precision: +-1.
+    ========= ==== ==================================
 
 isp_get_brightness
 ^^^^^^^^^^^^^^^^^^
 
-Table 1‑42 ISP API: isp_get_brightness
+.. table:: ISP API: isp_get_brightness
+    :align: center
 
-========= ====== =======================================
-Parameter Type   Introduction
-========= ====== =======================================
-<pval >   int *  Retrieves the current brightness value.
-                
-                 Range: -64 to 64.
-========= ====== =======================================
+    ========= ====== =======================================
+    Parameter Type   Introduction
+    ========= ====== =======================================
+    <pval >   int *  Retrieves the current brightness value.
+                    
+                     Range: -64 to 64.
+    ========= ====== =======================================
 
 isp_set_contrast
 ^^^^^^^^^^^^^^^^
 
-Table 1‑43 ISP API: isp_set_contrast
+.. table:: ISP API: isp_set_contrast
+    :align: center
 
-========= ==== ============================
-Parameter Type Introduction
-========= ==== ============================
-<val>     int  image contrast value.
-              
-               Range: 0~100.
-              
-               Adjustable precision is +-1.
-========= ==== ============================
+    ========= ==== ============================
+    Parameter Type Introduction
+    ========= ==== ============================
+    <val>     int  image contrast value.
+                
+                   Range: 0~100.
+                
+                   Adjustable precision is +-1.
+    ========= ==== ============================
 
 isp_get_contrast
 ^^^^^^^^^^^^^^^^
 
-Table 1‑44 ISP API: isp_get_contrast
+.. table:: ISP API: isp_get_contrast
+    :align: center
 
-========= ====== ===============================
-Parameter Type   Introduction
-========= ====== ===============================
-<pval>    Int *  Get the current contrast value.
-                
-                 Range: 0~100.
-========= ====== ===============================
+    ========= ====== ===============================
+    Parameter Type   Introduction
+    ========= ====== ===============================
+    <pval>    Int *  Get the current contrast value.
+                    
+                     Range: 0~100.
+    ========= ====== ===============================
 
 isp_set_saturation
 ^^^^^^^^^^^^^^^^^^
 
-Table 1‑45 ISP API: isp_set_saturation
+.. table:: ISP API: isp_set_saturation
+    :align: center
 
-========= ==== =========================
-Parameter Type Introduction
-========= ==== =========================
-<val>     int  ISP saturation.
-              
-               Range: 0 to 100.
-              
-               Adjustable accuracy: +-1.
-========= ==== =========================
+    ========= ==== =========================
+    Parameter Type Introduction
+    ========= ==== =========================
+    <val>     int  ISP saturation.
+                
+                   Range: 0 to 100.
+                
+                   Adjustable accuracy: +-1.
+    ========= ==== =========================
 
 isp_get_saturation
 ^^^^^^^^^^^^^^^^^^
 
-Table 1‑46 ISP API: isp_get_saturation
+.. table:: ISP API: isp_get_saturation
+    :align: center
 
-========= ====== ===========================
-Parameter Type   Introduction
-========= ====== ===========================
-<pval>    Int *  Get the current saturation.
-                
-                 Range: 0 to 100.
-========= ====== ===========================
+    ========= ====== ===========================
+    Parameter Type   Introduction
+    ========= ====== ===========================
+    <pval>    Int *  Get the current saturation.
+                    
+                     Range: 0 to 100.
+    ========= ====== ===========================
 
 isp_set_gamma
 ^^^^^^^^^^^^^
 
-Table 1‑47 ISP API: isp_set_gamma
+.. table:: ISP API: isp_set_gamma
+    :align: center
 
-========= ==== ==========================
-Parameter Type Introduction
-========= ==== ==========================
-<val>     int  Gamma coefficient.
-              
-               Range: 100~500.
-              
-               Adjustable precision: +-1.
-========= ==== ==========================
+    ========= ==== ==========================
+    Parameter Type Introduction
+    ========= ==== ==========================
+    <val>     int  Gamma coefficient.
+                
+                   Range: 100~500.
+                
+                   Adjustable precision: +-1.
+    ========= ==== ==========================
 
 isp_get_gamma
 ^^^^^^^^^^^^^
 
-Table 1‑48 ISP API: isp_get_gamma
+.. table:: ISP API: isp_get_gamma
+    :align: center
 
-========= ====== ====================================================
-Parameter Type   Introduction
-========= ====== ====================================================
-<pval>    Int *  Retrieve the current Gamma coefficient from 100~500.
-========= ====== ====================================================
+    ========= ====== ====================================================
+    Parameter Type   Introduction
+    ========= ====== ====================================================
+    <pval>    Int *  Retrieve the current Gamma coefficient from 100~500.
+    ========= ====== ====================================================
 
 isp_set_sharpness
 ^^^^^^^^^^^^^^^^^
 
-Table 1‑49 ISP API: isp_set_sharpness
+.. table:: ISP API: isp_set_sharpness
+    :align: center
 
-========= ==== =========================
-Parameter Type Introduction
-========= ==== =========================
-<val>     int  Sharpness of isp
-              
-               Range: 0~100.
-              
-               Adjustable precision: +-1
-========= ==== =========================
+    ========= ==== =========================
+    Parameter Type Introduction
+    ========= ==== =========================
+    <val>     int  Sharpness of isp
+                
+                   Range: 0~100.
+                
+                   Adjustable precision: +-1
+    ========= ==== =========================
 
 isp_get_sharpness
 ^^^^^^^^^^^^^^^^^
 
-Table 1‑50 ISP API: isp_get_sharpness
+.. table:: ISP API: isp_get_sharpness
+    :align: center
 
-========= ====== ==============================================
-Parameter Type   Introduction
-========= ====== ==============================================
-<pval>    Int *  Retrieve the current sharp value from 0 to 100
-========= ====== ==============================================
+    ========= ====== ==============================================
+    Parameter Type   Introduction
+    ========= ====== ==============================================
+    <pval>    Int *  Retrieve the current sharp value from 0 to 100
+    ========= ====== ==============================================
 
 isp_set_denoise_level
 ^^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑51 ISP API: isp_set_denoise_level
+.. table:: ISP API: isp_set_denoise_level
+    :align: center
 
-========= ==== =============================
-Parameter Type Introduction
-========= ==== =============================
-<val>     int  The level of noise reduction.
-              
-               Range: 0~8
-              
-               Adjustable precision: +-1
-========= ==== =============================
+    ========= ==== =============================
+    Parameter Type Introduction
+    ========= ==== =============================
+    <val>     int  The level of noise reduction.
+                
+                   Range: 0~8
+                
+                   Adjustable precision: +-1
+    ========= ==== =============================
 
 isp_get_denoise_level
 ^^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑52 ISP API: isp_get_denoise_level
+.. table:: ISP API: isp_get_denoise_level
+    :align: center
 
-========= ====== ======================================
-Parameter Type   Introduction
-========= ====== ======================================
-<pval>    Int *  Retrieve the level of noise reduction.
-                
-                 Range: 0~8
-========= ====== ======================================
+    ========= ====== ======================================
+    Parameter Type   Introduction
+    ========= ====== ======================================
+    <pval>    Int *  Retrieve the level of noise reduction.
+                    
+                     Range: 0~8
+    ========= ====== ======================================
 
 ISP Control API (Mode)
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1682,52 +1739,56 @@ ISP Control API (Mode)
 isp_set_day_night
 ^^^^^^^^^^^^^^^^^
 
-Table 1‑53 ISP API: isp_set_day_night
+.. table:: ISP API: isp_set_day_night
+    :align: center
 
-========= ==== =======================================================================
-Parameter Type Introduction
-========= ==== =======================================================================
-<val>     int  The value of day/night/other mode. 0: day mode, 1: night mode, 2: other
-========= ==== =======================================================================
+    ========= ==== =======================================================================
+    Parameter Type Introduction
+    ========= ==== =======================================================================
+    <val>     int  The value of day/night/other mode. 0: day mode, 1: night mode, 2: other
+    ========= ==== =======================================================================
 
 isp_get_day_night
 ^^^^^^^^^^^^^^^^^
 
-Table 1‑54 ISP API: isp_get_day_night
+.. table:: ISP API: isp_get_day_night
+    :align: center
 
-========= ====== ===========================================
-Parameter Type   Introduction
-========= ====== ===========================================
-<pval>    Int *  Retrieve the value of day/night/other mode.
-                
-                 0: day mode, 1: night mode, 2: other
-========= ====== ===========================================
+    ========= ====== ===========================================
+    Parameter Type   Introduction
+    ========= ====== ===========================================
+    <pval>    Int *  Retrieve the value of day/night/other mode.
+                    
+                     0: day mode, 1: night mode, 2: other
+    ========= ====== ===========================================
 
 isp_set_gray_mode
 ^^^^^^^^^^^^^^^^^
 
-Table 1‑55 ISP API: isp_set_gray_mode
+.. table:: ISP API: isp_set_gray_mode
+    :align: center
 
-========= ==== =============================
-Parameter Type Introduction
-========= ==== =============================
-<val>     int  The value of gray/color mode.
-              
-               0: color mode, 1: gray mode
-========= ==== =============================
+    ========= ==== =============================
+    Parameter Type Introduction
+    ========= ==== =============================
+    <val>     int  The value of gray/color mode.
+                
+                   0: color mode, 1: gray mode
+    ========= ==== =============================
 
 isp_get_gray_mode
 ^^^^^^^^^^^^^^^^^
 
-Table 1‑56 ISP API: isp_get_gray_mode
+.. table:: ISP API: isp_get_gray_mode
+    :align: center
 
-========= ====== ======================================
-Parameter Type   Introduction
-========= ====== ======================================
-<pval>    Int *  Retrieve the value of gray/color mode.
-                
-                 0: color mode , 1: gray mode
-========= ====== ======================================
+    ========= ====== ======================================
+    Parameter Type   Introduction
+    ========= ====== ======================================
+    <pval>    Int *  Retrieve the value of gray/color mode.
+                    
+                     0: color mode , 1: gray mode
+    ========= ====== ======================================
 
 ISP Control API (WDR)
 ~~~~~~~~~~~~~~~~~~~~~
@@ -1735,58 +1796,62 @@ ISP Control API (WDR)
 isp_set_wdr_mode
 ^^^^^^^^^^^^^^^^
 
-Table 1‑57 ISP API: isp_set_wdr_mode
+.. table:: ISP API: isp_set_wdr_mode
+    :align: center
 
-========= ==== ==============================
-Parameter Type Introduction
-========= ==== ==============================
-<val>     int  WDR mode.
-              
-               Range: 0 ~ 2
-              
-               0: Disable, 1: Manual, 2: Auto
-========= ==== ==============================
+    ========= ==== ==============================
+    Parameter Type Introduction
+    ========= ==== ==============================
+    <val>     int  WDR mode.
+                
+                   Range: 0 ~ 2
+                
+                   0: Disable, 1: Manual, 2: Auto
+    ========= ==== ==============================
 
 isp_get_wdr_mode
 ^^^^^^^^^^^^^^^^
 
-Table 1‑58 ISP API: isp_get_wdr_mode
+.. table:: ISP API: isp_get_wdr_mode
+    :align: center
 
-========= ====== ===============================
-Parameter Type   Introduction
-========= ====== ===============================
-<pval>    Int *  Retrieve the value of WDR mode.
-                
-                 Range: 0 ~ 2
-========= ====== ===============================
+    ========= ====== ===============================
+    Parameter Type   Introduction
+    ========= ====== ===============================
+    <pval>    Int *  Retrieve the value of WDR mode.
+                    
+                     Range: 0 ~ 2
+    ========= ====== ===============================
 
 isp_set_wdr_level
 ^^^^^^^^^^^^^^^^^
 
-Table 1‑59 ISP API: isp_set_wdr_level
+.. table:: ISP API: isp_set_wdr_level
+    :align: center
 
-========= ==== =========================
-Parameter Type Introduction
-========= ==== =========================
-<val>     int  WDR level.
-              
-               Range: 0~100.
-              
-               Adjustable precision: +-1
-========= ==== =========================
+    ========= ==== =========================
+    Parameter Type Introduction
+    ========= ==== =========================
+    <val>     int  WDR level.
+                
+                   Range: 0~100.
+                
+                   Adjustable precision: +-1
+    ========= ==== =========================
 
 isp_get_wdr_level
 ^^^^^^^^^^^^^^^^^
 
-Table 1‑60 ISP API: isp_get_wdr_level
+.. table:: ISP API: isp_get_wdr_level
+    :align: center
 
-========= ====== ================================
-Parameter Type   Introduction
-========= ====== ================================
-<pval>    Int *  Retrieve the value of WDR level.
-                
-                 Range: 0~100.
-========= ====== ================================
+    ========= ====== ================================
+    Parameter Type   Introduction
+    ========= ====== ================================
+    <pval>    Int *  Retrieve the value of WDR level.
+                    
+                     Range: 0~100.
+    ========= ====== ================================
 
 ISP Control API (Dehaze)
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1794,56 +1859,60 @@ ISP Control API (Dehaze)
 isp_set_dehaze
 ^^^^^^^^^^^^^^
 
-Table 1‑61 ISP API: isp_set_dehaze
+.. table:: ISP API: isp_set_dehaze
+    :align: center
 
-========= ==== =================================
-Parameter Type Introduction
-========= ==== =================================
-<val>     int  The value of enable/disable mode.
-              
-               0: disable, 1: enable
-========= ==== =================================
+    ========= ==== =================================
+    Parameter Type Introduction
+    ========= ==== =================================
+    <val>     int  The value of enable/disable mode.
+                
+                   0: disable, 1: enable
+    ========= ==== =================================
 
 isp_get_dehaze
 ^^^^^^^^^^^^^^
 
-Table 1‑62 ISP API: isp_get_dehaze
+.. table:: ISP API: isp_get_dehaze
+    :align: center
 
-========= ====== ==========================================
-Parameter Type   Introduction
-========= ====== ==========================================
-<pval>    Int *  Retrieve the value of enable/disable mode.
-                
-                 0: disable , 1: enable
-========= ====== ==========================================
+    ========= ====== ==========================================
+    Parameter Type   Introduction
+    ========= ====== ==========================================
+    <pval>    Int *  Retrieve the value of enable/disable mode.
+                    
+                     0: disable , 1: enable
+    ========= ====== ==========================================
 
 isp_set_dehaze_level
 ^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑63 ISP API: isp_set_dehaze_level
+.. table:: ISP API: isp_set_dehaze_level
+    :align: center
 
-========= ==== =========================
-Parameter Type Introduction
-========= ==== =========================
-<val>     int  The level of dehaze.
-              
-               Range: 0~255
-              
-               Adjustable precision: +-1
-========= ==== =========================
+    ========= ==== =========================
+    Parameter Type Introduction
+    ========= ==== =========================
+    <val>     int  The level of dehaze.
+                
+                   Range: 0~255
+                
+                   Adjustable precision: +-1
+    ========= ==== =========================
 
 isp_get_dehaze_level
 ^^^^^^^^^^^^^^^^^^^^
 
-Table 1‑64 ISP API: isp_get_dehaze_level
+.. table:: ISP API: isp_get_dehaze_level
+    :align: center
 
-========= ====== =============================
-Parameter Type   Introduction
-========= ====== =============================
-<pval>    Int *  Retrieve the level of dehaze.
-                
-                 Range: 0~255
-========= ====== =============================
+    ========= ====== =============================
+    Parameter Type   Introduction
+    ========= ====== =============================
+    <pval>    Int *  Retrieve the level of dehaze.
+                    
+                     Range: 0~255
+    ========= ====== =============================
 
 ISP Control API (FPS)
 ~~~~~~~~~~~~~~~~~~~~~
@@ -1851,58 +1920,62 @@ ISP Control API (FPS)
 isp_set_min_fps
 ^^^^^^^^^^^^^^^
 
-Table 1‑65 ISP API: isp_set_min_fps
+.. table:: ISP API: isp_set_min_fps
+    :align: center
 
-========= ==== =======================================
-Parameter Type Introduction
-========= ==== =======================================
-<val>     int  The value of minimum frame rate.
-              
-               Range: 1 ~ 30 (depend on sensor driver)
-              
-               Adjustable precision: +-1
-========= ==== =======================================
+    ========= ==== =======================================
+    Parameter Type Introduction
+    ========= ==== =======================================
+    <val>     int  The value of minimum frame rate.
+                
+                   Range: 1 ~ 30 (depend on sensor driver)
+                
+                   Adjustable precision: +-1
+    ========= ==== =======================================
 
 isp_get_min_fps
 ^^^^^^^^^^^^^^^
 
-Table 1‑66 ISP API: isp_get_min_fps
+.. table:: ISP API: isp_get_min_fps
+    :align: center
 
-========= ====== =========================================
-Parameter Type   Introduction
-========= ====== =========================================
-<pval>    Int *  Retrieve the value of minimum frame rate.
-                
-                 Range: 1 ~ 30 (depend on sensor driver)
-========= ====== =========================================
+    ========= ====== =========================================
+    Parameter Type   Introduction
+    ========= ====== =========================================
+    <pval>    Int *  Retrieve the value of minimum frame rate.
+                    
+                     Range: 1 ~ 30 (depend on sensor driver)
+    ========= ====== =========================================
 
 isp_set_max_fps
 ^^^^^^^^^^^^^^^
 
-Table 1‑67 ISP API: isp_set_max_fps
+.. table:: ISP API: isp_set_max_fps
+    :align: center
 
-========= ==== =======================================
-Parameter Type Introduction
-========= ==== =======================================
-<val>     int  The value of maximum frame rate.
-              
-               Range: 1 ~ 30 (depend on sensor driver)
-              
-               Adjustable precision: +-1
-========= ==== =======================================
+    ========= ==== =======================================
+    Parameter Type Introduction
+    ========= ==== =======================================
+    <val>     int  The value of maximum frame rate.
+                
+                   Range: 1 ~ 30 (depend on sensor driver)
+                
+                   Adjustable precision: +-1
+    ========= ==== =======================================
 
 isp_get_max_fps
 ^^^^^^^^^^^^^^^
 
-Table 1‑68 ISP API: isp_get_max_fps
+.. table:: ISP API: isp_get_max_fps
+    :align: center
 
-========= ====== =========================================
-Parameter Type   Introduction
-========= ====== =========================================
-<pval>    Int *  Retrieve the value of maximum frame rate.
-                
-                 Range: 1 ~ 30 (depend on sensor driver)
-========= ====== =========================================
+    ========= ====== =========================================
+    Parameter Type   Introduction
+    ========= ====== =========================================
+    <pval>    Int *  Retrieve the value of maximum frame rate.
+                    
+                     Range: 1 ~ 30 (depend on sensor driver)
+    ========= ====== =========================================
 
 Lens evaluation
 ~~~~~~~~~~~~~~~
@@ -1910,22 +1983,23 @@ Lens evaluation
 For lens performance evaluation, user may need to configuration isp. And
 we have prepared quick start guide.
 
-Table 1‑69 ISP API: Lens evaluation flow
+.. table:: ISP API: Lens evaluation flow
+    :align: center
 
-===================== =================== ==================================================================
-ISP API               Description         Flow
-===================== =================== ==================================================================
-isp_set_exposure_mode 0: Manual, 1:Auto   For golden lens, use auto mode to get AE & AWB information.
-isp_set_awb_ctrl      0: Manual, 1:Auto  
-isp_get_exposure_time Exposure (unit: us)
-isp_get_ae_gain       Gain (unit: 256=1x)
-isp_get_red_balance   Gain (unit: 256=1x)
-isp_get_blue_balance  Gain (unit: 256=1x)
-isp_set_exposure_time Exposure (unit: us) For competitor lens, use manual mode and set AE & AWB information.
-isp_set_ae_gain       Gain (unit: 256=1x)
-isp_set_red_balance   Gain (unit: 256=1x)
-isp_set_blue_balance  Gain (unit: 256=1x)
-===================== =================== ==================================================================
+    ===================== =================== ==================================================================
+    ISP API               Description         Flow
+    ===================== =================== ==================================================================
+    isp_set_exposure_mode 0: Manual, 1:Auto   For golden lens, use auto mode to get AE & AWB information.
+    isp_set_awb_ctrl      0: Manual, 1:Auto  
+    isp_get_exposure_time Exposure (unit: us)
+    isp_get_ae_gain       Gain (unit: 256=1x)
+    isp_get_red_balance   Gain (unit: 256=1x)
+    isp_get_blue_balance  Gain (unit: 256=1x)
+    isp_set_exposure_time Exposure (unit: us) For competitor lens, use manual mode and set AE & AWB information.
+    isp_set_ae_gain       Gain (unit: 256=1x)
+    isp_set_red_balance   Gain (unit: 256=1x)
+    isp_set_blue_balance  Gain (unit: 256=1x)
+    ===================== =================== ==================================================================
 
 Privacy Mask
 ------------
@@ -2281,23 +2355,25 @@ The MD example is a part of mmf video joined example. Please uncomment the examp
     mmf2_video_example_md_rtsp_init();
     //mmf2_video_example_md_nn_rtsp_init();
 
-Table 1‑70 MD example
 
-================================== ============================== ===========================================================================================================================================
-Example                            Description                    Result
-================================== ============================== ===========================================================================================================================================
-mmf2_video_example_md_rtsp_init    CH1 Video -> H264/HEVC -> RTSP RTSP video stream over the network.
-                                                                 
-                                   CH4 Video -> RGB -> MD         MD detect motion and draw the motion region to RTSP channel.
-mmf2_video_example_md_nn_rtsp_init CH1 Video -> H264/HEVC -> RTSP RTSP video stream over the network.
-                                                                 
-                                   CH4 Video -> RGB -> MD -> NN   MD module detect motion. If there is motion detected, it will trigger NN module to detect object and draw the bounding box to RTSP channel.
-mmf2_video_example_md_mp4_init     CH1 Video -> H264/HEVC -> MP4  RTSP video stream over the network.
-                                                                 
-                                   CH2 Video -> H264/HEVC -> RTSP MD module detect motion. If there is motion detected, it will record the motion event.
-                                                                 
-                                   CH4 Video -> RGB -> MD -> NN  
-================================== ============================== ===========================================================================================================================================
+.. table:: MD example
+    :align: center
+
+    ================================== ============================== ===========================================================================================================================================
+    Example                            Description                    Result
+    ================================== ============================== ===========================================================================================================================================
+    mmf2_video_example_md_rtsp_init    CH1 Video -> H264/HEVC -> RTSP RTSP video stream over the network.
+                                                                    
+                                       CH4 Video -> RGB -> MD         MD detect motion and draw the motion region to RTSP channel.
+    mmf2_video_example_md_nn_rtsp_init CH1 Video -> H264/HEVC -> RTSP RTSP video stream over the network.
+                                                                    
+                                       CH4 Video -> RGB -> MD -> NN   MD module detect motion. If there is motion detected, it will trigger NN module to detect object and draw the bounding box to RTSP channel.
+    mmf2_video_example_md_mp4_init     CH1 Video -> H264/HEVC -> MP4  RTSP video stream over the network.
+                                                                    
+                                       CH2 Video -> H264/HEVC -> RTSP MD module detect motion. If there is motion detected, it will record the motion event.
+                                                                    
+                                       CH4 Video -> RGB -> MD -> NN  
+    ================================== ============================== ===========================================================================================================================================
 
 Build MD Example
 ''''''''''''''''
@@ -2606,19 +2682,19 @@ following code.
         .block_lum_thr = 3,
     };
 
+.. table:: MD Evaluation
+    :align: center
 
-Table 1‑71 MD Evaluation
-
-============= ============== =========== ===== ===== =====
-RGB / IR Mode MD Sensitivity Moving Ways 3m    5m    7m
-============= ============== =========== ===== ===== =====
-Day mode      76             Enter scene 10/10 10/10 10/10
-Night mode    77             Enter scene 10/10 10/10 10/10
-Day mode      69             Enter scene 10/10 10/10 0/10
-Night mode    67             Enter scene 10/10 10/10 0/10
-Day mode      47             Enter scene 10/10 0/10  0/10
-Night mode    52             Enter scene 10/10 0/10  0/10
-============= ============== =========== ===== ===== =====
+    ============= ============== =========== ===== ===== =====
+    RGB / IR Mode MD Sensitivity Moving Ways 3m    5m    7m
+    ============= ============== =========== ===== ===== =====
+    Day mode      76             Enter scene 10/10 10/10 10/10
+    Night mode    77             Enter scene 10/10 10/10 10/10
+    Day mode      69             Enter scene 10/10 10/10 0/10
+    Night mode    67             Enter scene 10/10 10/10 0/10
+    Day mode      47             Enter scene 10/10 0/10  0/10
+    Night mode    52             Enter scene 10/10 0/10  0/10
+    ============= ============== =========== ===== ===== =====
 
 Auto Wide Dynamic Range
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -2742,19 +2818,20 @@ resolution in pure sdk are shows as following. However, the performance
 of motion detection CPU utilization will be affected if the system is
 busy.
 
-Table 1‑72 MD CPU Utillization
+.. table:: MD CPU Utillization
+    :align: center
 
-====================== ============= =================== ===============
-Input Image Resolution MD Resolution Video Channel 4 FPS CPU Utilization
-====================== ============= =================== ===============
-640x480                32x32         10                  9%
-640x360                32x32         10                  7%
-576x320                32x32         10                  8%
-416x416                32x32         10                  8%
-320x180                32x32         10                  5%
-128x128                32x32         10                  4%
-128x128                64x32         10                  7%
-====================== ============= =================== ===============
+    ====================== ============= =================== ===============
+    Input Image Resolution MD Resolution Video Channel 4 FPS CPU Utilization
+    ====================== ============= =================== ===============
+    640x480                32x32         10                  9%
+    640x360                32x32         10                  7%
+    576x320                32x32         10                  8%
+    416x416                32x32         10                  8%
+    320x180                32x32         10                  5%
+    128x128                32x32         10                  4%
+    128x128                64x32         10                  7%
+    ====================== ============= =================== ===============
 
 EIP Set Configuration
 ^^^^^^^^^^^^^^^^^^^^^
@@ -2995,57 +3072,59 @@ Each sensitivity value corresponding to md trigger block count, as shown
 in below table. It can detect small movements when the sensitivity is
 set to a larger value.
 
-Table 1‑73 MD 32x32 Sensitivity Mapping
+.. table:: MD 32x32 Sensitivity Mapping
+    :align: center
 
-+-----------------+-----------------------------------------------------------+
-| RTK sensitivity |                    Trigger Block Count                    |
-+=================+=====+=====+=====+=====+=====+=====+=====+=====+=====+=====+
-| 100-91          | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 3   | 4   |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 90-81           | 5   | 5   | 6   | 6   | 7   | 8   | 9   | 10  | 11  | 12  |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 80-71           | 13  | 14  | 16  | 17  | 18  | 20  | 21  | 23  | 24  | 26  |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 70-61           | 27  | 29  | 31  | 32  | 34  | 36  | 38  | 40  | 42  | 44  |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 60-51           | 46  | 48  | 50  | 53  | 55  | 57  | 60  | 62  | 65  | 67  |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 50-41           | 70  | 72  | 75  | 78  | 81  | 83  | 86  | 89  | 92  | 95  |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 40-31           | 98  | 101 | 104 | 108 | 111 | 114 | 118 | 121 | 124 | 128 |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 30-21           | 131 | 135 | 139 | 142 | 146 | 150 | 154 | 158 | 162 | 166 |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 20-11           | 170 | 174 | 178 | 182 | 186 | 191 | 195 | 199 | 204 | 208 |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 10-1            | 213 | 217 | 222 | 227 | 231 | 236 | 241 | 246 | 251 | 256 |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    +-----------------+-----------------------------------------------------------+
+    | RTK sensitivity |                    Trigger Block Count                    |
+    +=================+=====+=====+=====+=====+=====+=====+=====+=====+=====+=====+
+    | 100-91          | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 3   | 4   |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 90-81           | 5   | 5   | 6   | 6   | 7   | 8   | 9   | 10  | 11  | 12  |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 80-71           | 13  | 14  | 16  | 17  | 18  | 20  | 21  | 23  | 24  | 26  |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 70-61           | 27  | 29  | 31  | 32  | 34  | 36  | 38  | 40  | 42  | 44  |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 60-51           | 46  | 48  | 50  | 53  | 55  | 57  | 60  | 62  | 65  | 67  |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 50-41           | 70  | 72  | 75  | 78  | 81  | 83  | 86  | 89  | 92  | 95  |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 40-31           | 98  | 101 | 104 | 108 | 111 | 114 | 118 | 121 | 124 | 128 |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 30-21           | 131 | 135 | 139 | 142 | 146 | 150 | 154 | 158 | 162 | 166 |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 20-11           | 170 | 174 | 178 | 182 | 186 | 191 | 195 | 199 | 204 | 208 |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 10-1            | 213 | 217 | 222 | 227 | 231 | 236 | 241 | 246 | 251 | 256 |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
 
-Table 1‑74 MD 64x32 Sensitivity Mapping
+.. table:: MD 64x32 Sensitivity Mapping
+    :align: center
 
-+-----------------+-----------------------------------------------------------+
-| RTK sensitivity |                    Trigger Block Count                    |
-+=================+=====+=====+=====+=====+=====+=====+=====+=====+=====+=====+
-| 100-91          | 4   | 4   | 4   | 4   | 4   | 4   | 4   | 4   | 6   | 8   |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 90-81           | 10  | 10  | 12  | 12  | 14  | 16  | 18  | 20  | 22  | 24  |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 80-71           | 26  | 28  | 32  | 34  | 36  | 40  | 42  | 46  | 48  | 52  |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 70-61           | 54  | 58  | 62  | 64  | 68  | 72  | 76  | 80  | 84  | 88  |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 60-51           | 92  | 96  | 100 | 106 | 110 | 114 | 120 | 124 | 130 | 134 |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 50-41           | 140 | 144 | 150 | 156 | 162 | 166 | 172 | 178 | 184 | 190 |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 40-31           | 196 | 202 | 208 | 216 | 222 | 228 | 236 | 242 | 248 | 256 |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 30-21           | 262 | 270 | 278 | 284 | 292 | 300 | 308 | 316 | 324 | 332 |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 20-11           | 340 | 348 | 356 | 364 | 372 | 382 | 390 | 398 | 408 | 416 |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 10-1            | 426 | 434 | 444 | 454 | 462 | 472 | 482 | 492 | 502 | 512 |
-+-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    +-----------------+-----------------------------------------------------------+
+    | RTK sensitivity |                    Trigger Block Count                    |
+    +=================+=====+=====+=====+=====+=====+=====+=====+=====+=====+=====+
+    | 100-91          | 4   | 4   | 4   | 4   | 4   | 4   | 4   | 4   | 6   | 8   |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 90-81           | 10  | 10  | 12  | 12  | 14  | 16  | 18  | 20  | 22  | 24  |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 80-71           | 26  | 28  | 32  | 34  | 36  | 40  | 42  | 46  | 48  | 52  |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 70-61           | 54  | 58  | 62  | 64  | 68  | 72  | 76  | 80  | 84  | 88  |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 60-51           | 92  | 96  | 100 | 106 | 110 | 114 | 120 | 124 | 130 | 134 |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 50-41           | 140 | 144 | 150 | 156 | 162 | 166 | 172 | 178 | 184 | 190 |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 40-31           | 196 | 202 | 208 | 216 | 222 | 228 | 236 | 242 | 248 | 256 |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 30-21           | 262 | 270 | 278 | 284 | 292 | 300 | 308 | 316 | 324 | 332 |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 20-11           | 340 | 348 | 356 | 364 | 372 | 382 | 390 | 398 | 408 | 416 |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | 10-1            | 426 | 434 | 444 | 454 | 462 | 472 | 482 | 492 | 502 | 512 |
+    +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
 
 
 |
