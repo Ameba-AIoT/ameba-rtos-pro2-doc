@@ -175,7 +175,6 @@ Binary files
 
 \*1: please refer to figure in chapter :doc:`FLASHLAYOUT <08_FLASHLAYOUT>`
 
-\*2: please refer to chapter :doc:`FCS and multi sensor <18_FCS_MULTI>`
 
 certificate.bin、boot.bin、 firmware_isp_iq.bin can be OTA in MP image.
 

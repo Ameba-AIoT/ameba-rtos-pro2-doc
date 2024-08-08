@@ -21,7 +21,6 @@ Realtek AmebaPro2 application note
    15_ISP
    16_Bluetooth
    17_USAGE
-   18_FCS_MULTI
    19_USB
    20_WIFI
    22_Peripheral
