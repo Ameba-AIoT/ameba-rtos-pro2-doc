@@ -1784,20 +1784,6 @@ Currently supported example
 +--------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
 | mmf2_example_pcm_array_audio_init          | Array (pcm) -> audio                     | Play the array pcm data through AmebaPro2                         |
 +--------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_example_i2s_audio_init                | I2s (pcm) -> audio                       | Use I2S mic to capture the mic data and played through 3.5 audio  |
-|                                            |                                          |                                                                   |
-|                                            |                                          | jack.                                                             |
-|                                            |                                          |                                                                   |
-|                                            |                                          | Pin:                                                              |
-|                                            |                                          |                                                                   |
-|                                            |                                          | Sclk > PD_14                                                      |
-|                                            |                                          |                                                                   |
-|                                            |                                          | WS > PD_17                                                        |
-|                                            |                                          |                                                                   |
-|                                            |                                          | TX > PD_15 (not needed in this example)                           |
-|                                            |                                          |                                                                   |
-|                                            |                                          | RX > PD_18                                                        |
-+--------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
 | mmf2_example_2way_audio_g711_doorbell_init | AUDIO -> G711E -> RTSP                   | (1) PCMU sound stream over the network                            |
 |                                            |                                          |                                                                   |
 |                                            | RTP -> G711D -> AUDIO                    | (2) PCMU sound can be streamed to AmebaPro2 via the Internet and  |
@@ -1947,80 +1933,6 @@ Currently supported example
 |                                                  |                                          |                                                                   |
 |                                                  |                                          | Note: (1) video source of (2) is from the same ISP channel.       |
 +--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_joint_test_init               | Video (H264/H265)  -> RTSP (V1+A)        | Transmitting two H264/HEVC video streams from AmebaPro2 over the  |
-|                                                  |                                          |                                                                   |
-|                                                  | Video (H264/H265)  -> RTSP (V2+A)        | network, the source of the video is the different video stream.   |
-|                                                  |                                          |                                                                   |
-|                                                  | AUDIO -> AAC -> RTSP                     | Video default format: the width, height and half of FPS with max  |
-|                                                  |                                          |                                                                   |
-|                                                  | RTP -> AAD -> AUDIO                      | sensor specification (V1) and 720P the FPS of max sensor          |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | specification (V2)                                                |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | Streaming two copies of AAC sounds to AmebaPro2 via the network.  |
-+--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_joint_test_rtsp_mp4_init      | Video (H264/H265)  -> MP4 (V1+A)         | (1) Transfer AmebaPro2's H264/HEVC video and AAC sound stream over|
-|                                                  |                                          |                                                                   |
-|                                                  | Video (H264/H265)  -> RTSP (V2+A)        | the network. Video default format: 720P and the FPS of max sensor |
-|                                                  |                                          |                                                                   |
-|                                                  | AUDIO -> AAC -> RTSP and MP4             | specification.                                                    |
-|                                                  |                                          |                                                                   |
-|                                                  | RTP -> AAD -> AUDIO                      | (2) AmebaPro2 will record three videos (the width, height and half|
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | of FPS with max sensor specification+AAC) to the SD card for 30   |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | seconds each. The default storage name is:                        |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | AmebaPro2_recording_0.mp4                                         |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | AmebaPro2_recording_1.mp4                                         |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | AmebaPro2_recording_2.mp4                                         |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | (3) Streaming AAC sounds to AmebaPro2 via the network.            |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | (4) RTP send the audio stream from network to AmebaPro2 and the   |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | stream is decoded by AAD and played through 3.5 audio jack        |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | Note: (1) video source of (2) is from different ISP channels.     |
-+--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_2way_audio_pcmu_doorbell_init | Video (H264/H265)  -> RTSP (V1)          | (1) Transmitting AmebaPro2's H264/HEVC stream and PCMU sound      |
-|                                                  |                                          |                                                                   |
-|                                                  | AUDIO -> G711E -> RTSP                   | stream over the network. Video default format: max sensor         |
-|                                                  |                                          |                                                                   |
-|                                                  | RTP -> G711D -> AUDIO                    | specification.                                                    |
-|                                                  |                                          |                                                                   |
-|                                                  | ARRAY (PCMU) -> G711D -> AUDIO (doorbell)| (2) PCMU sound can be streamed to AmebaPro2 via the Internet and  |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | playback.                                                         |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | (3) Play PCMU sound array in AmebaPro2 (default is the doorbell). |
-+--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_2way_audio_pcmu_init          | Video (H264/H265)  -> RTSP (V1)          | (1) Transmitting AmebaPro2's H264/HEVC stream and PCMU sound      |
-|                                                  |                                          |                                                                   |
-|                                                  | AUDIO -> G711E -> RTSP                   | stream over the network. Video default format: max sensor         |
-|                                                  |                                          |                                                                   |
-|                                                  | RTP -> G711D -> AUDIO                    | specification.                                                    |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | (2) PCMU sound can be streamed to AmebaPro2 via the Internet and  |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | playback.                                                         |
-+--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_av_mp4_httpfs_init            | 1 Video (H264) 1 Audio                   | AmebaPro2 will record a video every 30 seconds and save it to the |
-|                                                  |                                          |                                                                   |
-|                                                  | -> MP4 (SD card) Http File Server        | SD card (max sensor specification +AAC). The default is to record |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | 60 files, and repeat the recording after the end.                 |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | The default storage name is: mp4_record_0.mp4~mp4_record_29.mp4   |
-|                                                  |                                          |                                                                   |
-|                                                  |                                          | Also open Http File Server for client to do playback.             |
-+--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_h264_pcmu_array_mp4_init      | 1 Video array and 1 Audio array (pcmu)   | Save 1 video stream and 1 pcmu audio stream to mp4 file (the      |
-|                                                  |                                          |                                                                   |
-|                                                  | -> MP4 (SD card)                         | record file may not play on some player)                          |
-+--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
 | mmf2_video_example_demuxer_rtsp_init             | Demux a mp4 file in SD card              | Demux a mp4 file (suggest to use a file created by AmebaPro2) and |
 |                                                  |                                          |                                                                   |
 |                                                  | (based on record file name) to 1 Video   | send the video and audio data through rtsp                        |
@@ -2063,46 +1975,6 @@ Currently supported example
 |                                                      |                                          |                                                                   |
 |                                                      |                                          | about how to load face detection/recognition NN model)            |
 +------------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_joint_test_all_nn_rtsp_init       | Video (H264/H265) -> RTSP (V1)           | (1) RTSP video stream over the network.                           |
-|                                                      |                                          |                                                                   |
-|                                                      | RGB  -> NN object detect (V4)            | (2) NN do object detection, face detection and face recognition,  |
-|                                                      |                                          |                                                                   |
-|                                                      | RGB  -> NN face detect (V4) ->           | and then draw the bounding box and face recognition result to RTSP|
-|                                                      |                                          |                                                                   |
-|                                                      | NN face recognition                      | channel.                                                          |
-|                                                      |                                          |                                                                   |
-|                                                      | AUDIO -> NN audio classification         | NN do audio classification. (Please see NN chapter for more       |
-|                                                      |                                          |                                                                   |
-|                                                      |                                          | details about how to load face detection/recognition NN model)    |
-+------------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_joint_test_vipnn_rtsp_mp4_init    | H264 -> MP4  (V1)                        | (1) RTSP video stream over the network.                           |
-|                                                      |                                          |                                                                   |
-|                                                      | Video (H264/H265) -> RTSP (V2)           | (2) AmebaPro2 will record three videos (720P 30FPS+AAC) to the SD |
-|                                                      |                                          |                                                                   |
-|                                                      | RGB  -> NN object detect (V4)            | card for 30 seconds each. The default storage name is :           |
-|                                                      |                                          |                                                                   |
-|                                                      | RGB  -> NN face detect (V4) ->           | AmebaPro2_recording_0.mp4                                         |
-|                                                      |                                          |                                                                   |
-|                                                      | NN face recognition (optional)           | AmebaPro2_recording_1.mp4                                         |
-|                                                      |                                          |                                                                   |
-|                                                      | AUDIO -> AAC  -> RTSP and mp4            | AmebaPro2_recording_2.mp4                                         |
-|                                                      |                                          |                                                                   |
-|                                                      | RTP   -> AAD  -> AUDIO                   | (3) Streaming AAC sounds to AmebaPro2 via the network             |
-|                                                      |                                          |                                                                   |
-|                                                      | AUDIO -> NN audio classification         | (4) RTP send the audio stream from network to AmebaPro2 and the   |
-|                                                      |                                          |                                                                   |
-|                                                      |                                          | stream is decoded by AAD and played through 3.5 audio jack.       |
-|                                                      |                                          |                                                                   |
-|                                                      |                                          | (5) NN do object detection, face detection and face recognition,  |
-|                                                      |                                          |                                                                   |
-|                                                      |                                          | and then draw the bounding box and face recognition result to     |
-|                                                      |                                          |                                                                   |
-|                                                      |                                          | RTSP channel. NN do audio classification. (Please see NN chapter  |
-|                                                      |                                          |                                                                   |
-|                                                      |                                          | for more details about how to load face detection/recognition NN  |
-|                                                      |                                          |                                                                   |
-|                                                      |                                          | model)                                                            |
-+------------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
 | mmf2_video_example_vipnn_facedet_sync_init           | Video (H264/H265) -> RTSP (V1)           | (1) RTSP video stream over the network.                           |
 |                                                      |                                          |                                                                   |
 |                                                      | Video (H264/H265) -> RTSP (V2, Sync mode)| (2) NN do face detection then draw the bounding box and face      |
@@ -2135,14 +2007,6 @@ Currently supported example
 |                                              |                                          |                                                                   |
 |                                              |                                          | Please see NN chapter for more details                            |
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-
--  Video + Audio + FCS:
-
-+-------------------------------------------------+---------------------------------------------------------+-----------------------------------------+
-| Example                                         | Description                                             | Result                                  |
-+=================================================+=========================================================+=========================================+
-| mmf2_video_example_joint_test_rtsp_mp4_init_fcs | The same as mmf2_video_example_joint_test_rtsp_mp4_init | Please see FCS chapter for more details |
-+-------------------------------------------------+---------------------------------------------------------+-----------------------------------------+
 
 
 Execution and testing
