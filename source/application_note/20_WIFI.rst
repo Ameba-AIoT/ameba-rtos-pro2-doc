@@ -2230,3 +2230,127 @@ Adaptivity Threshold Getting:
         }
         return ret;
     }
+
+
+Wifi disconnect events:
+-----------------------
+
+Register wifi disconnect callback:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  Customers can refer to the following to register disconect callback after wifi_on() function. 
+	This callback will return the reason of deauth/disassociation to the upper layer. 
+	In addition, the wifi driver can customize the disconnection 65535/65534/65533.
+
+.. code-block:: c
+
+    //wifi disconnect callback function
+    static void wifi_disconnect_hdl(char *buf, int buf_len, int flags, void *userdata)
+    {
+        u16 disconn_reason;
+        disconn_reason = *(u16 *)(buf + 6);
+        if (disconn_reason == 65535) {
+            printf("[wifi_disconnect_hdl] no beacon\n\r");
+        } 
+        else if (disconn_reason == 65534) {
+		    printf("[wifi_disconnect_hdl] ap chanage\n\r");
+        }	
+        else if (disconn_reason == 65533) {
+		    printf("[wifi_disconnect_hdl] driver disconnect\n\r");
+        }
+        else {
+	    printf("[wifi_disconnect_hdl] deauth/disassoc reason(%d)\n\r",disconn_reason);
+       }
+    }
+
+    //Register callback function after wifi_on()
+    wifi_reg_event_handler(WIFI_EVENT_DISCONNECT, wifi_disconnect_hdl, NULL);
+
+Register wifi disconnect callback reason:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  the wifi driver can customize the disconnection 65535/65534/65533.
+
+i. 	The disconnection reason 65535 and meaning is that station listen to the router's beacon within 18 seconds, so the station send disconnection to router.
+
+ii.	The disconnection reason 65534 and meaning is that station detects that the beacon content information of the router has changed, such as channel, security, etc., so the station actively send disconnection to router.
+
+iii.	The disconnection reason 65533 and meaning is that station calls wifi_disconnect() function, or when the station is originally connected to the router and needs to be reconnected, the WIFI driver will assist to disconnect to router first. At this time, wifi disconnect callback with 65533 will be sent back to the upper layer, and then the station will reconnect.
+
+iv.	Other disconnection reasons come from the Deauth/Disassociation sent by the router. For reason code, 802.11spec define the relevant WIFI disconnect reason.
+
+Modify the WIFI TX power method:
+--------------------------------
+
+-  Customers can modify the power by modifying the power by rate table/power limit table. Refer to the 1.9 Power by Rate and Power Limit Introduction chapter.
+
+-  In addition, customers only need to adjust the last two variables to modify the TX power through ATCMD as follows:
+
+-  ATWZ=phydm set_txagc,2 ,0, 0/1 [Add or Decrease Tx power], 6 [TX power dbm and the unit is 0.5dbm] and example is shown as below:
+
+i. 	ATWZ=phydm set_txagc,2,0,1,6	// Add TX power 3dbm(6/2 = 3)
+
+ii. 	ATWZ=phydm set_txagc,2,0,0,6	// Decrease TX power 3dbm(6/2 = 3)
+
+-  This AT command can only be used for testing. If the Pro2 device reboots, this AT command won't work.
+
+Wifi build MP user guide:
+-------------------------
+
+
+Generate MP mode image:
+~~~~~~~~~~~~~~~~~~~~~~~
+
+-  9.6SDK support single image for normal and MP mode. 
+
+-  Please set up the configure for MP Bluetooth test as below.
+
+i. 	project\realtek_amebapro2_v0_example\inc\platform_opts_bt.h
+
+a.	#define CONFIG_BT 1
+
+ii. 	project\realtek_amebapro2_v0_example\inc\platform_opts_bt.h
+
+a.	#define CONFIG_ATCMD_MP         1
+
+.. note :: - WiFi defaults to normal mode.
+
+    - WiFi needs to be disconnected before switching to MP mode. (Ex: ATWD(wifi disconnect))
+
+    - Use the "iwpriv mp_start" AT command to switch to MP mode.
+
+    - If the WiFi wants to go back to normal mode, it is recommend to reset the power to normal mode.
+
+How to switch to WIFI/Bluetooth MP mode:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  Wifi setup mp mode cmd: 
+
+i. 	Step 1: ATWD(If there is a wifi connection, DUT will automatically connect with AP, At this time, please issue the above command #ATWD[this is the function of disconnected AP])
+
+ii. 	Step 2: ATWf=2(use #ATWf=2 [this is clear flash SSID+PW for fast connection])
+
+iii. 	iwpriv mp_start
+
+-  BT setup mp mode cmd: 
+
+i. 	Step 1: ATWD(If there is a wifi connection, DUT will automatically connect with AP, At this time, please issue the above command #ATWD[this is the function of disconnected AP])
+
+ii. 	Step 2: ATWf=2(use #ATWf=2 [this is clear flash SSID+PW for fast connection])
+
+iii. 	Step 3: iwpriv mp_start
+
+iv. 	Step 4: ATM2=bt_power,on
+
+v. 	Step 5: ATM2=gnt_bt,bt
+
+vi. 	Step 6: ATM2= bridge
+
+-  After completing the above instructions , you can close the log to open the BT APP. 
+
+MP detailed instruction:
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  For more detailed MP instructions, refer to AN0004 Realtek low power wi-fi mp user guide_v2.0.pdf
+
+-  Besides, about the mp tssi on detailed. Refer to AmebaPro2_RTL8735B_WiFi RF MP FLOW R03_TSSI_20220614
