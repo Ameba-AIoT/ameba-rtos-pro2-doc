@@ -736,8 +736,20 @@ are within the limits.*
 *For VOE 1.4.3.0 and its later version, the ISP supported max resolution
 for all channel is 2704 x 1960.*
 
-Resolution adjustment
-^^^^^^^^^^^^^^^^^^^^^
+Video scale up function
+^^^^^^^^^^^^^^^^^^^^^^^
+
+After VOE1.5.6.0, the scale up function is supported, but there are some
+limitations: (1) Only ch0 can scale up. (2) All streams need to be closed
+when setting the scale up function. (3) The maximum scale up resolution
+cannot exceed twice the ROI resolution. (4) The maximum resolution is 
+2688x1944. (5) The scale function supports ROI settings, but the ROI 
+settings will be applied to all streams and do not support individual 
+stream ROI settings.
+
+
+Video resolution adjustment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Amebapro2 ISP support scaling down function with non-aspect ratio window
 ( it should be less than sensor output size). User can set 「use_roi」to
