@@ -613,14 +613,30 @@ Here shows the context of the video module.
    called while doing snapshot. It could be set by using
    CMD_VIDEO_SNAPSHOT_CB.
 
-Basic video module parameters setting
+VOE heap presetting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Presetting the voe_heap_size:
+Before starting any stream, the function video_voe_presetting() 
+should be called to estimate and set the required heap size for the VOE.
 
-Use **CMD_VIDEO_SET_VOE_HEAP** to set up the heap size that will be used
-in the voe process, including the output buffer for ISP (, snapshot) and
-Encoder, before setting the video parameters.
+.. code-block:: c
+
+   int video_voe_presetting(int v1_enable, int v1_w, int v1_h, int v1_bps, int v1_shapshot,
+                            int v2_enable, int v2_w, int v2_h, int v2_bps, int v2_shapshot,
+                            int v3_enable, int v3_w, int v3_h, int v3_bps, int v3_shapshot,
+                            int v4_enable, int v4_w, int v4_h);
+
+Since the VOE heap requires a large amount of memory, to avoid memory 
+fragmentation, the function video_voe_presetting() will only be 
+effective on the first call unless video_voe_release() is explicitly 
+called to reset the allocation. 
+
+.. code-block:: c
+
+   void video_voe_release(void);
+
+Basic video module parameters setting
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Here are some video module parameters provided to set.
 
@@ -783,83 +799,32 @@ Table 1-2 Image aspect ratio example image (partial view)
 VOE log show option adjustment 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Users can modify VOE log show option between video_init() and
-video_deinit(). For normal mode, video_init() is included in opening
-video module step. For FCS mode, video_init() is included in bootloader.
+Users can adjust the VOE log display options to provide additional 
+information for debugging purposes. 
+For normal booting, the VOE log is default disable in “video_api.h”. 
+To enable VOE log, please set APP_VOE_LOG_EN to 1.
 
-After video_init(), user can modify VOE log setting with following
-command. Set enable = 0 to disable VOE log. Set enable = 1 to enable VOE
-log.
+.. code-block:: bash
+
+   #define APP_VOE_LOG_EN          0
+
+For FCS booting, the VOE log is disabled by default for better time
+measurement quality. To enable VOE log in FCS mode, please set 
+BOOTLOADER_VOE_LOG_EN = 1 in "video_boot.h".
+
+.. code-block:: bash
+
+   #define BOOTLOADER_VOE_LOG_EN   0
+
+.. note :: Note that enabling VOE log in the bootloader will cause some conflicts when ROM log is disabled.
+
+If need to dynamically adjust the VOE display settings, users can use the 
+following command. Modify the VOE log settings: Set 'enable' to 0 to disable 
+the VOE log and to 1 to enable it.
 
 .. code-block:: c
 
    video_ctrl(0, VIDEO_DEBUG, enable);
-
-For normal booting, the VOE log is default enable in "video_api.c". To
-disable VOE log, please set "--dbg 0" according to specific video codec
-type
-
-.. code-block:: bash
-
-   int video_open(video_params_t *v_stream, output_callback_t output_cb, void *ctx)
-   {
-       …
-       int ret = 0;
-       if ((codec & (CODEC_HEVC | CODEC_H264)) != 0) {
-           …
-           ret = snprintf(cmd1, sizeof(cmd1), "%s %d %s -w %d -h %d -x %d -X %d -y %d -Y %d -r %d --mode %d --codecFormat %d %s --dbg 0 -i isp" // -x %d -y %d
-           …
-
-       }
-       if ((codec & CODEC_JPEG) != 0) {
-           …
-           ret = snprintf(cmd2, sizeof(cmd2), "%s %d %s -w %d -h %d -x %d -X %d -y %d -Y %d -G %d -q %d --mode %d --codecFormat %d %s --dbg 0 -i isp"
-           …
-       }
-       if ((codec & (CODEC_NV12 | CODEC_RGB | CODEC_NV16)) != 0) {
-           …
-           ret = snprintf(cmd3, sizeof(cmd3), "%s %d %s -w %d -h %d --mode %d --codecFormat %d %s --dbg 0 -i isp"
-           …
-       }
-   }
-
-For FCS booting, the VOE log is disabled by default for better time
-measurement quality. To enable log in FCS, there are two places that
-need to be modified.
-
--  To enable VOE log in bootloader, please set voe_dbg = 1 in
-   "video_boot.c".
-
-.. code-block:: bash
-
-   int video_boot_open(int ch_index, video_boot_params_t *v_stream)
-   {
-       …
-       v_adp->cmd[ch]->voe_dbg = 1;
-   }
-
-.. note :: Note that enabling VOE log in the bootloader will cause some conflicts when ROM log is disabled.
-
--  To enable VOE log in normal mode, please comment hal_video_print(0)
-   in "video_api.c".
-
-.. code-block:: bash
-
-   int video_open(video_params_t *v_stream, output_callback_t output_cb, void *ctx)
-   {
-       …
-       if (isp_boot->fcs_start_time) { //If it enable the fcs mode that it will show the fcs info.
-           hal_video_print(1);
-           video_time_info_t video_time;
-           hal_video_time_info(1, &video_time);
-           isp_info.frame_done_time = isp_boot->fcs_voe_time + video_time.frame_done / 1000;
-        
-           video_dprintf(VIDEO_LOG_MSG, " fcs_start_time %d fcs_voe_time %d frame_done_time %d\r\n", isp_boot->fcs_start_time, isp_boot->fcs_voe_time, isp_info.frame_done_time);
-
-           //hal_video_print(0);
-       }
-       …
-   }
 
 Video module rate control (RC) adjustment 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1006,6 +971,36 @@ retention.
 
 -  SAVE_TO_RETENTION: Load video initial AE, AWB settings from SRAM
    retention
+
+Video error return
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The video error return code includes the error category, which can be 
+obtained through video_get_error_group() for debugging purposes. 
+
+.. code-block:: c
+
+   int video_get_error_group(int error_id);
+
+Please refer to the table below for the correspondence between video 
+error code ranges and error categories.
+
+.. table:: Video error code ranges and error categories
+    :align: center
+
+    +-------------------------+----------------------------+
+    | Video Error Category    | Error Code Range           |
+    +=========================+============================+
+    | VOE                     | 0x88000000 - 0x8FFFFFFF    |
+    +-------------------------+----------------------------+
+    | ISP Flow                | 0x90000000 - 0x97FFFFFF    |
+    +-------------------------+----------------------------+
+    | Sensor Driver           | 0x98000000 - 0x9FFFFFFF    |
+    +-------------------------+----------------------------+
+    | Mod                     | 0xA0000000 - 0xA7FFFFFF    |
+    +-------------------------+----------------------------+
+    | OSD                     | 0xA8000000 - 0xAFFFFFFF    |
+    +-------------------------+----------------------------+
 
 RTSP
 ~~~~

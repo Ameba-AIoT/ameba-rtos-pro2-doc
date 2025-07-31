@@ -928,6 +928,11 @@ OSD Render Task
 For MD and NN examples, we provided an osd_render_task to dynamically
 render OSD object in real time.
 
+Since OSD objects for the same stream are shared, if users need to run 
+both rts_osd_task and osd_render_task simultaneously, please execute 
+rts_osd_task first. The osd_render_task will automatically avoid any 
+OSD blocks that have already been used.
+
 For the usage of osd_render_task, please first initial OSD objects and
 font library, and then start the osd_render_task.
 
