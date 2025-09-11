@@ -138,3 +138,13 @@ repeated writing.
       */
     int otp_logical_write(u16 addr, u16 cnts, u8 *data);
 
+
+Write otp to disable log uart
+-----------------------------
+
+Write logical otp to disable log uart
+
+.. code-block:: c
+
+    int otp_rom_log_message_disable(void)
+
