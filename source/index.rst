@@ -12,6 +12,8 @@ Welcome to AmebaPro2's Documentation!
 
    application_note/index
 
+   hw_design/index
+
 Indices and tables
 ==================
 
