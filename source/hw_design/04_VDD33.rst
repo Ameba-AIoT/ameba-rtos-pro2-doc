@@ -5,4 +5,8 @@ VDD33
   :local:
   :depth: 2
 
+VDD33 is dedicated to Amebapro 2, because the VDD33 power noise is very large, avoid interfering with others.
 
+Must add another DC-DC BUCK to the peripheral circuit
+
+.. image:: ../_hw_static/04_VDD33/04_VDD33.png
