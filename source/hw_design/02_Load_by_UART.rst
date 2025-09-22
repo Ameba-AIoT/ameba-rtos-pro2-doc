@@ -11,7 +11,7 @@ Below is the boot strap setting.
 
 Suggest pull high GPIOA_5 via 1k ohms to enter load code mode
 
-.. image:: ../_hw_static/02_Load_by_UART/02_Load_by_UART1.png
+.. image:: ../_hw_static/02_Load_by_UART/02_Load_by_UART4.png
 
 .. image:: ../_hw_static/02_Load_by_UART/02_Load_by_UART2.png
 
