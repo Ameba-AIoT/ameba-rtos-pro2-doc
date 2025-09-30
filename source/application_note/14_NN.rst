@@ -389,8 +389,8 @@ face feature, and fill the results to face_feature_res_t structure:
     } face_feature_res_t;
 
 
-NN model preparation
---------------------
+NN model preparation (Acuity)
+-----------------------------
 
 NN model should be prepared before using the NN example
 
