@@ -389,8 +389,8 @@ face feature, and fill the results to face_feature_res_t structure:
     } face_feature_res_t;
 
 
-NN model preparation
---------------------
+NN model preparation (Acuity)
+-----------------------------
 
 NN model should be prepared before using the NN example
 
@@ -412,6 +412,20 @@ They are located in
 "project/realtek_amebapro2_v0_example/src/test_model".
 
 .. note :: In face recognition application, it would be better to remain the image aspect ratio to get a better accuracy. If user want to run object detection and face detection/recognition at the same time, we can choose scrfd_500m_bnkps_576x320_u8.nb and yolov4_tiny_576x320.nb.
+
+Offline AI Model Conversion Methods
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Users can use the offline Acuity Toolkit to convert their customized trained model
+
+- `Acuity Toolkit <https://ameba-doc-ai-video-analytics-doc.readthedocs-hosted.com/en/latest/index.html>`_ (supported on Linux OS only)
+
+.. note :: To access offline AI model conversion tools, please contact AmebaAIoT@realtek.com with the subject line **"Offline AI Model"**. Ensure that you use your **official company, institution, or educational organization email account** for this request. This will help to verify your affiliation and process your inquiry more efficiently. Once approved, please sign in to your GitHub account to download the files 
+
+Acuity Toolkit download
+^^^^^^^^^^^^^^^^^^^^^^^
+
+- `Installation Guide <https://ameba-doc-ai-video-analytics-doc.readthedocs-hosted.com/en/latest/user_manual/Acuity_tool/Acuity_installation.html>`_
 
 NN memory evaluation
 --------------------
