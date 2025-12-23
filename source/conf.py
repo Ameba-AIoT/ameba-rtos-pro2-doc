@@ -31,5 +31,9 @@ exclude_patterns = []
 html_logo = '_static/Realtek_logo.png'
 
 html_theme = 'sphinx_rtd_theme'
+html_theme_options = {
+    'navigation_depth': 5,
+    'collapse_navigation': True,
+}
 html_static_path = ['_static']
 numfig = True
