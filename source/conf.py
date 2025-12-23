@@ -33,7 +33,15 @@ html_logo = '_static/Realtek_logo.png'
 html_theme = 'sphinx_rtd_theme'
 html_theme_options = {
     'navigation_depth': 5,
-    'collapse_navigation': True,
 }
 html_static_path = ['_static']
 numfig = True
+
+# LaTeX 設定 - 支援中文
+latex_engine = 'xelatex'
+latex_elements = {
+    'preamble': r'''
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Sans CJK SC}
+''',
+}
