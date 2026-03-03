@@ -10,3 +10,17 @@ VDD33 is dedicated to Amebapro 2, because the VDD33 power noise is very large, a
 Must add another DC-DC BUCK to the peripheral circuit
 
 .. image:: ../_hw_static/04_VDD33/04_VDD33.png
+   :width: 1380 px
+   :height: 427 px
+   :scale: 70%
+
+.. note::
+
+   Some camera sensor modules require 1.2V and 1.8V power rails.
+   If these voltages are generated from LDOs powered directly by VDD33, noise from the VDD33 rail may propagate to the sensor supply.
+
+   For noise-sensitive camera modules, it is recommended to use a dedicated 3.3V DC-DC buck converter specifically for the camera power domain.
+   This dedicated 3.3V rail should then supply the 1.2V and 1.8V LDO regulators to minimize power noise coupling.
+
+   Refer to :doc:`DC BUCK <03_DC_BUCK>` for DC-DC design guidelines.
+   Refer to `DC BUCK <03_DC_BUCK.html>`__ for DC BUCK design.

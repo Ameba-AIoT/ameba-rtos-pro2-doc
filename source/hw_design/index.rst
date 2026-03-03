@@ -2,8 +2,8 @@ Realtek AmebaPro2 HW design Guide
 ==================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
-   SCH_review_guide
-   Layout_review_guide
-
+   Introduction & Design Goals <introduction.rst>
+   Schematic Guidelines <SCH_review_guide.rst>
+   PCB Layout Guidelines <Layout_review_guide.rst>

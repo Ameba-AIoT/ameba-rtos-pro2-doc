@@ -16,15 +16,16 @@ MP1605(non P2P)
 TPS62822(non P2P)
 
 .. image:: ../_hw_static/03_DC_BUCK/03_DC_BUCK1.png
+   :width: 1353 px
+   :height: 439 px
+   :scale: 70%
 
 DC BUCK is highly correlated with system stability, RF performance, and power consumption. 
 It requires extensive testing and verification. Replacing components is not recommended. 
 Customers who insist on modifying must meet the following conditions and conduct their own testing and assume the consequences.
 
-
 3.3V DC-DC Power Specification
 
- 
 Must meet:
 
 (1) When Vin≧3.6V ; Iout=0A, then Vout=3.3V±3% and Vout ripple peak to peak < 100mV
@@ -42,8 +43,6 @@ Must meet:
 (7) Have Enable pin function to reset AmebaPro.
 
 (8) Soft start time < 1.2ms
-
- 
 
 Recommend:
 

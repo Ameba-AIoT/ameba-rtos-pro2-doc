@@ -14,5 +14,10 @@ Add 4.7uF cap near flash power as close as possible.
 Reserve RC filter on FLASH CLK
 
 .. image:: ../_hw_static/05_Flash/05_Flash1.png
+   :width: 654 px
+   :height: 61 px
 
 .. image:: ../_hw_static/05_Flash/05_Flash2.png
+   :width: 1299 px
+   :height: 436 px
+   :scale: 80%

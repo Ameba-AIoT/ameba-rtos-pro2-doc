@@ -1,4 +1,4 @@
-Layout review guide
+PCB Layout Guidelines
 ===========================
 
 .. toctree::
@@ -10,4 +10,3 @@ Layout review guide
    13_SPI_flash
    14_SD_card
    15_Decouple_capacitors
-   

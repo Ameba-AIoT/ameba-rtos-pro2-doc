@@ -1,15 +1,9 @@
-Schematic review guide
+Schematic Guidelines
 ===========================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
-   01_CHIP_EN
-   02_Load_by_UART
-   03_DC_BUCK
-   04_VDD33
-   05_Flash
-   06_Image_sensor
-   07_SD_card
-   08_Digital_Microphone
-   09_Log_in_out
+   Reset, Boot & Firmware Upload Signals <SCH_reset_boot_upload.rst>
+   Power & Regulation <SCH_power_regulation.rst>
+   Interfaces <SCH_interfaces.rst>

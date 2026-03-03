@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'AmebaPro2\'s Documentation'
-copyright = '2024 Realtek Semiconductor Corp. All rights reserved'
+copyright = '2026 Realtek Semiconductor Corp. All rights reserved'
 author = 'REALTEK'
 release = 'v0.1'
 
@@ -27,6 +27,14 @@ exclude_patterns = []
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
+
+html_context = {
+    "display_github": True,
+    "github_user": "Ameba-AIoT",
+    "github_repo": "ameba-rtos-pro2-doc",
+    "github_version": "master",
+    "conf_py_path": "/source/",
+}
 
 html_logo = '_static/Realtek_logo.png'
 
