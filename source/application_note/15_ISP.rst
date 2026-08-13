@@ -587,18 +587,21 @@ OSD Data Structures
 .. table:: OSD data structure: rt_font_st
     :align: center
 
-    ============= ================ ===========================================================================================================================================
-    Parameter     Type             Introduction
-    ============= ================ ===========================================================================================================================================
-    <block_alpha> uint8_t          Transparent value: 0~15.
-    <ch_color>    uint32_t         Character color in RGB.
-    <bg_enable>   uint8_t          Enable background: 0~1.
-    <bg_color>    uint32_t         Background color in RGB.
-    <h_gap>       uint8_t :4       The meaning of the field in the osd structure is shown in below figure. The horizontal interval is h_gap, and the vertical interval is v_gap.
-    <v_gap>       uint8_t :4       The meaning of the field in the osd structure is shown in below figure. The horizontal interval is h_gap, and the vertical interval is v_gap.
-    <time_fmt>    rts_osd_time_fmt Time format, please refer to introduction of rts_osd_time_fmt
-    <date_fmt>    rts_osd_date_fmt Date format, please refer to introduction of rts_osd_date_fmt
-    ============= ================ ===========================================================================================================================================
+    =============== ================ ===========================================================================================================================================
+    Parameter       Type             Introduction
+    =============== ================ ===========================================================================================================================================
+    <block_alpha>   uint8_t          Transparent value: 0~15.
+    <ch_color>      uint32_t         Character color in 0xAARRGGBB format. 0 = disabled (use colorkey or original mode).
+    <bg_enable>     uint8_t          Enable background: 0~1.
+    <bg_color>      uint32_t         Background color in 0xAARRGGBB format.
+    <colorkey_src>  uint32_t         Source color to match for color replacement in 0xAARRGGBB format.
+    <colorkey_dst>  uint32_t         Replacement color for matched pixels in 0xAARRGGBB format.
+    <stroke_color>  uint32_t         Edge outline color in 0xAARRGGBB format. 0 = stroke disabled.
+    <h_gap>         uint8_t :4       The meaning of the field in the osd structure is shown in below figure. The horizontal interval is h_gap, and the vertical interval is v_gap.
+    <v_gap>         uint8_t :4       The meaning of the field in the osd structure is shown in below figure. The horizontal interval is h_gap, and the vertical interval is v_gap.
+    <time_fmt>      rts_osd_time_fmt Time format, please refer to introduction of rts_osd_time_fmt
+    <date_fmt>      rts_osd_date_fmt Date format, please refer to introduction of rts_osd_date_fmt
+    =============== ================ ===========================================================================================================================================
 
 .. figure:: ../_static/15_ISP/image2.png
    :align: center
@@ -1236,6 +1239,286 @@ iii. Replace the variables in below static functions (emphasized in bold):
 
     -  Press "Font to .txt" to generate .txt and .bmp files from the
        font-lib.
+
+OSD Font Color Replacement
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The OSD font renderer (``func_write_RGBA4444``, ``func_write_RGBA2222``,
+``func_write_RGBA1111``) supports three color modes, selected automatically
+based on which fields are configured in ``rt_font_st``:
+
+.. table:: OSD Font Color Mode Selection
+    :align: center
+
+    =================== =================== =================== ===================== ============================================================
+    ``ch_color``        ``colorkey_src``     ``colorkey_dst``    Mode                  Use case
+    =================== =================== =================== ===================== ============================================================
+    non-zero            any                 any                 **ch_color/bg_color** Paint all characters in a single color
+    0                   non-zero            any                 **colorkey**          Replace specific font pixel colors
+    0                   0                   non-zero            **colorkey (black)**  Replace black font pixels (RGB=0)
+    0                   0                   0                   **original**          Render font baked-in colors as-is
+    =================== =================== =================== ===================== ============================================================
+
+When ``colorkey_src_rgb == colorkey_dst_rgb``, the replacement is a no-op
+and pixels are copied as-is. This covers both the guard case (src == dst in
+colorkey mode) and the original mode case (both zero).
+
+.. note:: Colorkey and original modes are only available for RGBA4444
+    (ARGB4444 font). The RGBA2222 and RGBA1111 paths only support
+    ch_color/bg_color mode.
+
+ch_color/bg_color Mode
+^^^^^^^^^^^^^^^^^^^^^^
+
+Paints every non-zero-alpha pixel with the configured ``ch_color`` and
+zero-alpha (background) pixels with ``bg_color``. Works across all three
+pixel formats (4444, 2222, 1111).
+
+.. code-block:: c
+
+    rt_font_st font = {
+        .ch_color    = COLOR_RED,       // ARGB format
+        .bg_color    = COLOR_BLACK,     // ARGB format
+        .bg_enable   = 0,
+        .block_alpha = 0x0F,            // 0-15, overrides source alpha
+    };
+
+Color Conversion (0xAARRGGBB to ABGR pixel)
+'''''''''''''''''''''''''''''''''''''''''''
+
+All ``make_color_abgr*`` functions accept ``block_alpha`` (0-15) directly
+and extract the format-appropriate bits internally:
+
+.. list-table::
+    :align: center
+    :widths: 22 34 28 42
+    :header-rows: 1
+
+    * - Function
+      - Output format
+      - block_alpha extraction
+      - Channel extraction
+    * - ``make_color_abgr1111``
+      - ABGR1111 [A][B][G][R]
+      - bit 3: ``(ba >> 3) & 1``
+      - ``(b>>7), (g>>7), (r>>7)`` - 1 bit each
+    * - ``make_color_abgr2222``
+      - ABGR2222 [AA][BB][GG][RR]
+      - bits 3-2: ``(ba >> 2) & 3``
+      - ``(b>>6), (g>>6), (r>>6)`` - 2 bits each
+    * - ``make_color_abgr4444``
+      - ABGR4444 [AAAA][BBBB][GGGG][RRRR]
+      - bits 3-0: ``ba & 0xF``
+      - ``(b>>4), (g>>4), (r>>4)`` - 4 bits each
+
+Pixel memory layout (MSB to LSB):
+
+::
+
+    ABGR4444 (16-bit):  [AAAA(15:12)][BBBB(11:8)][GGGG(7:4)][RRRR(3:0)]
+    ABGR2222 (8-bit):   [AA(7:6)][BB(5:4)][GG(3:2)][RR(1:0)]
+    ABGR1111 (4-bit):   [A(3)][B(2)][G(1)][R(0)]
+
+Rendering behavior at block_alpha = 0
+'''''''''''''''''''''''''''''''''''''
+
+Each format extracts a limited number of bits from ``block_alpha`` (0-15):
+
++-----------+--------------+--------------------------------------+
+| Format    | Alpha bits   | ``block_alpha`` rounds to 0 when..   |
++===========+==============+======================================+
+| 1111      | 1 bit        | ``block_alpha`` 0-7                  |
++-----------+--------------+--------------------------------------+
+| 2222      | 2 bits       | ``block_alpha`` 0-3                  |
++-----------+--------------+--------------------------------------+
+| 4444      | 4 bits       | ``block_alpha`` = 0 only             |
++-----------+--------------+--------------------------------------+
+
+When ``block_alpha`` rounds to zero, the output pixel has alpha = 0. The HW
+treats alpha = 0 as fully transparent.
+
+Guard: Preventing invisible text
+''''''''''''''''''''''''''''''''
+
+When both ``ch_color`` and ``bg_color`` quantize to all-zero bits (e.g.,
+``COLOR_BLACK`` + ``block_alpha`` rounding to 0), a guard ensures the pixel
+is visible:
+
++---------------------+---------------------------------------------------+
+| Condition           | Guard action                                      |
++=====================+===================================================+
+| With stroke enabled | Set minimal color bit (keep alpha=0) so stroke    |
+|                     | detection can find character edges. Edge pixels   |
+|                     | get replaced with stroke color (visible outline). |
++---------------------+---------------------------------------------------+
+| Without stroke      | Set minimum alpha for the format so text is       |
+|                     | visible as black at minimal opacity.              |
++---------------------+---------------------------------------------------+
+
+Colorkey Mode
+^^^^^^^^^^^^^
+
+Enters colorkey replacement when ``colorkey_src_rgb != colorkey_dst_rgb``.
+Replaces pixels whose 12-bit RGB matches ``colorkey_src_rgb`` with
+``colorkey_dst_rgb``. Non-matching pixels keep their original font color.
+
+.. note:: Colorkey mode is only supported for RGBA4444 (ARGB4444 font).
+
+Normal usage - match a specific color:
+
+.. code-block:: c
+
+    rt_font_st font_red = {
+        .block_alpha   = 0x0F,
+        .colorkey_src  = COLOR_BLUE,   // match blue font pixels
+        .colorkey_dst  = COLOR_RED,    // replace with red
+    };
+
+Black font matching (``colorkey_src = 0``, ``colorkey_dst != 0``):
+
+.. code-block:: c
+
+    rt_font_st font_black_to_red = {
+        .block_alpha   = 0x0F,
+        .colorkey_src  = 0,               // match black font pixels (RGB=0)
+        .colorkey_dst  = COLOR_RED,       // replace with red
+    };
+
+The alpha guard ``(colorkey_src_rgb != 0 || src_pixel_alpha)`` ensures:
+
+- For **non-zero** ``colorkey_src_rgb`` (normal case): always true - normal
+  RGB matching
+- For **zero** ``colorkey_src_rgb`` (black matching): only matches pixels
+  with non-zero alpha - excludes transparent background (``0x0000``) from
+  being painted
+
+Original Mode
+^^^^^^^^^^^^^
+
+When ``ch_color == 0``, ``colorkey_src == 0``, and ``colorkey_dst == 0``,
+the font data is copied directly to the output with no color modification.
+The font's baked-in colors are preserved.
+
+.. note:: Original mode is only supported for RGBA4444 (ARGB4444 font).
+
+.. code-block:: c
+
+    rt_font_st font = {
+        .ch_color      = 0,             // No ch_color override
+        .colorkey_src  = 0,             // No colorkey replacement
+        .colorkey_dst  = 0,             // Confirms not matching black
+        // The font's original pixel colors are rendered as-is
+    };
+
+Stroke (Edge Outline)
+^^^^^^^^^^^^^^^^^^^^^
+
+Stroke is **optional** for all three pixel formats (4444, 2222, 1111) -
+controlled by ``stroke_color``. When set, character edge pixels adjacent to
+a transparent background are replaced with the stroke color.
+
+.. code-block:: c
+
+    rt_font_st font = {
+        .ch_color      = COLOR_RED,
+        .stroke_color  = COLOR_BLACK,   // 0 to disable
+        .block_alpha   = 0x0F,
+    };
+
+All three renderers use value-based detection (comparing pixel value against
+the rendered background value) rather than alpha-based detection. This
+ensures stroke works at all ``block_alpha`` levels - including
+``block_alpha=0``, where character pixels have zero alpha but non-zero color
+channels.
+
+.. list-table::
+    :align: center
+    :widths: 15 15 55
+    :header-rows: 1
+
+    * - Format
+      - Stroke alpha
+      - Stroke alpha extraction
+    * - RGBA4444
+      - 4 bits
+      - ``(stroke_color >> 28) & 0x0F`` - bits 31-28
+    * - RGBA2222
+      - 2 bits
+      - ``(stroke_color >> 28) & 0x03`` - bits 29-28
+    * - RGBA1111
+      - 1 bit
+      - ``(stroke_color >> 28) & 0x01`` - bit 28
+
+Color Format Reference
+^^^^^^^^^^^^^^^^^^^^^^
+
+All color fields (``ch_color``, ``bg_color``, ``colorkey_src``,
+``colorkey_dst``, ``stroke_color``) use ``0xAARRGGBB`` format, produced by
+the ``ARGB()`` macro in ``canvas.h``:
+
+.. code-block:: c
+
+    #define ARGB(a, r, g, b) ((((a)&0xff) << 24) | (((r)&0xff) << 16) | (((g)&0xff) << 8) | ((b)&0xff))
+
+Common predefined colors:
+
+.. code-block:: c
+
+    COLOR_RED    = ARGB(0xff, 0xff, 0x00, 0x00)   // 0xFFFF0000
+    COLOR_GREEN  = ARGB(0xff, 0x00, 0xff, 0x00)   // 0xFF00FF00
+    COLOR_BLUE   = ARGB(0xff, 0x00, 0x00, 0xff)   // 0xFF0000FF
+    COLOR_BLACK  = ARGB(0xff, 0x00, 0x00, 0x00)   // 0xFF000000
+    COLOR_WHITE  = ARGB(0xff, 0xff, 0xff, 0xff)   // 0xFFFFFFFF
+    COLOR_YELLOW = ARGB(0xff, 0xff, 0xff, 0x00)   // 0xFFFFFF00
+    COLOR_CYAN   = ARGB(0xff, 0x00, 0xff, 0xff)   // 0xFF00FFFF
+    COLOR_PURPLE = ARGB(0xff, 0xff, 0x00, 0xff)   // 0xFFFF00FF
+
+Multi-Color OSD Example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: c
+
+    #include "canvas.h"
+
+    // Ch_color mode: render all text in red
+    rt_font_st font_red = {
+        .ch_color    = COLOR_RED,
+        .bg_color    = 0,
+        .bg_enable   = 0,
+        .block_alpha = 0x0F,
+    };
+
+    // Ch_color mode: transparent text with black stroke only
+    rt_font_st font_transparent_stroke = {
+        .ch_color     = COLOR_BLACK,    // quantizes to zero
+        .bg_color     = 0,
+        .bg_enable    = 0,
+        .block_alpha  = 0,              // interior transparent
+        .stroke_color = COLOR_BLACK,    // stroke outline visible
+    };
+
+    // Colorkey mode: replace blue font pixels with red
+    rt_font_st font_red_colorkey = {
+        .block_alpha  = 0x0F,
+        .colorkey_src = COLOR_BLUE,
+        .colorkey_dst = COLOR_RED,
+        .stroke_color = COLOR_BLACK,
+    };
+
+    // Original mode: render font with baked-in colors
+    rt_font_st font_original = {
+        .ch_color     = 0,
+        .colorkey_src = 0,
+        .colorkey_dst = 0,
+        .block_alpha  = 0x0F,
+    };
+
+    // Black font matching: replace black pixels with cyan
+    rt_font_st font_black_to_cyan = {
+        .block_alpha   = 0x0F,
+        .colorkey_src  = 0,                 // match black (RGB=0)
+        .colorkey_dst  = COLOR_CYAN,        // replace with cyan
+    };
 
 ISP Control API
 ---------------
