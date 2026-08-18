@@ -380,6 +380,62 @@ in **sensor.h**
 
     #define MANUAL_SENSOR_IQ    0x01
 
+How to customize camera sonsor and FCS driver
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Camera sensor driver for VOE (Video Offload Engine). Supports Normal Driver and Fast Camera Start (FCS) flows.
+
+Compilation
+^^^^^^^^^^^^
+
+**Please ensure that the toolchain path (** ``ASDK_DIR`` **) in** ``rtl8735b_driver_code_sensor/source/Makefile`` **and** ``rtl8735b_driver_code_sensor/source/sensor/Makefile`` **are CORRECT**
+
+Build a specific sensor driver:
+
+.. code-block:: bash
+
+    cd rtl8735b_driver_code_sensor/source/sensor
+
+    make sensor=sc2333 image
+
+Build all supported sensors:
+
+.. code-block:: bash
+
+    make all_sensor
+
+Output binaries are placed in ``source/output/`` (please create one if the folder does not exist):
+
+.. code-block:: text
+
+    sensor_<name>.bin   — Normal driver
+
+    fcs_data_<name>.bin — FCS driver (if supported)
+
+    iq_<name>.bin       — IQ configuration
+
+FCS Driver
+^^^^^^^^^^^
+
+To generate the Fast Camera Start driver binary (per sensor folder):
+
+.. code-block:: bash
+
+    gcc -o fcs_g.exe gen_fcs_data_<name>.c
+
+    ./fcs_g.exe
+
+
+Folder Structure
+^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    source/sensor/          — Sensor driver sources (organized by vendor)
+
+    source/sensor/build/    — Built binaries (auto-generated)
+
+    source/sensor/Makefile  — Sensor build configuration
 
 Cleanup and Rebuild
 ~~~~~~~~~~~~~~~~~~~
