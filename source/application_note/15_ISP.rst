@@ -380,10 +380,10 @@ in **sensor.h**
 
     #define MANUAL_SENSOR_IQ    0x01
 
-How to customize camera sonsor and FCS driver
+How to customize camera sensor and FCS driver
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Camera sensor driver for VOE (Video Offload Engine). Supports Normal Driver and Fast Camera Start (FCS) flows.
+Camera sensor driver for VOE (Video Offload Engine). Supports Normal Driver and Fast Camera Start (FCS) flows. For detailed process please refer to `ameba-camera-sensor-driver <https://github.com/Ameba-AIoT/ameba-camera-sensor-driver>`__.
 
 Compilation
 ^^^^^^^^^^^^
