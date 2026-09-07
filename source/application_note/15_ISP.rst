@@ -383,28 +383,121 @@ in **sensor.h**
 How to customize camera sensor and FCS driver
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Camera sensor driver for VOE (Video Offload Engine). Supports Normal Driver and Fast Camera Start (FCS) flows. For detailed process please refer to `ameba-camera-sensor-driver <https://github.com/Ameba-AIoT/ameba-camera-sensor-driver>`__.
+The camera sensor driver is not built together with the SDK project. It
+is compiled separately against the VOE (Video Offload Engine) code base
+and delivered to the SDK as a pre-built binary. The driver source code
+is released in `ameba-camera-sensor-driver <https://github.com/Ameba-AIoT/ameba-camera-sensor-driver>`__.
+
+AmebaPro2 supports two sensor bring-up flows, and each flow consumes its
+own binary:
+
+-  **Normal camera flow** is used for general usage. The sensor is
+   initialized by the VOE sensor driver (``sensor_<name>.bin``) during
+   normal boot.
+
+-  **Fast Camera Start (FCS) flow** is used to get the 1\ :sup:`st` video
+   frame as soon as possible. The ROM code loads the FCS data
+   (``fcs_data_<name>.bin``) and initializes the sensor before the
+   firmware is running.
+
+Both binaries, together with the IQ binary, are packed into
+**firmware_isp_iq.bin**, which can be updated by OTA in an MP image
+(``isp_iq_ota.bin``). Please refer to chapter :doc:`SDK <02_SDK>` for the
+binary file description, chapter :doc:`OTA <09_OTA>` for the update flow,
+and :doc:`[AmebaPro2] Introduction for AmebaPro2 Flow
+<UM_IQ_driver_guide/35_Introduction_For_AmebaPro2Flow>` for the overall
+architecture of the two flows.
+
+.. note :: **Version alignment**
+
+  The normal sensor driver and the IQ binary are VOE based, so their
+  version **must** be aligned with the VOE version used in the SDK.
+  Please check the VOE version of your SDK first, then select the
+  corresponding VOE code base (for example ``voe1470``) to build the
+  driver. A mismatched pair may still be packed into the image, but the
+  sensor will fail to bring up at runtime.
+
+Driver code base
+^^^^^^^^^^^^^^^^^
+
+The two flows are built from two independent code bases, and the IQ
+binary comes from the IQ tuning flow:
+
+.. table:: Code base for each driver binary
+    :align: center
+
+    +-----------------------+------------------------------+-----------------------+
+    | Item                  | Code base                    | Output binary         |
+    +=======================+==============================+=======================+
+    | Normal sensor driver  | rtl8735_driver_code_sensor   | sensor_<name>.bin     |
+    +-----------------------+------------------------------+-----------------------+
+    | FCS driver            | rtl8735_driver_code_fcs      | fcs_data_<name>.bin   |
+    |                       | (gen_fcs_data_<name>.c)      |                       |
+    +-----------------------+------------------------------+-----------------------+
+    | IQ binary             | Please refer to the IQ       | iq_<name>.bin         |
+    |                       | tuning guide                 |                       |
+    +-----------------------+------------------------------+-----------------------+
+
+The release note at the root of each code base
+(``GitHub_release_note.txt``) and ``source/version`` record the version
+of that code base. Use them to confirm the alignment described in the
+note above before starting a build.
+
+.. note :: **Folder naming**
+
+  The folder released in the code base is named
+  ``rtl8735_driver_code_sensor``, while some build examples write it as
+  ``rtl8735b_driver_code_sensor``. Please follow the name that actually
+  exists in your copy of the code base.
+
+Prerequisites
+^^^^^^^^^^^^^^
+
+Before building, prepare the following host environment:
+
+-  **ASDK toolchain** — the same toolchain family used to build the
+   AmebaPro2 SDK. Its location is given to the sensor build by the
+   ``ASDK_DIR`` variable described in `Compilation`_.
+
+-  **Host GCC** — the FCS binary is produced by a program that runs on
+   the host (not on the target), so a native compiler is required. On
+   Windows, the MSYS2/MinGW shell shipped with the SDK tools can be used.
+
+-  **Python** — the packing scripts in the code base
+   (``source/sensor/gen_sensor_bin.py`` and ``source/gen_voe_bin.py``)
+   are used to produce the released binaries.
+
+-  **Sensor documents from the vendor** — sensor spec, initial
+   configuration (register table), application note, module design guide
+   and a sensor board. These are needed only when porting a new sensor,
+   see `Information to collect before porting`_.
 
 Compilation
 ^^^^^^^^^^^^
 
-**Please ensure that the toolchain path (** ``ASDK_DIR`` **) in** ``rtl8735b_driver_code_sensor/source/Makefile`` **and** ``rtl8735b_driver_code_sensor/source/sensor/Makefile`` **are CORRECT**
+**Please ensure that the toolchain path (** ``ASDK_DIR`` **) in**
+``rtl8735_driver_code_sensor/source/Makefile`` **and**
+``rtl8735_driver_code_sensor/source/sensor/Makefile`` **are CORRECT**
+before compiling.
 
 Build a specific sensor driver:
 
 .. code-block:: bash
 
-    cd rtl8735b_driver_code_sensor/source/sensor
+    cd rtl8735_driver_code_sensor/source/sensor
 
     make sensor=sc2333 image
 
-Build all supported sensors:
+The value of ``sensor=`` is the sensor name used by the driver folder and
+by the driver file name, not the marketing name. Build all supported
+sensors instead with:
 
 .. code-block:: bash
 
     make all_sensor
 
-Output binaries are placed in ``source/output/`` (please create one if the folder does not exist):
+Output binaries are placed in ``source/output/`` (please create one if
+the folder does not exist):
 
 .. code-block:: text
 
@@ -414,28 +507,401 @@ Output binaries are placed in ``source/output/`` (please create one if the folde
 
     iq_<name>.bin       — IQ configuration
 
-FCS Driver
+Sensor sources are grouped by vendor. The two code bases use different
+vendor folder names, so check both when working on one sensor:
+
+.. table:: Vendor folders in the two code bases
+    :align: center
+
+    +----------------+--------------------------+----------------------+
+    | Vendor         | Normal driver folder     | FCS driver folder    |
+    +================+==========================+======================+
+    | Galaxycore     | sensor/gc                | gc                   |
+    +----------------+--------------------------+----------------------+
+    | SmartSens      | sensor/smartsens         | sc                   |
+    +----------------+--------------------------+----------------------+
+    | OmniVision     | sensor/omnivision        | ov                   |
+    +----------------+--------------------------+----------------------+
+    | PrimeSensor    | sensor/pst               | ps                   |
+    +----------------+--------------------------+----------------------+
+    | SOI            | sensor/jx                | soi                  |
+    +----------------+--------------------------+----------------------+
+    | Sony           | sensor/sony              | sony                 |
+    +----------------+--------------------------+----------------------+
+    | ImageDesign    | sensor/imagedesign       | \-                   |
+    +----------------+--------------------------+----------------------+
+    | Others         | sensor/ST, sensor/cv,    | \-                   |
+    |                | sensor/novatek,          |                      |
+    |                | sensor/realtek           |                      |
+    +----------------+--------------------------+----------------------+
+
+.. note ::
+
+  A sensor may exist in the normal driver code base but not in the FCS
+  code base. In that case only the normal flow can be used for that
+  sensor.
+
+FCS driver
 ^^^^^^^^^^^
 
-To generate the Fast Camera Start driver binary (per sensor folder):
+The FCS binary is not produced by the sensor Makefile. Because the FCS
+data is consumed by the ROM code before the firmware is running, it is
+generated as a static data blob by a program that runs on the host. Each
+sensor folder in ``rtl8735_driver_code_fcs`` contains two files:
+
+.. code-block:: text
+
+    gen_fcs_data_<name>.c — Generator: the sensor power-on and register
+                            sequence to be replayed by the ROM code
+
+    fcs_gen.h             — Common definitions and helpers used by the
+                            generator
+
+In the folder of the target sensor, compile and run the generator:
 
 .. code-block:: bash
+
+    cd rtl8735_driver_code_fcs/<vendor>/<name>
 
     gcc -o fcs_g.exe gen_fcs_data_<name>.c
 
     ./fcs_g.exe
 
+The resulting ``fcs_data_<name>.bin`` is the file to be copied into the
+SDK, see `Apply the binaries to the SDK`_.
 
-Folder Structure
+.. note ::
+
+  Not all sensors support FCS. If a sensor has no
+  ``gen_fcs_data_<name>.c``, only the normal flow is available for that
+  sensor. Note that the dummy set (set 0) must be reserved in
+  **sensor.h** in either case, as described in `Sensor configuration`_.
+
+Folder structure
 ^^^^^^^^^^^^^^^^^
+
+Normal sensor driver code base:
 
 .. code-block:: text
 
-    source/sensor/          — Sensor driver sources (organized by vendor)
+    source/Makefile              — Top level build configuration (ASDK_DIR)
 
-    source/sensor/build/    — Built binaries (auto-generated)
+    source/gen_voe_bin.py        — Packing script for the VOE binary
 
-    source/sensor/Makefile  — Sensor build configuration
+    source/include/              — VOE and ISP headers
+
+    source/isp/, source/lib/,
+    source/lib_isp/, source/os/  — VOE / ISP libraries and OS wrapper
+
+    source/sensor/               — Sensor driver sources (by vendor)
+
+    source/sensor/Makefile       — Sensor build configuration
+
+    source/sensor/sensor_entry.c — Sensor driver entry / registration
+
+    source/sensor/include/       — Sensor driver common headers
+
+    source/sensor/gen_sensor_bin.py — Packing script for the sensor binary
+
+    source/sensor/build/         — Built binaries (auto-generated)
+
+    source/output/               — Released binaries (sensor / fcs_data / iq)
+
+FCS driver code base:
+
+.. code-block:: text
+
+    <vendor>/<name>/gen_fcs_data_<name>.c — FCS data generator
+
+    <vendor>/<name>/fcs_gen.h             — Generator common definitions
+
+Add a new sensor to the driver code base
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If the target sensor is not in the code base yet, add it by the
+following steps. Take **sc2333** as an example:
+
+1. Create a folder for the new sensor under its vendor folder, and copy
+   the content from a sensor of the same vendor or the same segment:
+
+   .. code-block:: text
+
+       Folder path: sensor\smartsens\sc2333\
+       File path:   sensor\smartsens\sc2333\sensor_sc2336_mipi.c
+
+2. Open the copied driver and replace the sensor name everywhere
+   (``sc2336`` -> ``sc2333``).
+
+3. Modify ``sensor\Makefile`` to (1) add the folder path, (2) add the
+   sensor driver file name, and (3) add the sensor to the build target
+   list.
+
+4. Compile and check the output binary in ``source/output/``.
+
+5. If the sensor also needs the FCS flow, create the matching folder in
+   ``rtl8735_driver_code_fcs`` and port ``gen_fcs_data_<name>.c`` in the
+   same way, then follow `FCS driver`_ to generate the binary.
+
+Information to collect before porting
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Most porting effort is spent filling in sensor-specific numbers, so
+collect the following from the vendor spec and the vendor initial
+configuration file first.
+
+**Power and clock**
+
+-  Power domains of the sensor: AVDD / DVDD / DOVDD.
+
+-  Power-on sequence: enable power, set the GPIO controlling the Reset
+   and Pwdn pins, set MCLK, then write the initial setting through I2C
+   following the sensor spec.
+
+-  MCLK: 24 MHz or 27 MHz is generally suggested. The value must match
+   the vendor initial table.
+
+**I2C**
+
+-  Slave address.
+
+-  I2C prototype: address length (2 or 1 byte) and data length
+   (2 or 1 byte).
+
+-  Sensor ID register and its expected value, used by
+   ``<sensor>_check``.
+
+**MIPI RX**
+
+AmebaPro2 only supports the MIPI interface. Confirm these items before
+writing the RX configuration:
+
+-  MIPI lane number
+
+-  Bit number of each pixel
+
+-  MIPI clock
+
+-  Frame rate
+
+-  Frame length (VTS) and line length (HTS)
+
+-  Pixel clock
+
+The relations between them are:
+
+.. math:: Pixel\ clock = Frame\ length * Line\ length * Fps
+
+.. math:: Mipi\ clock = Pixel\ clock * bit
+
+.. math:: Mipi\ clock\ per\ lane = \frac{Pixel\ clock * bit}{Lane\ number}
+
+Line length can also be derived from the MIPI clock:
+
+.. math:: Line\ length = \frac{Mipi\ clock * Lane}{bit * Frame\ length * Fps}
+
+**Window and bayer order**
+
+-  Adjust the bayer pattern order so that the sensor and the ISP are
+   aligned (RGGB / GRBG / GBRG / BGGR).
+
+-  For pan/tilt configuration, it is suggested to request at least 4
+   extra pixels for both H and V in the initial setting. For a
+   1920x1080 output, use a 1924x1084 or 1928x1088 window configuration.
+
+Driver architecture and function list
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A sensor driver is a set of callbacks gathered in one
+``rts_isp_sensor_ops`` structure (``<sensor>_ops``). Taking **sc2333** as
+an example, the functions to be implemented are:
+
+.. table:: Sensor driver function list
+    :align: center
+
+    +---------------------------------+---------------------------------------------------+
+    | Function                        | Description                                       |
+    +=================================+===================================================+
+    | sc2333_ops                      | Function pointer arrangement of this sensor       |
+    |                                 | driver                                            |
+    +---------------------------------+---------------------------------------------------+
+    | fps_info_asic                   | RX information based on the vendor initial table  |
+    +---------------------------------+---------------------------------------------------+
+    | sc2333_get_info                 | Power on / power off sequence with I2C setting    |
+    +---------------------------------+---------------------------------------------------+
+    | sc2333_get_init_info            | RX configuration (MIPI and window setting)        |
+    +---------------------------------+---------------------------------------------------+
+    | sc2333_get_tuned_again          | Set the sensor analog gain                        |
+    +---------------------------------+---------------------------------------------------+
+    | sc2333_get_tuned_dgain          | Not used on AmebaPro2                             |
+    +---------------------------------+---------------------------------------------------+
+    | sc2333_get_exposure_gain_info   | Auto exposure                                     |
+    +---------------------------------+---------------------------------------------------+
+    | sc2333_set_mirror_flip          | Sensor orientation                                |
+    +---------------------------------+---------------------------------------------------+
+    | sc2333_check                    | Check the sensor ID                               |
+    +---------------------------------+---------------------------------------------------+
+
+Each entry of the power on / off sequence in ``<sensor>_get_info`` takes
+four parameters:
+
+.. table:: Parameters of one power sequence entry
+    :align: center
+
+    +-------------+-------------------------------------------------------------+
+    | Parameter   | Meaning                                                     |
+    +=============+=============================================================+
+    | 0           | Index, the entries are executed cascaded one by one         |
+    +-------------+-------------------------------------------------------------+
+    | 1           | GPIO to operate (Reset / Pwdn / system clock)               |
+    +-------------+-------------------------------------------------------------+
+    | 2           | Value: high or low for a GPIO, frequency for a clock        |
+    +-------------+-------------------------------------------------------------+
+    | 3           | Delay after this entry, in us                               |
+    +-------------+-------------------------------------------------------------+
+
+Three items must be configured by the sensor driver itself, and all of
+them are read from the sensor register table:
+
+-  Auto exposure time configuration — how the exposure time is written
+   as exposure lines.
+
+-  Auto exposure gain configuration — how the sensor analog gain is set.
+
+-  Orientation configuration — the mirror/flip registers.
+
+For the complete field-by-field description of each function, please
+refer to :doc:`[AmebaPro2] Introduction for Porting Sensor Driver
+<UM_IQ_driver_guide/36_Introduction_For_Porting_Sensor_Driver>` and
+:doc:`[AmebaPro2] Introduction for Sensor Bringup Flow
+<UM_IQ_driver_guide/37_Introduction_For_Sensor_Bringup_Flow>`.
+
+Apply the binaries to the SDK
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Copy the generated ``sensor_<name>.bin``, ``fcs_data_<name>.bin`` and
+``iq_<name>.bin`` into the following SDK path:
+
+.. code-block:: text
+
+    component\soc\8735b\fwlib\rtl8735b\lib\source\ram\video\voe_bin
+
+During the make stage, the build script copies the files in **voe_bin**
+to the link folder
+``project\realtek_amebapro2_v0_example\GCC-RELEASE\build\application``
+automatically, so only **voe_bin** needs to be updated manually.
+
+Then configure the driver set with the following files:
+
+.. code-block:: text
+
+    project\realtek_amebapro2_v0_example\GCC-RELEASE\mp\amebapro2_sensor_set.json
+
+    project\realtek_amebapro2_v0_example\GCC-RELEASE\mp\amebapro2_isp_iq.json
+
+    project\realtek_amebapro2_v0_example\inc\sensor.h
+
+.. table:: Configuration files for sensor and IQ
+    :align: center
+
+    +-----------------------------+----------------------------------------------------+
+    | File                        | Description                                        |
+    +=============================+====================================================+
+    | amebapro2_sensor_set.json   | Defines how many driver sets are used. It supports |
+    |                             | at most 9 sets including 1 dummy set. The dummy    |
+    |                             | set (set 0) cannot be removed.                     |
+    +-----------------------------+----------------------------------------------------+
+    | amebapro2_isp_iq.json       | Defines which set index is used for the FCS flow.  |
+    +-----------------------------+----------------------------------------------------+
+    | sensor.h                    | Configuration for sensor control, including which  |
+    |                             | driver set index to bring up.                      |
+    +-----------------------------+----------------------------------------------------+
+
+For the detailed **sensor.h** fields (``SENSOR_MAX``, ``sen_id[ ]``,
+``USE_SENSOR``, ``manual_iq[ ]`` and ``MANUAL_SENSOR_IQ``) and the
+combination examples of one/multiple sensors versus one/multiple IQ
+binaries, please refer to `Sensor configuration`_ and `How to apply
+"sensor.h" file to fit to customized usage`_ above. After the
+configuration is finished, follow `Cleanup and Rebuild`_ to make the new
+setting take effect.
+
+Verify the customized driver
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When the sensor and IQ binaries are loaded, the date and timestamp of
+each binary are printed. The version information can also be queried by
+calling ``video_get_version()`` or by the AT command ``ATII=version``:
+
+.. code-block:: bash
+
+    voe_ver: 1.4.2.1
+    sensor_voe_ver: 1.4.2.1
+    sensor_timestamp: 2023/04/20
+    fcs_version: 0x5306
+    iq_timestamp: 2023/05/12 16:04:30
+    iq_cus_ver: 0x01
+
+Check that **sensor_voe_ver** matches **voe_ver**, and that
+**sensor_timestamp** / **fcs_version** / **iq_timestamp** match the
+binaries just generated. Please refer to chapter :doc:`SDK <02_SDK>` for
+the meaning of each field.
+
+Debug flow
+^^^^^^^^^^^
+
+If no image is output after applying a customized driver, narrow down the
+problem in the following order instead of tuning the IQ first.
+
+1. **Check the driver binary** — confirm from the debug log that the
+   expected sensor driver is loaded, and that its timestamp is the one
+   just built. A stale binary in **voe_bin** or a missing cleanup is the
+   most common cause, see `Cleanup and Rebuild`_.
+
+2. **Check the power-on sequence** — read the sensor ID register through
+   I2C. If the sensor ID cannot be read, the power domains, the Reset /
+   Pwdn GPIO, the MCLK or the I2C prototype in ``<sensor>_get_info`` are
+   still wrong, and there is no point in checking the RX.
+
+3. **Check the MIPI RX** — read the ISP receiving counters. If the frame
+   count does not increase, the lane number, bit depth or MIPI clock in
+   ``<sensor>_get_init_info`` does not match the sensor output.
+
+4. **Check the ISP pipeline** — read the input frame count and the
+   pipeline idle status.
+
+.. table:: Registers for checking the RX and pipeline status
+    :align: center
+
+    +--------------------------+---------------+-------------------------------------+
+    | Register                 | Address       | Purpose                             |
+    +==========================+===============+=====================================+
+    | MIPI_DPHY_FRAME_CNT      | 0x403C_0198   | MIPI frame count                    |
+    +--------------------------+---------------+-------------------------------------+
+    | MIPI_DPHY_LINE_CNT       | 0x403C_019C   | MIPI line count                     |
+    +--------------------------+---------------+-------------------------------------+
+    | MIPI_DPHY_PXI_CNT        | 0x403C_01A0   | MIPI pixel count                    |
+    +--------------------------+---------------+-------------------------------------+
+    | SYS_FRAME_CNT            | 0x4030_0020   | Input frame count of the ISP        |
+    +--------------------------+---------------+-------------------------------------+
+    | SYS_FRAME_IDLE           | 0x4030_0028   | ISP pipeline idle status            |
+    +--------------------------+---------------+-------------------------------------+
+
+These registers can be read at runtime with an AT command. The address
+base is 0x40000000, so only the offset is given:
+
+.. code-block:: bash
+
+    ATIX=read32,<address offset>,<length>
+
+For example, to read the three MIPI counters in one command:
+
+.. code-block:: bash
+
+    ATIX=read32,0xc0198,3
+
+Compare the counted line/pixel numbers with the HTS/VTS of the vendor
+initial setting. A frame count that increases while the line or pixel
+count is wrong usually means the window configuration or the bayer order
+is mismatched rather than the clock.
 
 Cleanup and Rebuild
 ~~~~~~~~~~~~~~~~~~~
