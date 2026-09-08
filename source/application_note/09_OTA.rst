@@ -267,6 +267,11 @@ Step 3: Execute ‘tools\\DownloadServer\\start.bat’.
 
    Download Server
 
+.. note::
+
+   The GitHub tool repository is as follows:
+   `ameba-tool-rtos-pro2 <https://github.com/Ameba-AIoT/ameba-tool-rtos-pro2>`_
+
 
 
 Execute OTA Procedure
