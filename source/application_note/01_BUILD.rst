@@ -93,11 +93,18 @@ Building the project
 
 (3) Create folder "build" and enter "build" folder.
 
-(4) Run "cmake .. -G"Unix Makefiles"
-    -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake" to create the makefile.
+(4) Run the following command to create the makefile:
 
-(5) Run "cmake --build . --target flash" to build and generate flash
-    binary.
+   .. code-block:: bash
+
+      cmake .. -G"Unix Makefiles" -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake
+
+(5) Run the following command to build and generate flash binary:
+
+   .. code-block:: bash
+
+      cmake --build . --target flash
+
 
 .. note :: If building the project successfully, you can see flash_ntz.bin in the ‘build’ folder
 
