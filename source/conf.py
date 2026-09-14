@@ -17,7 +17,8 @@ release = 'v0.1'
 extensions = [
     'recommonmark',
     'sphinx_markdown_tables',
-    'sphinx.ext.intersphinx'
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.mathjax'
 ]
 
 templates_path = ['_templates']
@@ -43,6 +44,7 @@ html_theme_options = {
     'navigation_depth': 5,
 }
 html_static_path = ['_static']
+html_css_files = ['custom.css']
 numfig = True
 
 # LaTeX 設定 - 支援中文
