@@ -1671,7 +1671,7 @@ Requisites and Setup
 
 **Software setup:**
 
--  In project\realtek_amebapro2_v0_example\inc\platform_opts.h select
+-  In project\\realtek_amebapro2_v0_example\\inc\\platform_opts.h select
    the usage sensor.
 
 -  For audio only example, use "cmake .. -G"Unix Makefiles"
@@ -1786,7 +1786,7 @@ Currently supported example
 |                                            |                                          |                                                                   |
 |                                            |                                          | jack.                                                             |
 +--------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_example_2way_audio_init               | audio -> OPUSC -> RTSP                   | Stream OPUS sound to AmebaPro2’s audio jack via the network and   | 
+| mmf2_example_2way_audio_opus_init          | audio -> OPUSC -> RTSP                   | Stream OPUS sound to AmebaPro2’s audio jack via the network and   | 
 |                                            |                                          |                                                                   |
 |                                            | RTP -> OPUSD -> audio                    | transmit the sound received by AmebaPro2 over the network         |
 |                                            |                                          |                                                                   |
