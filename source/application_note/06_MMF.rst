@@ -1737,6 +1737,9 @@ Currently supported example
 |                                            |                                          |                                                                   |
 |                                            |                                          | used in the procedure.                                            |
 +--------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+| mmf2_example_i2s_audio_init                | I2S -> audio, audio loopback             | Receives audio through I2S and plays it back through the          |
+|                                            |                                          | AmebaPro2 audio output.                                           |
++--------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
 | mmf2_example_g711loop_init                 | audio -> G711E -> G711D -> audio         | The sound received by AmebaPro2 can be broadcast from the 3.5     |
 |                                            |                                          |                                                                   |
 |                                            |                                          | audio channel of AmebaPro2. PCM is encoded by G711 and transmit,  |
@@ -1805,89 +1808,89 @@ Currently supported example
 +--------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
 
 -  Video only examples: (the max specification of the sensor is defined
-   in project\realtek_amebapro2_v0_example\inc\sensor.h)
+   in project/realtek_amebapro2_v0_example/inc/sensor.h)
 
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| Example                                      | Description                              | Result                                                            |
+|Example                                       |Description                               |Result                                                             |
 +==============================================+==========================================+===================================================================+
-| mmf2_video_example_v1_init                   | CH1 Video -> H264/H265 -> RTSP           | Transfer AmebaPro2's H264/HEVC video stream over the network.     |
+|mmf2_video_example_v1_init                    |CH1 Video -> H264/H265 -> RTSP            |Transfer AmebaPro2's H264/HEVC video stream over the network.      |
 |                                              |                                          |                                                                   |
-|                                              |                                          | Video default format: max sensor specification.                   |
+|                                              |                                          |Video default format: max sensor specification.                    |
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_v2_init                   | CH2 Video -> H264/H265-> RTSP            | Transfer AmebaPro2's H264/HEVC video stream over the network.     |
+|mmf2_video_example_v2_init                    |CH2 Video -> H264/H265-> RTSP             |Transfer AmebaPro2's H264/HEVC video stream over the network.      |
 |                                              |                                          |                                                                   |
-|                                              |                                          | Video default format: max sensor specification.                   |
+|                                              |                                          |Video default format: max sensor specification.                    |
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_v3_init                   | CH3 Video -> JPEG -> RTSP                | Transfer AmebaPro2's JPEG video stream over the network. Video    |
+|mmf2_video_example_v3_init                    |CH3 Video -> JPEG -> RTSP                 |Transfer AmebaPro2's JPEG video stream over the network. Video     |
 |                                              |                                          |                                                                   |
-|                                              |                                          | default format: the width, height with max sensor specification   |
+|                                              |                                          |default format: the width, height with max sensor specification    |
 |                                              |                                          |                                                                   |
-|                                              |                                          | and FPS 5. If the width or height of max sensor specification is  |
+|                                              |                                          |and FPS 5. If the width or height of max sensor specification is   |
 |                                              |                                          |                                                                   |
-|                                              |                                          | large than 2040, it will be limited to 2040.                      |
+|                                              |                                          |large than 2040, it will be limited to 2040.                       |
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_v1_shapshot_init          | CH1 Video -> H264/H265-> RTSP + SNAPSHOT | Transfer AmebaPro2's H264/HEVC video stream over the network and  |
+|mmf2_video_example_v1_shapshot_init           |CH1 Video -> H264/H265-> RTSP + SNAPSHOT  |Transfer AmebaPro2's H264/HEVC video stream over the network and   |
 |                                              |                                          |                                                                   |
-|                                              |                                          | snapshot (JPEG) while streaming.                                  |
+|                                              |                                          |snapshot (JPEG) while streaming.                                   |
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_simo_init                 | 1 Video (H264/H265) -> 2 RTSP (V1, V2)   | Transmitting two H264/HEVC video streams from AmebaPro2 over the  |
-|                                              |                                          |                                                                   |
-|                                              |                                          | network, the source of the video is the same video stream. Video  |
-|                                              |                                          |                                                                   |
-|                                              |                                          | default format: max sensor specification.                         |
+|mmf2_video_example_v1_snapshot_hr_init        |CH1 Video -> high-resolution snapshot     |Capture a high-resolution JPEG snapshot and save it to the SD card.|
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_array_rtsp_init           | ARRAY (H264/H265) -> RTSP (V)            | Transfer H264/HEVC stream array in AmebaPro2 over the network     |
-|                                              |                                          |                                                                   |
-|                                              |                                          | Video default format: 25FPS.                                      |
+|mmf2_video_example_v1_shapshot_httpfs_init    |CH1 Video -> H264/H265 -> RTSP + snapshot |Transfer video over RTSP, capture snapshots, and serve snapshot    |
+|                                              |+ HTTP file server                        |files through the HTTP file server.                                |
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_v1_param_change_init      | CH1 Video -> H264/H265-> RTSP            | Transfer AmebaPro2's H264/HEVC video over the network and support |
-|                                              |                                          |                                                                   |
-|                                              | (parameter change)                       | dynamic adjustment of video parameters. The parameters of dynamic |
-|                                              |                                          |                                                                   |
-|                                              |                                          | adjustment are Resolution, Rate Control Mode, Bit Rate in order.  |
+|mmf2_video_example_v1_day_night_change_init   |CH1 Video -> H264/H265 -> RTSP (day/night |Switch between day and night image settings while streaming video  |
+|                                              |+ MD)                                     |and running motion detection.                                      |
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_h264_array_mp4_init       | ARRAY (H264/H265) -> MP4 (SD card)       | AmebaPro2 will record H264/HEVC stream array to the SD card for   |
-|                                              |                                          |                                                                   |
-|                                              |                                          | 30 second. Video default format: 25FPS.                           |
+|mmf2_video_example_timelapse_mp4_init         |CH1 Video -> time-lapse MP4 (SD card)     |Capture time-lapse video and record it to MP4 with an OSD          |
+|                                              |                                          |timestamp.                                                         |
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_md_rtsp_init              | CH1 Video -> H264/H265-> RTSP            | RTSP video stream over the network.                               |
+|mmf2_video_example_simo_init                  |1 Video (H264/H265) -> 2 RTSP (V1, V2)    |Transmitting two H264/HEVC video streams from AmebaPro2 over the   |
 |                                              |                                          |                                                                   |
-|                                              | CH4 Video -> RGB -> MD                   | MD detect motion and draw the motion region to RTSP channel.      |
+|                                              |                                          |network, the source of the video is the same video stream. Video   |
+|                                              |                                          |                                                                   |
+|                                              |                                          |default format: max sensor specification.                          |
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_v12_adjust_framerate_init | CH1 Video -> H264/H265->RTSP             | Transfer AmebaPro2's H264/HEVC video stream over the network.     |
+|mmf2_video_example_array_rtsp_init            |ARRAY (H264/H265) -> RTSP (V)             |Transfer H264/HEVC stream array in AmebaPro2 over the network      |
 |                                              |                                          |                                                                   |
-|                                              | -> adjust framerate                      | Video default format: 1080P 30FPS, and then adjust framerate when |
-|                                              |                                          |                                                                   |
-|                                              |                                          | streaming on.                                                     |
-|                                              | CH2 Video -> H264/H265->RTSP             | Transfer AmebaPro2's H264/HEVC video stream over the network.     |
-|                                              |                                          |                                                                   |
-|                                              | -> adjust framerate                      | Video default format: 720P 15FPS, and then adjust framerate when  |
-|                                              |                                          |                                                                   |
-|                                              |                                          | streaming on.                                                     |
+|                                              |                                          |Video default format: 25FPS.                                       |
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_jpeg_external_init        | EXTERNAL DATA -> JPEG                    | Use video HW encode any data (NV12, NV16…) to jpeg. The results   |
+|mmf2_video_example_v1_param_change_init       |CH1 Video -> H264/H265-> RTSP             |Transfer AmebaPro2's H264/HEVC video over the network and support  |
 |                                              |                                          |                                                                   |
-|                                              |                                          | will be saved to SD card as test_0001.jpg, test_0002.jpg...       |
+|                                              |(parameter change)                        |dynamic adjustment of video parameters. The parameters of dynamic  |
+|                                              |                                          |                                                                   |
+|                                              |                                          |adjustment are Resolution, Rate Control Mode, Bit Rate in order.   |
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_bayercap_rtsp_init        | CH1 Video -> Bayer-> SD Card             | Output raw data in bayer format and save to SD Card.              |
+|mmf2_video_example_h264_pcmu_array_mp4_init   |ARRAY (H264/H265) -> MP4 (SD card)        |AmebaPro2 will record H264/HEVC stream array to the SD card for    |
 |                                              |                                          |                                                                   |
-|                                              | CH2 Video -> H264/H265-> RTSP            | Transfer AmebaPro2's H264/HEVC video stream over the network.     |
+|                                              |                                          |30 second. Video default format: 25FPS.                            |
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_v1_mask_init              | CH1 Video -> H264/H265-> RTSP            | In normal mode, setup privacy mask before opening video, and the  |
+|mmf2_video_example_md_rtsp_init               |CH1 Video -> H264/H265-> RTSP             |RTSP video stream over the network.                                |
 |                                              |                                          |                                                                   |
-|                                              |                                          | stream output will include privacy mask.                          |
-|                                              |                                          |                                                                   |
-|                                              |                                          | Transfer AmebaPro2's H264/HEVC video stream over the network.     |
+|                                              |CH4 Video -> RGB -> MD                    |MD detect motion and draw the motion region to RTSP channel.       |
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
-| mmf2_video_example_v1_rate_control_init      | CH1 Video -> H264/H265-> RTSP            | Transfer AmebaPro2's H264/HEVC video stream over the network.     |
+|mmf2_video_example_jpeg_external_init         |EXTERNAL DATA -> JPEG                     |Use video HW encode any data (NV12, NV16…) to jpeg. The results    |
 |                                              |                                          |                                                                   |
-|                                              |                                          | It can auto adjust frame rate based on bit rate which is set by   |
+|                                              |                                          |will be saved to SD card as test_0001.jpg, test_0002.jpg...        |
++----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_bayercap_rtsp_init         |CH1 Video -> Bayer-> SD Card              |Output raw data in bayer format and save to SD Card.               |
 |                                              |                                          |                                                                   |
-|                                              |                                          | user.                                                             |
+|                                              |CH2 Video -> H264/H265-> RTSP             |Transfer AmebaPro2's H264/HEVC video stream over the network.      |
++----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_v1_mask_init               |CH1 Video -> H264/H265-> RTSP             |In normal mode, setup privacy mask before opening video, and the   |
+|                                              |                                          |                                                                   |
+|                                              |                                          |stream output will include privacy mask.                           |
+|                                              |                                          |                                                                   |
+|                                              |                                          |Transfer AmebaPro2's H264/HEVC video stream over the network.      |
++----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_v1_rate_control_init       |CH1 Video -> H264/H265-> RTSP             |Transfer AmebaPro2's H264/HEVC video stream over the network.      |
+|                                              |                                          |                                                                   |
+|                                              |                                          |It can auto adjust frame rate based on bit rate which is set by    |
+|                                              |                                          |                                                                   |
+|                                              |                                          |user.                                                              |
 +----------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
 
 -  Video + Audio examples: (the max specification of the sensor is
-   defined in project\realtek_amebapro2_v0_example\inc\sensor.h)
+   defined in project/realtek_amebapro2_v0_example/inc/sensor.h)
 
 +--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
 | Example                                          | Description                              | Result                                                            |
@@ -1939,6 +1942,25 @@ Currently supported example
 |                                                  |                                          | (3) Streaming AAC sounds to AmebaPro2 via the network.            |
 |                                                  |                                          |                                                                   |
 |                                                  |                                          | Note: (1) video source of (2) is from the same ISP channel.       |
++--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_joint_test_init                |2 Video + 2-way audio                     |Stream two H264/HEVC video channels and AAC audio over RTSP while  |
+|                                                  |                                          |receiving RTP audio through AAD for local playback.                |
++--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_joint_test_rtsp_mp4_init       |Video + audio -> RTSP and MP4             |Send H264/HEVC video to RTSP and MP4, stream AAC audio, and receive|
+|                                                  |                                          |RTP audio for local playback.                                      |
++--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_2way_audio_pcmu_doorbell_init  |H264/HEVC + PCMU + doorbell               |Stream video and bidirectional PCMU audio, and play a PCMU doorbell|
+|                                                  |                                          |array through the local audio output.                              |
++--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_2way_audio_pcmu_init           |H264/HEVC + PCMU                          |Stream H264/HEVC video and bidirectional PCMU audio.               |
++--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_av_mp4_httpfs_init             |Video + audio -> MP4 and HTTPFS           |Record H264/HEVC video and audio to MP4 on the SD card and provide |
+|                                                  |                                          |access through the HTTP file server.                               |
++--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_md_mp4_init                    |Video + MD + audio -> MP4 and RTSP        |Use motion detection to control recording, with H264/HEVC sent to  |
+|                                                  |                                          |MP4 and RTSP together with AAC audio.                              |
++--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_joint_test_rtsp_mp4_init_fcs   |Joint RTSP/MP4 test with FCS              |Run the joint RTSP/MP4 test with fast camera start (FCS) support.  |
 +--------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
 | mmf2_video_example_demuxer_rtsp_init             | Demux a mp4 file in SD card              | Demux a mp4 file (suggest to use a file created by AmebaPro2) and |
 |                                                  |                                          |                                                                   |
@@ -2000,7 +2022,23 @@ Currently supported example
 |                                                      |                                          |                                                                   |
 |                                                      | RGB  -> NN face detect (V4) ->           | (2) 3 models cascading: face detection + face landmark detection  |
 |                                                      |                                          |                                                                   |
-|                                                      | NN landmark detect -> NN face recognition| + face recognition                                                |
+|                                                      |NN landmark detect -> NN face recognition |+ face recognition                                                 |
++------------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_joint_test_all_nn_rtsp_init        |Video + audio + NN                        |Stream video and audio while running object detection, face        |
+|                                                      |                                          |detection/recognition, and audio classification.                   |
++------------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_vipnn_handgesture_init             |Video -> hand gesture NN                  |Stream H264/HEVC video and run NN palm and hand landmark detection |
+|                                                      |                                          |on the RGB stream.                                                 |
++------------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_joint_test_vipnn_rtsp_mp4_init     |Video + audio + NN -> RTSP and MP4        |Record and stream H264/HEVC video with AAC audio while running     |
+|                                                      |                                          |object detection, face detection/recognition, and audio            |
+|                                                      |                                          |classification.                                                    |
++------------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_vipnn_classify_rtsp_init           |Video -> image classification NN          |Stream H264/HEVC video over RTSP and perform NN image              |
+|                                                      |                                          |classification on the RGB stream.                                  |
++------------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
+|mmf2_video_example_dynamic_roi_rtsp_init              |Video -> dynamic ROI                      |Stream two H264/HEVC channels and dynamically adjust the ROI using |
+|                                                      |                                          |NN object-detection results.                                       |
 +------------------------------------------------------+------------------------------------------+-------------------------------------------------------------------+
 
 -  Audio + NN examples:
