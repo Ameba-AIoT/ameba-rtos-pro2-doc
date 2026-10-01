@@ -60,7 +60,8 @@ Sensor configuration
 ~~~~~~~~~~~~~~~~~~~~
 
 User can check supported sensor list and sensor settings is in
-`"project\\realtek_amebapro2_v0_example\\inc\\sensor.h" <https://github.com/Ameba-AIoT/ameba-rtos-pro2/blob/main/project/realtek_amebapro2_v0_example/inc/sensor.h>`_
+"project\\realtek_amebapro2_v0_example\\inc\\sensor.h" 
+(GitHub: https://github.com/Ameba-AIoT/ameba-rtos-pro2/blob/main/project/realtek_amebapro2_v0_example/inc/sensor.h)
 
 Setup
 ^^^^^
@@ -177,7 +178,8 @@ One sensor vs. one IQ (auto mode)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 -  Files in
-   `"component\\soc\\8735b\\fwlib\\rtl8735b\\lib\\source\\ram\\video\\voe_bin" <https://github.com/Ameba-AIoT/ameba-rtos-pro2/tree/main/component/soc/8735b/fwlib/rtl8735b/lib/source/ram/video/voe_bin>`_
+   "component\\soc\\8735b\\fwlib\\rtl8735b\\lib\\source\\ram\\video\\voe_bin"
+   (GitHub: https://github.com/Ameba-AIoT/ameba-rtos-pro2/tree/main/component/soc/8735b/fwlib/rtl8735b/lib/source/ram/video/voe_bin)
 
 .. code-block:: bash
 
@@ -239,7 +241,8 @@ One sensor vs. multiple IQ (manual mode)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 -  Confirm files in
-   `"component\\soc\\8735b\\fwlib\\rtl8735b\\lib\\source\\ram\\video\\voe_bin" <https://github.com/Ameba-AIoT/ameba-rtos-pro2/tree/main/component/soc/8735b/fwlib/rtl8735b/lib/source/ram/video/voe_bin>`_
+   "component\\soc\\8735b\\fwlib\\rtl8735b\\lib\\source\\ram\\video\\voe_bin" 
+   (GitHub: https://github.com/Ameba-AIoT/ameba-rtos-pro2/tree/main/component/soc/8735b/fwlib/rtl8735b/lib/source/ram/video/voe_bin)
 
 .. code-block:: bash
 
@@ -319,7 +322,8 @@ an example of configuring the **sensor.h** file.
     ===== ========================== ================= ============================================
 
 According to the table, first make sure that the sensor/IQ/FCS files has
-been placed in the path: `component\\soc\\8735b\\fwlib\\rtl8735b\\lib\\source\\ram\\video\\voe_bin <https://github.com/Ameba-AIoT/ameba-rtos-pro2/tree/main/component/soc/8735b/fwlib/rtl8735b/lib/source/ram/video/voe_bin>`_
+been placed in the path: "component\\soc\\8735b\\fwlib\\rtl8735b\\lib\\source\\ram\\video\\voe_bin" (GitHub:
+https://github.com/Ameba-AIoT/ameba-rtos-pro2/tree/main/component/soc/8735b/fwlib/rtl8735b/lib/source/ram/video/voe_bin)
 
 As follows, then we can implement this example through the configuration
 in **sensor.h**
@@ -481,12 +485,12 @@ tuning support.
 HDR Mode
 ~~~~~~~~~~
 
-AmebaPro2 IQ Binary File Overview
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+IQ Binary File Overview
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 On AmebaPro2, Image Quality (**IQ**) parameters are stored in a standalone
-binary file called **IQ.BIN**. IQ parameter profiles are categorized into
-two types:
+binary file called ``iq_<sensor_id>.bin``. IQ parameter profiles are
+categorized into two types:
 
 -  **Complete IQ (Full IQ):** A complete package containing multiple IQ
    parameter sets for different exposure modes and operating conditions.
@@ -516,80 +520,145 @@ exposure mode.
     5     Group 1 HDR           Other        Reserved or user-defined IQ table for other HDR-mode scenarios
     ===== ======= ============= ============ ========================================
 
-Key Settings to Enable HDR
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. note::
 
-As ``example_media_uvc`` will be used for RealCam IQ Tuning Tool, please
-add the following lines to
-`example_media_uvc.c <https://github.com/Ameba-AIoT/ameba-rtos-pro2/blob/main/component/example/media_uvcd/example_media_uvc.c>`_
-before calling ``video_pre_init_setup_parameters(&init_params);``
+   The index for each table could be adjustable, but in general case, we
+   suggest user to use the setting listed as above.
+
+Enable HDR Mode
+^^^^^^^^^^^^^^^^^
+
+**Example used:** ``media_uvcd`` (code:
+`example_media_uvc.c <https://github.com/Ameba-AIoT/ameba-rtos-pro2/blob/main/component/example/media_uvcd/example_media_uvc.c>`_).
+
+This example is used with the
+`RealCam IQ Tuning Tool <https://github.com/Ameba-AIoT/ameba-tool-rtos-pro2/tree/main/IQ%20Tuning>`_.
+
+**Reference sensor:** GC4663
+
+Step 1: Check Sensor Support
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Open
+`sensor.h <https://github.com/Ameba-AIoT/ameba-rtos-pro2/blob/main/project/realtek_amebapro2_v0_example/inc/sensor.h>`_
+and confirm your sensor is marked ``v`` in the **ISP HDR** column.
+
+Select the sensor with macro, e.g. set ``USE_SENSOR`` to
+``SENSOR_GC4663``.
+
+Step 2: Set Sensor Max FPS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In ``sensor_params_t sensor_params[]`` (in ``sensor.h``), change the
+sensor's FPS to its **HDR mode** limit, as noted in the comment next to
+the entry:
+
+.. table:: Sensor HDR Mode FPS Limit
+    :align: center
+
+    =============== =============
+    Resolution      HDR Max FPS
+    =============== =============
+    2K (2560x1440)  20
+    FHD (1920x1080) 30
+    =============== =============
+
+For example, when using GC4663:
 
 .. code-block:: c
 
-    init_params.isp_init_enable = 1; // ISP init
-    init_params.init_isp_items.init_hdr_mode = 0x01; // (0x00 = Linear mode, 0x01 = HDR mode)
+    // Before (Linear)
+    [SENSOR_GC4663] = {2560, 1440, 24},
+    // After (HDR, 2K)
+    [SENSOR_GC4663] = {2560, 1440, 20},
 
-Reference:
-`mmf2_video_example_v1_param_change_init.c <https://github.com/Ameba-AIoT/ameba-rtos-pro2/blob/main/project/realtek_amebapro2_v0_example/src/mmfv2_video_example/mmf2_video_example_v1_param_change_init.c>`_
+Step 3: Check IQ Min FPS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Before Building Example
-^^^^^^^^^^^^^^^^^^^^^^^
+The sensor HDR max FPS (Step 2) **must be greater than or equal to** the
+``dyn_min_fps`` of **both** of these IQ tables:
 
-1.  Kindly ensure that HDR mode is supported on the selected sensor,
-    refer to sensors marked with ``v`` in column ``ISP HDR`` in
-    `sensor.h <https://github.com/Ameba-AIoT/ameba-rtos-pro2/blob/main/project/realtek_amebapro2_v0_example/inc/sensor.h>`_.
+.. table:: IQ Min FPS requirement
+    :align: center
 
-    *take GC4663 as the default sensor for HDR mode*
-
-2.  Please update the default FPS value (max fps) to HDR mode fps
-    according to the comment in ``sensor_params_t sensor_params[]``, for
-    example, FPS value will be set as 20 for HDR mode of GC4663.
-
-3.  Ensure that the SDK default sensor iq is used, for example, please
-    use the default ``iq_gc4663.bin``, *HDR_max_fps >= Linear_min fps &
-    HDR_max_fps >= HDR_min_fps*
+    ======== ========== ==================================
+    IQ Index Mode       Requirement
+    ======== ========== ==================================
+    0        Linear Day ``dyn_min_fps`` <= HDR max FPS
+    3        HDR Day    ``dyn_min_fps`` <= HDR max FPS
+    ======== ========== ==================================
 
 .. note::
 
-    **Sensor HDR Mode FPS Limit**
+   The ISP loads index 0 during init before switching to HDR.
 
-    ============ =======
-    Resolution   Max FPS
-    ============ =======
-    4K           20
-    FHD          30
-    ============ =======
+You can check ``dyn_min_fps`` in RealCam ISP Tuning Pro under
+``AE \ AE Attribute Extension``.
 
-    **Min FPS of IQ <= Max FPS**, i.e. please ensure that the min FPS of
-    Linear and HDR mode IQ is less than or equal to the sensor HDR Mode
-    FPS limit.
+The SDK default ``iq_gc4663.bin`` already meets this requirement. Use it
+for your first test before trying a custom IQ. (GitHub: https://github.com/Ameba-AIoT/ameba-rtos-pro2/blob/main/component/soc/8735b/fwlib/rtl8735b/lib/source/ram/video/voe_bin/iq_gc4663.bin)
 
-Build Example
-^^^^^^^^^^^^^
+Step 4: Enable HDR in the Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In
+`video_api.c <https://github.com/Ameba-AIoT/ameba-rtos-pro2/blob/main/component/video/driver/RTL8735B/video_api.c>`_,
+set ``init_items.init_hdr_mode`` value to 1:
+
+.. code-block:: c
+
+    init_items.init_hdr_mode = 1; // 0: Linear, 1: HDR
+
+Step 5: Build and Flash
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Run these commands from
+``project/realtek_amebapro2_v0_example/GCC-RELEASE/build``:
 
 .. code-block:: bash
 
     cmake .. -G"Unix Makefiles" -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake -DEXAMPLE=media_uvcd
     cmake --build . --target flash -j12
 
-Log Verification
+Flash ``flash_ntz.bin`` to the board using ``uartfwburn`` image tool.
+
+Step 6: Verify
+^^^^^^^^^^^^^^^^^^^^
+
+Check the UART log after boot:
+
+1.  **IQ timestamp:** this confirms the correct IQ bin is built in. The
+    SDK default GC4663 IQ shows:
+
+    .. code-block:: text
+
+        iq timestamp: 2026/09/21 17:34:49
+
+2.  **HDR active:** look for
+    ``[VOE]change sensor mode => 2560x1440@20.000000fps - 'hdr line 2to1'``.
+
+3.  **Stream:** open RealCam and confirm the video stream is visible.
+
+Troubleshooting
 ^^^^^^^^^^^^^^^^^^
 
-IQ timestamp can be used to verify if the correct IQ bin is built into
-firmware. For example, iq timestamp: 2026/09/21 17:34:49 is expected for
-the SDK default GC4663 IQ bin.
+.. list-table:: Troubleshooting
+    :align: center
+    :header-rows: 1
 
-Debugging Tips
-^^^^^^^^^^^^^^
-
-1.  Unable to view streaming on RealCam after enabling HDR.
-
-    Kindly check if the following conditions are met:
-
-    -  The ``sensor.h`` max FPS is set according to the sensor FPS limit
-
-    -  The ``dyn_min_fps`` for IQ index 0 and 3 are less than the
-       ``sensor.h`` max FPS
+    * - Symptom
+      - Likely Cause
+      - Fix
+    * - No stream in RealCam after enabling HDR
+      - Sensor max FPS exceeds the HDR limit
+      - Recheck Step 2
+    * - No stream in RealCam after enabling HDR
+      - ``dyn_min_fps`` of IQ index 0 or 3 is greater than sensor max FPS
+      - Recheck Step 3
+    * - IQ timestamp does not match
+      - Wrong or old IQ bin built in
+      - Clean the build folder and rebuild, try to perform chip erase if
+        the issue remains
 
 OSD2
 ----
