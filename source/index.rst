@@ -13,3 +13,5 @@ Welcome to AmebaPro2's Documentation!
    application_note/index
 
    hw_design/index
+
+   wifi_mp_tool/index

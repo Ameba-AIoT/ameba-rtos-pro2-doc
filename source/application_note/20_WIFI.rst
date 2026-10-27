@@ -2294,6 +2294,8 @@ ii. 	ATWZ=phydm set_txagc,2,0,0,6	// Decrease TX power 3dbm(6/2 = 3)
 
 -  This AT command can only be used for testing. If the Pro2 device reboots, this AT command won't work.
 
+.. _wifi_build_mp_user_guide:
+
 Wifi build MP user guide:
 -------------------------
 
